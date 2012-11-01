@@ -4,6 +4,7 @@ var SkyRoads = (function() {
     };
 
     var camera = {
+        fov : 75,
         position : { x:0, y:240, z:-500 }
     };
 
