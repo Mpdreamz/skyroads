@@ -1,7 +1,6 @@
 var camera, scene, renderer;
 var geometry, material, mesh;
 
-
 var SkyRoads = (function() {
     var plane = {
         size : { x: 200, y: 10, z: 200 },
@@ -18,7 +17,6 @@ var SkyRoads = (function() {
     }
 
 })();
-
 
 $(function() {
     var gui = new dat.GUI();
