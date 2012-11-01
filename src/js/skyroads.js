@@ -11,7 +11,10 @@ var SkyRoads = (function() {
         position : { x:0, y:240, z:-500 }
     };
 
+    
+
     return {
+        object2Folder : object2Folder,
         plane: plane,
         camera: camera
     }
@@ -20,39 +23,13 @@ var SkyRoads = (function() {
 
 $(function() {
     var gui = new dat.GUI();
-    object2Folder(gui, SkyRoads);
+    SkyRoads.object2Folder(gui, SkyRoads);
 
     init();
     animate();
 
 });
 
-function object2Folder(gui, obj, parentKey)
-{
-    $.each(obj, function(key, value) 
-    { 
-        if (typeof(value) == "object")
-        {
-            var g = gui.addFolder(key);
-            object2Folder(g, value, key);
-            g.open()
-        }
-        else {
-            if (parentKey == "rotation")
-            {
-                gui.add(obj, key, -180, 180);
-            }
-            else if (parentKey == "size")
-            {
-                gui.add(obj, key, 0, 1000);
-            }
-            else {
-                gui.add(obj, key, -1000, 1000);
-            }
-        }
-        
-    });
-}
 
 
 
@@ -84,9 +61,9 @@ function animate() {
     mesh.scale.x = SkyRoads.plane.size.x;
     mesh.scale.y = SkyRoads.plane.size.y;
     mesh.scale.z = SkyRoads.plane.size.z;
-    mesh.rotation.x = deg2rad(SkyRoads.plane.rotation.x);
-    mesh.rotation.y = deg2rad(SkyRoads.plane.rotation.y);
-    mesh.rotation.z = deg2rad(SkyRoads.plane.rotation.z);
+    mesh.rotation.x = SkyRoads.plane.rotation.x.toRadians();
+    mesh.rotation.y = SkyRoads.plane.rotation.y.toRadians();
+    mesh.rotation.z = SkyRoads.plane.rotation.z.toRadians();
 
     camera.position.x = SkyRoads.camera.position.x;
     camera.position.y = SkyRoads.camera.position.y;
@@ -101,8 +78,3 @@ function animate() {
     renderer.render( scene, camera );
 
 }
-
-function deg2rad(value) {
-    return (value / 360) * 2 * Math.PI;
-}
-
