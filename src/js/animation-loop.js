@@ -1,7 +1,7 @@
 var Scene = (function () {
     var camera, scene, renderer;
 
-    var vehicle;
+    var vehicle, ghostCameraTarget;
 
     var initScene = function init() {
 
@@ -23,6 +23,9 @@ var Scene = (function () {
         vehicle = new Vehicle();
         scene.add(vehicle.mesh);
 
+        ghostCameraTarget = new GhostCameraTarget();
+        //scene.add(ghostCameraTarget.mesh);
+
         renderer = new THREE.CanvasRenderer();
         renderer.setSize( window.innerWidth, window.innerHeight );
 
@@ -40,12 +43,9 @@ var Scene = (function () {
 
 
         vehicle.update();
+        ghostCameraTarget.update();
 
-        camera.lookAt(vehicle.mesh.position);
-
-        // camera.target.position.x = 0;
-        // camera.target.position.y = 0;
-        // camera.target.position.z = 0;
+        camera.lookAt(ghostCameraTarget.mesh.position);
 
         renderer.render( scene, camera );
 
@@ -92,6 +92,31 @@ var Tile = (function (x, y, z) {
         update: update
     }
 })
+
+var GhostCameraTarget = (function () {
+    var mesh;
+
+    var init = function () {
+        var g = new THREE.CubeGeometry( 1, 1, 1 );
+        var m = new THREE.MeshBasicMaterial( { } );
+        mesh =  new THREE.Mesh( g, m );
+        update();
+    }
+
+    var update = function (){
+        //mesh.position.x = SkyRoads.vehicle.position.x;
+        mesh.position.y = SkyRoads.vehicle.position.y;
+        mesh.position.z = SkyRoads.time * SkyRoads.vehicle.acceleration + SkyRoads.camera.targetOffset;
+    }
+
+    init();
+
+    return {
+        update: update,
+        mesh: mesh
+    }
+});
+
 
 var Vehicle = (function () {
     var mesh;
