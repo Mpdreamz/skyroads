@@ -19,38 +19,44 @@ var SkyRoads = (function() {
 
 })();
 
+
 $(function() {
     var gui = new dat.GUI();
-    var plane = gui.addFolder("Plane");
-    plane.open();
-    var planeSize = plane.addFolder("Size");
-    planeSize.add(SkyRoads.plane.size, 'x', 0, 1000);
-    planeSize.add(SkyRoads.plane.size, 'y', 0, 1000);
-    planeSize.add(SkyRoads.plane.size, 'z', 0, 1000);
-    planeSize.open();
-    var planeRotation = plane.addFolder("Rotation");
-    planeRotation.add(SkyRoads.plane.rotation, 'x', -180, 180);
-    planeRotation.add(SkyRoads.plane.rotation, 'y', -180, 180);
-    planeRotation.add(SkyRoads.plane.rotation, 'z', -180, 180);
-    planeRotation.open();    
-    
-
-    var camera = gui.addFolder("Camera");
-    var cameraRotation = camera.addFolder("Position");
-
-    cameraRotation.add(SkyRoads.camera.position, 'y', -1000, 1000);
-    cameraRotation.add(SkyRoads.camera.position, 'x', -1000, 1000);
-    cameraRotation.add(SkyRoads.camera.position, 'z', -1000, 1000);
-
-
-    gui.open();
-    camera.open();
-    cameraRotation.open();
+    object2Folder(gui, SkyRoads);
 
     init();
     animate();
 
 });
+
+function object2Folder(gui, obj, parentKey)
+{
+    $.each(obj, function(key, value) 
+    { 
+        if (typeof(value) == "object")
+        {
+            var g = gui.addFolder(key);
+            object2Folder(g, value, key);
+            g.open()
+        }
+        else {
+            if (parentKey == "rotation")
+            {
+                gui.add(obj, key, -180, 180);
+            }
+            else if (parentKey == "size")
+            {
+                gui.add(obj, key, 0, 1000);
+            }
+            else {
+                gui.add(obj, key, -1000, 1000);
+            }
+        }
+        
+    });
+}
+
+
 
 function init() {
 
