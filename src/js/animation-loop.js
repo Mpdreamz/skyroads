@@ -1,6 +1,5 @@
 var Scene = (function () {
     var camera, scene, renderer;
-    var geometry, material, mesh;
 
     var vehicle;
 
@@ -11,14 +10,17 @@ var Scene = (function () {
 
         scene = new THREE.Scene();
 
-        geometry = new THREE.CubeGeometry( 1, 1, 1 );
-        material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
-
-        mesh = new THREE.Mesh( geometry, material );
-        scene.add( mesh );
+        for (var depth =0; depth < 1000; depth++)
+        {
+            var cellWidth = 200;
+            for (var column = 0; column < 7; column++)
+            {
+                tile = new Tile(column * cellWidth - 3 * cellWidth, 0, depth * cellWidth);
+                scene.add(tile.mesh);
+            }
+        }
 
         vehicle = new Vehicle();
-
         scene.add(vehicle.mesh);
 
         renderer = new THREE.CanvasRenderer();
@@ -32,13 +34,6 @@ var Scene = (function () {
         // note: three.js includes requestAnimationFrame shim
         requestAnimationFrame( animate );
 
-        mesh.scale.x = SkyRoads.plane.size.x;
-        mesh.scale.y = SkyRoads.plane.size.y;
-        mesh.scale.z = SkyRoads.plane.size.z;
-        mesh.rotation.x = SkyRoads.plane.rotation.x.toRadians();
-        mesh.rotation.y = SkyRoads.plane.rotation.y.toRadians();
-        mesh.rotation.z = SkyRoads.plane.rotation.z.toRadians();
-
         camera.position.x = SkyRoads.camera.position.x;
         camera.position.y = SkyRoads.camera.position.y;
         camera.position.z = SkyRoads.camera.position.z;
@@ -46,8 +41,6 @@ var Scene = (function () {
         vehicle.update();
 
         camera.lookAt(vehicle.mesh.position);
-
-
 
         // camera.target.position.x = 0;
         // camera.target.position.y = 0;
@@ -68,6 +61,36 @@ var Scene = (function () {
 
 })();
 
+
+var Tile = (function (x, y, z) {
+    var mesh;
+
+    function init () {
+        var g = new THREE.CubeGeometry( 1, 1, 1 );
+        var m = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
+
+        mesh = new THREE.Mesh( g, m );
+        
+        mesh.position.x = x;
+        mesh.position.y = y;
+        mesh.position.z = z;
+
+        update();
+    }
+
+    function update() {
+        mesh.scale.x = SkyRoads.cell.size.x;
+        mesh.scale.y = SkyRoads.cell.size.y;
+        mesh.scale.z = SkyRoads.cell.size.x;
+    }
+
+    init();
+
+    return {
+        mesh: mesh,
+        update: update
+    }
+})
 
 var Vehicle = (function () {
     var mesh;

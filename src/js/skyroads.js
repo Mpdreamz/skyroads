@@ -1,7 +1,6 @@
 var SkyRoads = (function() {
-    var plane = {
-        size : { x: 200, y: 10, z: 200 },
-        rotation : { x: 0, y: 0, z: 0 }
+    var cell = {
+        size : { x: 200, y: 10 }
     };
 
     var camera = {
@@ -15,7 +14,7 @@ var SkyRoads = (function() {
 
     return {
         vehicle: vehicle,
-        plane: plane,
+        cell: cell,
         camera: camera
 
     }
