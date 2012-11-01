@@ -36,7 +36,7 @@ var Scene = (function () {
 
         camera.position.x = SkyRoads.camera.position.x;
         camera.position.y = SkyRoads.camera.position.y;
-        camera.position.z = SkyRoads.camera.position.z;
+        camera.position.z = SkyRoads.time * SkyRoads.vehicle.acceleration + SkyRoads.camera.position.z;
 
 
         vehicle.update();
@@ -104,9 +104,11 @@ var Vehicle = (function () {
     }
 
     var update = function () {
+
         mesh.position.x = SkyRoads.vehicle.position.x;
         mesh.position.y = SkyRoads.vehicle.position.y;
-        mesh.position.z = SkyRoads.vehicle.position.z;
+        mesh.position.z = SkyRoads.time * SkyRoads.vehicle.acceleration;
+
         mesh.scale.x = SkyRoads.vehicle.size.x;
         mesh.scale.y = SkyRoads.vehicle.size.y;
         mesh.scale.z = SkyRoads.vehicle.size.z;
