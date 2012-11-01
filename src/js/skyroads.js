@@ -1,6 +1,6 @@
 var SkyRoads = (function() {
     
-
+    var time = 0;
 
     var cell = {
         size : { x: 200, y: 10 }
@@ -19,7 +19,7 @@ var SkyRoads = (function() {
     }
 
     return {
-        time: 0,
+        time: time,
         vehicle: vehicle,
         cell: cell,
         camera: camera
