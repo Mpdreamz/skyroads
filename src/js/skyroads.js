@@ -14,7 +14,6 @@ var SkyRoads = (function() {
     
 
     return {
-        object2Folder : object2Folder,
         plane: plane,
         camera: camera
     }
@@ -22,9 +21,7 @@ var SkyRoads = (function() {
 })();
 
 $(function() {
-    var gui = new dat.GUI();
-    SkyRoads.object2Folder(gui, SkyRoads);
-
+    
     init();
     animate();
 

@@ -1,7 +1,8 @@
 var StateEditor = (function()
 {
 	var init = function() {
-
+        var gui = new dat.GUI();
+        object2Folder(gui, SkyRoads);
 	}
 
 	function object2Folder(gui, obj, parentKey)
@@ -33,7 +34,10 @@ var StateEditor = (function()
             
         });
     };
+    
+    init();
+
     return {
-    	init: init;
+    	
     }
-})
+})();
