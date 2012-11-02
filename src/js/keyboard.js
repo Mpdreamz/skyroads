@@ -2,16 +2,16 @@ var Keyboard = (function() {
 
 
 	var accelerate = function () {
-		SkyRoads.time = SkyRoads.time + 10;
+		SkyRoads.time += 10;
 	}
 	var decelerate = function () {
-		SkyRoads.time--;	
+		SkyRoads.time -= 10;	
 	}
 	var moveLeft = function () {
-		SkyRoads.vehicle.position.x--;
+		SkyRoads.vehicle.position.x += 10;
 	}
 	var moveRight = function () {
-		SkyRoads.vehicle.position.x++;	
+		SkyRoads.vehicle.position.x -= 10;	
 	}
 
 	var onKeyDown = function (e) {
