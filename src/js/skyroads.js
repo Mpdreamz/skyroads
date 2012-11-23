@@ -11,7 +11,7 @@ var SkyRoads = (function() {
         targetOffset: 600,
         fov : 75,
         position : { x:0, y:0, z:0 },
-        offsetPosition : { x:0, y:240, z:-500 }
+        offsetPosition : { x:0, y:240, z: 500 }
     };
 
     var vehicle = {

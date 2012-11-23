@@ -1,10 +1,9 @@
 var Camera = (function () {
-    var mesh, target;
+    var camera, target;
 
     var init = function() {
-        mesh = new THREE.PerspectiveCamera( SkyRoads.camera.fov, window.innerWidth / window.innerHeight, 1, 10000 );
-        target = new GhostCameraTarget();
-        mesh.lookAt(target.mesh.position);
+        camera = new THREE.PerspectiveCamera( SkyRoads.camera.fov, window.innerWidth / window.innerHeight, 1, 10000 );
+        target = new THREE.Mesh( new THREE.CubeGeometry( 1, 1, 1 ), new THREE.MeshBasicMaterial( { } ) );
 
         update();
     };
@@ -14,17 +13,19 @@ var Camera = (function () {
         SkyRoads.camera.position.y = SkyRoads.vehicle.position.y + SkyRoads.camera.offsetPosition.y;
         SkyRoads.camera.position.z = SkyRoads.vehicle.position.z + SkyRoads.camera.offsetPosition.z;
 
-        mesh.position.x = SkyRoads.camera.position.x;
-        mesh.position.y = SkyRoads.camera.position.y;
-        mesh.position.z = SkyRoads.camera.position.z;
+        camera.position.x = SkyRoads.camera.position.x;
+        camera.position.y = SkyRoads.camera.position.y;
+        camera.position.z = SkyRoads.camera.position.z;
 
-        target.update();
+        target.position.y = SkyRoads.vehicle.position.y;
+        target.position.z = SkyRoads.vehicle.position.z - SkyRoads.camera.targetOffset;
+        camera.lookAt(target.position);
     };
 
     init();
 
     return {
-        mesh: mesh,
+        mesh: camera,
         update: update
     };
 });
