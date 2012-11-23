@@ -61,6 +61,7 @@ var editor = (function() {
 					Scene.updateScene();
 				});
 		}
+		$("#level-selector").blur();
 	}
 
 

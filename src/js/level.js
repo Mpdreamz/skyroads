@@ -56,6 +56,7 @@ var Level = (function() {
 		_.each(data, function (cell) {
 			addTile(cell);
 		});
+		
 		SkyRoads = utils.deepCopy(Scene.SkyRoadsCopy);
 		StateEditor.init();
 	}

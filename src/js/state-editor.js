@@ -1,7 +1,12 @@
 var StateEditor = (function()
 {
     var gui;
-	var init = function() {
+
+	function init() {
+        if (gui !== undefined) {
+            $(gui.domElement).remove();
+        }
+
         gui = new dat.GUI();
         object2Folder(gui, SkyRoads);
 	}
@@ -40,6 +45,6 @@ var StateEditor = (function()
 
     return {
         init: init,
-    	gui: gui
-    }
+        gui: gui
+    };
 })();
