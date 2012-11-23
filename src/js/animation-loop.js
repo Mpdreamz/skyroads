@@ -9,7 +9,7 @@ var Scene = (function () {
 
         scene = new THREE.Scene();
 
-        for (var depth =0; depth < 1000; depth++)
+        for (var depth = 0; depth > -1000; depth--)
         {
             var cellWidth = 200;
             for (var column = 0; column < 7; column++)
@@ -134,7 +134,7 @@ var GhostCameraTarget = (function () {
     var update = function (){
         //mesh.position.x = SkyRoads.vehicle.position.x;
         mesh.position.y = SkyRoads.vehicle.position.y;
-        mesh.position.z = SkyRoads.vehicle.position.z + SkyRoads.camera.targetOffset;
+        mesh.position.z = SkyRoads.vehicle.position.z - SkyRoads.camera.targetOffset;
     };
 
     init();
@@ -157,7 +157,7 @@ var Vehicle = (function () {
     }
 
     var update = function () {
-        SkyRoads.vehicle.position.z += SkyRoads.vehicle.velocity;
+        SkyRoads.vehicle.position.z -= SkyRoads.vehicle.velocity;
 
         mesh.position.x = SkyRoads.vehicle.position.x;
         mesh.position.y = SkyRoads.vehicle.position.y;
