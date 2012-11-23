@@ -31,7 +31,8 @@ var Scene = (function () {
         directionalLight.position.set(1, 1, -1).normalize();
         scene.add(directionalLight);
 
-        renderer = new THREE.WebGLRenderer();
+        //renderer = new THREE.WebGLRenderer();
+        renderer = new THREE.CanvasRenderer();
         renderer.setSize( $('#gameWindow').width(), $('#gameWindow').height() );
 
         $('#gameWindow').append( renderer.domElement );

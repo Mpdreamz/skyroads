@@ -51,6 +51,16 @@ var Vehicle = (function () {
         }
         SkyRoads.vehicle.velocity.y -= SkyRoads.world.gravity * SkyRoads.delta;
 
+        // Handle special tile properties
+        var tile = Level.getTileAt(mesh.position.x, mesh.position.z);
+
+        if (tile) {
+            // 1. Booster tile
+            if (tile.cell.type === "booster") {
+                SkyRoads.vehicle.acceleration += 5;
+            }
+        }
+
         SkyRoads.vehicle.position.x += SkyRoads.vehicle.velocity.x * SkyRoads.delta;
         SkyRoads.vehicle.position.y += SkyRoads.vehicle.velocity.y * SkyRoads.delta;
         SkyRoads.vehicle.position.z -= SkyRoads.vehicle.velocity.z * SkyRoads.delta;
