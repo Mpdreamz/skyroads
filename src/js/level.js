@@ -57,8 +57,17 @@ var Level = (function() {
 			return;
 		tile.cell.h = tile.cell.h % 140;
 		tile.cell.h += 20;
-		console.log(tile.cell.h)
 		tile.update();
+	}
+	function loadFromJsonData(data) {
+		tiles = [];
+		_.each(data, function (cell) {
+			addTile(cell);
+		});
+	}
+
+	function getMeshes() {
+		return _.map(tiles, function (tile) { return tile.mesh; } );
 	}
 
 
@@ -71,6 +80,8 @@ var Level = (function() {
 		getTiles: getTiles,
 		addTile: addTile,
 		removeTile: removeTile,
-		positionOccupied: positionOccupied
+		positionOccupied: positionOccupied,
+		getMeshes: getMeshes,
+		loadFromJsonData: loadFromJsonData
 	};
 }());
