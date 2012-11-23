@@ -104,7 +104,7 @@ var Vehicle = (function () {
     }
 
     function hasFrontalCollisions() {
-        var boxRadiusZ = SkyRoads.vehicle.size.y / 2;
+        var boxRadiusZ = SkyRoads.vehicle.size.z / 2;
         var directionVector = new THREE.Vector3(0, 0, -SkyRoads.vehicle.velocity.z);
         return hasCollisions(directionVector, boxRadiusZ);
     }
