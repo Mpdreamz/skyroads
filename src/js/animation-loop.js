@@ -45,9 +45,13 @@ var Scene = (function () {
 
         SkyRoads.time += SkyRoads.delta;
 
+        SkyRoads.camera.position.x = SkyRoads.vehicle.position.x + SkyRoads.camera.offsetPosition.x;
+        SkyRoads.camera.position.y = SkyRoads.vehicle.position.y + SkyRoads.camera.offsetPosition.y;
+        SkyRoads.camera.position.z = SkyRoads.vehicle.position.z + SkyRoads.camera.offsetPosition.z;
+
         camera.position.x = SkyRoads.camera.position.x;
         camera.position.y = SkyRoads.camera.position.y;
-        camera.position.z = SkyRoads.time * SkyRoads.vehicle.acceleration + SkyRoads.camera.position.z;
+        camera.position.z = SkyRoads.camera.position.z;
 
         vehicle.update();
         ghostCameraTarget.update();
@@ -113,7 +117,7 @@ var GhostCameraTarget = (function () {
     var update = function (){
         //mesh.position.x = SkyRoads.vehicle.position.x;
         mesh.position.y = SkyRoads.vehicle.position.y;
-        mesh.position.z = SkyRoads.time * SkyRoads.vehicle.acceleration + SkyRoads.camera.targetOffset;
+        mesh.position.z = SkyRoads.vehicle.position.z + SkyRoads.camera.targetOffset;
     }
 
     init();
@@ -133,14 +137,6 @@ var Vehicle = (function () {
         var m = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
         mesh =  new THREE.Mesh( g, m );
         update();
-
-        mesh.position.x = SkyRoads.vehicle.position.x;
-        mesh.position.y = SkyRoads.vehicle.position.y;
-        mesh.position.z = SkyRoads.time * SkyRoads.vehicle.acceleration;
-
-        mesh.scale.x = SkyRoads.vehicle.size.x;
-        mesh.scale.y = SkyRoads.vehicle.size.y;
-        mesh.scale.z = SkyRoads.vehicle.size.z;
     }
 
     var update = function () {
@@ -149,8 +145,15 @@ var Vehicle = (function () {
         } else if (SkyRoads.keyboard.keyDown) {
             SkyRoads.vehicle.velocity -= SkyRoads.vehicle.acceleration * SkyRoads.delta;
         }
+        SkyRoads.vehicle.position.z += SkyRoads.vehicle.velocity;
 
-        mesh.position.z += SkyRoads.vehicle.velocity;
+        mesh.position.x = SkyRoads.vehicle.position.x;
+        mesh.position.y = SkyRoads.vehicle.position.y;
+        mesh.position.z = SkyRoads.vehicle.position.z;
+
+        mesh.scale.x = SkyRoads.vehicle.size.x;
+        mesh.scale.y = SkyRoads.vehicle.size.y;
+        mesh.scale.z = SkyRoads.vehicle.size.z;
     }
 
     init();
