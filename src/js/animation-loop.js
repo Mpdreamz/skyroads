@@ -61,7 +61,7 @@ var Scene = (function () {
         currentTime = newTime;
 
         SkyRoads.time += SkyRoads.delta;
-        if (SkyRoads.time > 2) {
+        if (SkyRoads.time > 2 && !SkyRoads.vehicle.dead) {
             keyboard.update();
             camera.update();
             vehicle.update();

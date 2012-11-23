@@ -5,6 +5,7 @@ var Vehicle = (function () {
         var g = new THREE.CubeGeometry( 1, 1, 1 );
         var m = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
         mesh =  new THREE.Mesh( g, m );
+        dead = false;
         update();
     }
 
@@ -34,6 +35,7 @@ var Vehicle = (function () {
         // We could be exploding
         if ( hasFrontalCollisions() ) {
             console.log('explosion');
+            SkyRoads.vehicle.dead = true;
         }
         // Or pushing up against the side of a block
         else if (hasLateralCollisions()) {
@@ -61,6 +63,7 @@ var Vehicle = (function () {
         // detect death by falling
         if (SkyRoads.vehicle.position.y < -5000) {
             console.log("death by falling");
+            SkyRoads.vehicle.dead = true;
         }
     }
 
@@ -139,7 +142,7 @@ var Vehicle = (function () {
 
     return {
         update: update,
-        mesh: mesh
+        mesh: mesh,
+        dead: dead
     };
-
 });
