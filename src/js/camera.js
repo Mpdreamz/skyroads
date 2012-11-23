@@ -2,7 +2,7 @@ var Camera = (function () {
     var camera, target;
 
     var init = function() {
-        camera = new THREE.PerspectiveCamera( SkyRoads.camera.fov, window.innerWidth / window.innerHeight, 1, 10000 );
+        camera = new THREE.PerspectiveCamera(SkyRoads.camera.fov, window.innerWidth / window.innerHeight, 1, 10000 );
         target = new THREE.Mesh( new THREE.CubeGeometry( 1, 1, 1 ), new THREE.MeshBasicMaterial( { } ) );
 
         update();

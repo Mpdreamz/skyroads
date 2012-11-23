@@ -4,7 +4,7 @@ var SkyRoads = (function() {
     var delta = 0;
 
     var world = {
-        gravity : 350,
+        gravity : 10000,
         bounciness : 0.75
     };
 
@@ -22,9 +22,9 @@ var SkyRoads = (function() {
 
     var vehicle = {
         velocity :  { x: 0, y: 0, z: 0 },
-        acceleration : 10,
-        deceleration : 50,
-        maximumVelocity : { x: 1000, y: 4000, z: 50 },
+        acceleration : 250,
+        deceleration : 1000,
+        maximumVelocity : { x: 1000, y: 2500, z: 5000 },
         size : { x: 50, y: 30, z: 50 },
         position : { x:0, y:20, z:0 },
         canJump : true
