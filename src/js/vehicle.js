@@ -39,7 +39,7 @@ var Vehicle = (function () {
         SkyRoads.vehicle.velocity.y -= SkyRoads.world.gravity * SkyRoads.delta;
 
         if (hasCollisions()) {
-            console.log("HIT");
+            SkyRoads.vehicle.velocity.x = 0;
         }
 
         SkyRoads.vehicle.position.x += SkyRoads.vehicle.velocity.x * SkyRoads.delta;
@@ -72,7 +72,6 @@ var Vehicle = (function () {
         var ray = new THREE.Ray(originPoint, directionVector.clone().normalize());
         var collisionResults = ray.intersectObjects(Level.getMeshes());
         if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() * SkyRoads.delta) {
-            console.log(collisionResults[0].distance);
             return true;
         }
         return false;
