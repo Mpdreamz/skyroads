@@ -9,8 +9,9 @@ var Scene = (function () {
 
         scene = new THREE.Scene();
 
-        $.each(Level.tiles, function(i, tile) {
-            scene.add(tile.mesh);
+        _.each(Level.tiles, function(tile) {
+            var t = tile;
+            scene.add(t.mesh);
         });
         
         // for (var depth =0; depth < 1000; depth++)
@@ -29,11 +30,31 @@ var Scene = (function () {
 
         camera = new Camera();
         renderer = new THREE.CanvasRenderer();
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize( $('#gameWindow').width(), $('#gameWindow').height() );
 
-        document.body.appendChild( renderer.domElement );
+        $('#gameWindow').append( renderer.domElement );
     };
+    function updateScene() {
 
+        var obj, i;
+        for ( i = scene.children.length - 1; i >= 0 ; i -- ) {
+            obj = scene.children[ i ];
+            if (obj._isTile) {
+                scene.remove(obj);
+            }
+        }
+
+        // _.each(tilesCache, function (tile) {
+        //     scene.remove(tile.mesh);
+        //     renderer.deallocateObject(tile.mesh);
+        // });
+
+        _.each(Level.tiles, function(tile) {
+            var t = tile;
+            scene.add(t.mesh);
+        });
+        renderer.render(scene, camera.mesh);
+    }
 
     var animate = function animate() {
         // note: three.js includes requestAnimationFrame shim
@@ -55,10 +76,11 @@ var Scene = (function () {
     $(function() {
         initScene();
         animate();
+
     });
 
     return {
-        
+        updateScene: updateScene
     };
 
 })();
