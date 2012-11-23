@@ -16,7 +16,9 @@ var Keyboard = (function() {
 			case 39:
 				SkyRoads.keyboard.keyRight = true;
 				break;
-			
+			case 32:
+				SkyRoads.keyboard.spacebar = true;
+				break;
 		}
 	};
 
@@ -36,7 +38,9 @@ var Keyboard = (function() {
 			case 39:
 				SkyRoads.keyboard.keyRight = false;
 				break;
-			
+			case 32:
+				SkyRoads.keyboard.spacebar = false;
+				break;
 		}
 	};
 

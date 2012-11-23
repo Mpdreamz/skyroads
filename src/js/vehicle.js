@@ -31,6 +31,19 @@ var Vehicle = (function () {
         SkyRoads.vehicle.velocity.x = Math.min(SkyRoads.vehicle.velocity.x, SkyRoads.vehicle.maximumVelocity.x);
         SkyRoads.vehicle.velocity.x = Math.max(SkyRoads.vehicle.velocity.x, -SkyRoads.vehicle.maximumVelocity.x);
         SkyRoads.vehicle.position.x += SkyRoads.vehicle.velocity.x * SkyRoads.delta;
+
+        // jump
+        var minHeight = 20;
+        SkyRoads.vehicle.canJump = SkyRoads.vehicle.position.y === minHeight;
+        if (SkyRoads.keyboard.spacebar && SkyRoads.vehicle.canJump) {
+            SkyRoads.vehicle.velocity.y = SkyRoads.vehicle.maximumVelocity.y;
+        }
+        SkyRoads.vehicle.velocity.y -= SkyRoads.world.gravity;
+        SkyRoads.vehicle.position.y += SkyRoads.vehicle.velocity.y * SkyRoads.delta;
+        if (SkyRoads.vehicle.position.y < minHeight) {
+            SkyRoads.vehicle.position.y = minHeight;
+            SkyRoads.vehicle.velocity.y = -SkyRoads.vehicle.velocity.y * SkyRoads.world.bounciness;
+        }
     }
 
     function move() {

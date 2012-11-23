@@ -4,7 +4,8 @@ var SkyRoads = (function() {
     var delta = 0;
 
     var world = {
-        gravity : 10
+        gravity : 25,
+        bounciness : 0.75
     };
 
     var cell = {
@@ -22,9 +23,10 @@ var SkyRoads = (function() {
         velocity :  { x: 0, y: 0, z: 0 },
         acceleration : 10,
         deceleration : 50,
-        maximumVelocity : { x: 1000, y: 0, z: 50 },
+        maximumVelocity : { x: 1000, y: 1000, z: 50 },
         size : { x: 50, y: 30, z: 50 },
-        position : { x:0, y:20, z:0 }
+        position : { x:0, y:20, z:0 },
+        canJump : true
     };
 
     var keyboard = {
