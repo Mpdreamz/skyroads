@@ -102,7 +102,7 @@ var Camera = (function () {
     }
 
     var update = function() {
-        SkyRoads.camera.position.x = SkyRoads.vehicle.position.x + SkyRoads.camera.offsetPosition.x;
+        SkyRoads.camera.position.x = SkyRoads.camera.offsetPosition.x;
         SkyRoads.camera.position.y = SkyRoads.vehicle.position.y + SkyRoads.camera.offsetPosition.y;
         SkyRoads.camera.position.z = SkyRoads.vehicle.position.z + SkyRoads.camera.offsetPosition.z;
 
