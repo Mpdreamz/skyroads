@@ -72,7 +72,7 @@ var Vehicle = (function () {
         cornerTiles.push(Level.getTileAt( pos.x + boxRadiusX, pos.z - boxRadiusZ));
         cornerTiles.push(Level.getTileAt( pos.x + boxRadiusX, pos.z + boxRadiusZ));
 
-        var minHeight = -1000;
+        var minHeight = -100000;
         _.each(cornerTiles, function(tile) {
             if (tile !== undefined) {
                 minHeight = Math.max(minHeight, tile.cell.h);
