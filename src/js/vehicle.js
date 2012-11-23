@@ -58,6 +58,10 @@ var Vehicle = (function () {
             SkyRoads.vehicle.position.y = minHeight;
             SkyRoads.vehicle.velocity.y = -SkyRoads.vehicle.velocity.y * SkyRoads.world.bounciness;
         }
+        // detect death by falling
+        if (SkyRoads.vehicle.position.y < -5000) {
+            console.log("death by falling");
+        }
     }
 
     function getMinHeight() {
