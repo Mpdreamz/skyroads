@@ -51,11 +51,11 @@ var Scene = (function () {
         currentTime = newTime;
 
         SkyRoads.time += SkyRoads.delta;
-
-        keyboard.update();
-        camera.update();
-        vehicle.update();
-
+        if (SkyRoads.time > 2 && !SkyRoads.vehicle.dead) {
+            keyboard.update();
+            camera.update();
+            vehicle.update();
+        }
         renderer.render(scene, camera.mesh);
     };
 
