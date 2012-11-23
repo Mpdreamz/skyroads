@@ -6,6 +6,7 @@ var Scene = (function () {
     var currentTime = new Date().getTime();
     var SkyRoadsCopy = utils.deepCopy(SkyRoads);
     console.log(SkyRoadsCopy);
+
     var initScene = function init() {
 
         scene = new THREE.Scene();
@@ -49,6 +50,8 @@ var Scene = (function () {
 
         var newTime = new Date().getTime();
         SkyRoads.delta = (newTime - currentTime) / 1000;
+        if (SkyRoadsCopy.delta > 0.05)
+            console.log(SkyRoads.delta);
         currentTime = newTime;
 
         SkyRoads.time += SkyRoads.delta;
