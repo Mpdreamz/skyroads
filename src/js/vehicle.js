@@ -3,7 +3,7 @@ var Vehicle = (function () {
 
     function init() {
         var g = new THREE.CubeGeometry( 1, 1, 1 );
-        var m = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
+        var m = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
         mesh =  new THREE.Mesh( g, m );
         update();
     }
@@ -33,7 +33,7 @@ var Vehicle = (function () {
         SkyRoads.vehicle.position.x += SkyRoads.vehicle.velocity.x * SkyRoads.delta;
 
         // jump
-        var minHeight = 20;
+        var minHeight = 40;
         SkyRoads.vehicle.canJump = SkyRoads.vehicle.position.y === minHeight;
         if (SkyRoads.keyboard.spacebar && SkyRoads.vehicle.canJump) {
             SkyRoads.vehicle.velocity.y = SkyRoads.vehicle.maximumVelocity.y;
