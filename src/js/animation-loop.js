@@ -27,6 +27,7 @@ var Scene = (function () {
 
         $('#gameWindow').append( renderer.domElement );
     };
+
     function updateScene() {
 
         var obj, i;
@@ -59,6 +60,8 @@ var Scene = (function () {
             keyboard.update();
             camera.update();
             vehicle.update();
+        } else if (SkyRoads.vehicle.dead) {
+            $("#death-screen").show();
         }
         renderer.render(scene, camera.mesh);
     };
