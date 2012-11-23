@@ -18,7 +18,7 @@ var Keyboard = (function() {
 				break;
 			
 		}
-	}
+	};
 
 	var onKeyUp = function (e) {
 		var keyCode = e.which;
@@ -38,12 +38,12 @@ var Keyboard = (function() {
 				break;
 			
 		}
-	}
+	};
 
 	var init = function () {
 		$(document).keydown(onKeyDown);
 		$(document).keyup(onKeyUp);
-	}
+	};
 
 	var update = function () {
         if (SkyRoads.keyboard.keyUp) {
@@ -58,12 +58,12 @@ var Keyboard = (function() {
         if (SkyRoads.keyboard.keyRight) {
             SkyRoads.vehicle.position.x -= SkyRoads.vehicle.horizontalVelocity * SkyRoads.delta;
         }
-    }
+    };
 
 	$(init);
 
 	return {
 		update: update
-	}
+	};
 
 });

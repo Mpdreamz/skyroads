@@ -28,7 +28,7 @@ var Scene = (function () {
         renderer.setSize( window.innerWidth, window.innerHeight );
 
         document.body.appendChild( renderer.domElement );
-    }
+    };
 
 
     var animate = function animate() {
@@ -46,16 +46,16 @@ var Scene = (function () {
         vehicle.update();
 
         renderer.render(scene, camera.mesh);
-    }
+    };
 
     $(function() {
         initScene();
         animate();
     });
 
-    return { 
+    return {
         
-    }
+    };
 
 })();
 
@@ -87,8 +87,8 @@ var Tile = (function (x, y, z) {
     return {
         mesh: mesh,
         update: update
-    }
-})
+    };
+});
 
 var Camera = (function () {
     var mesh, target;
@@ -99,7 +99,7 @@ var Camera = (function () {
         mesh.lookAt(target.mesh.position);
 
         update();
-    }
+    };
 
     var update = function() {
         SkyRoads.camera.position.x = SkyRoads.camera.offsetPosition.x;
@@ -111,14 +111,14 @@ var Camera = (function () {
         mesh.position.z = SkyRoads.camera.position.z;
 
         target.update();
-    }
+    };
 
     init();
 
     return {
         mesh: mesh,
         update: update
-    }
+    };
 });
 
 var GhostCameraTarget = (function () {
@@ -129,20 +129,20 @@ var GhostCameraTarget = (function () {
         var m = new THREE.MeshBasicMaterial( { } );
         mesh =  new THREE.Mesh( g, m );
         update();
-    }
+    };
 
     var update = function (){
         //mesh.position.x = SkyRoads.vehicle.position.x;
         mesh.position.y = SkyRoads.vehicle.position.y;
         mesh.position.z = SkyRoads.vehicle.position.z + SkyRoads.camera.targetOffset;
-    }
+    };
 
     init();
 
     return {
         update: update,
         mesh: mesh
-    }
+    };
 });
 
 
@@ -166,14 +166,14 @@ var Vehicle = (function () {
         mesh.scale.x = SkyRoads.vehicle.size.x;
         mesh.scale.y = SkyRoads.vehicle.size.y;
         mesh.scale.z = SkyRoads.vehicle.size.z;
-    }
+    };
 
     init();
 
     return {
         update: update,
         mesh: mesh
-    }
+    };
 
 });
 

@@ -20,7 +20,7 @@ var SkyRoads = (function() {
         horizontalVelocity : 1000,
         size : { x: 50, y: 30, z: 50 },
         position : { x:0, y:20, z:0 }
-    }
+    };
 
     var keyboard = {
         keyUp : false,
@@ -36,6 +36,6 @@ var SkyRoads = (function() {
         cell: cell,
         camera: camera,
         keyboard: keyboard
-    }
+    };
 
 })();
