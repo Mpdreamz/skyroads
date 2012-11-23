@@ -20,11 +20,11 @@ var Tile = (function (tileProps) {
     function _createMaterial() {
         switch(cell.type) {
             case "booster":
-                return new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+                return new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
             case "explosive":
                 return new THREE.MeshBasicMaterial( { color: 0xff0000 } ); 
             default:
-                return new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+                return new THREE.MeshBasicMaterial( { color: 0x0000ff } );
         }
 
     }

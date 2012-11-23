@@ -62,6 +62,12 @@
 }
 
 #cellEditor .hover {
+	display:table-cell;
+	width: 30px;
+	height: 30px;
+	margin-top: 0px;
+	line-height: auto;
+	vertical-align: text-top;
 	text-align:center;
 	color:white;
 	background: black !important;
