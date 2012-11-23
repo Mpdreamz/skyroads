@@ -54,7 +54,7 @@ var Vehicle = (function () {
         SkyRoads.vehicle.position.z -= SkyRoads.vehicle.velocity.z * SkyRoads.delta;
 
         // falling
-        if (SkyRoads.vehicle.position.y < minHeight && SkyRoads.vehicle.position.y > 0) {
+        if (SkyRoads.vehicle.position.y < minHeight && SkyRoads.vehicle.position.y > -50) {
             SkyRoads.vehicle.position.y = minHeight;
             SkyRoads.vehicle.velocity.y = -SkyRoads.vehicle.velocity.y * SkyRoads.world.bounciness;
         }
