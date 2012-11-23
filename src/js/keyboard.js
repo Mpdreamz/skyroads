@@ -40,22 +40,24 @@ var Keyboard = (function() {
 		}
 	}
 
-
-
-
-
 	var init = function () {
 		$(document).keydown(onKeyDown);
 		$(document).keyup(onKeyUp);
 	}
 
+	var update = function () {
+        if (SkyRoads.keyboard.keyUp) {
+            SkyRoads.vehicle.velocity += SkyRoads.vehicle.acceleration * SkyRoads.delta;
+        }
+        if (SkyRoads.keyboard.keyDown) {
+            SkyRoads.vehicle.velocity -= SkyRoads.vehicle.acceleration * SkyRoads.delta;
+        }
+    }
 
 	$(init);
 
-
-	return 
-	{
-
+	return {
+		update: update
 	}
 
-})();
+});

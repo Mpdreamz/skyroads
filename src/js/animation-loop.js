@@ -1,7 +1,7 @@
 var Scene = (function () {
     var camera, scene, renderer;
 
-    var vehicle, ghostCameraTarget;
+    var vehicle, ghostCameraTarget, keyboard;
     
     var currentTime = new Date().getTime();
 
@@ -22,6 +22,7 @@ var Scene = (function () {
             }
         }
 
+        keyboard = new Keyboard();
         vehicle = new Vehicle();
         scene.add(vehicle.mesh);
 
@@ -45,6 +46,10 @@ var Scene = (function () {
 
         SkyRoads.time += SkyRoads.delta;
 
+        keyboard.update();
+        vehicle.update();
+        ghostCameraTarget.update();
+
         SkyRoads.camera.position.x = SkyRoads.vehicle.position.x + SkyRoads.camera.offsetPosition.x;
         SkyRoads.camera.position.y = SkyRoads.vehicle.position.y + SkyRoads.camera.offsetPosition.y;
         SkyRoads.camera.position.z = SkyRoads.vehicle.position.z + SkyRoads.camera.offsetPosition.z;
@@ -52,9 +57,6 @@ var Scene = (function () {
         camera.position.x = SkyRoads.camera.position.x;
         camera.position.y = SkyRoads.camera.position.y;
         camera.position.z = SkyRoads.camera.position.z;
-
-        vehicle.update();
-        ghostCameraTarget.update();
 
         camera.lookAt(ghostCameraTarget.mesh.position);
 
@@ -140,11 +142,6 @@ var Vehicle = (function () {
     }
 
     var update = function () {
-        if (SkyRoads.keyboard.keyUp) {
-            SkyRoads.vehicle.velocity += SkyRoads.vehicle.acceleration * SkyRoads.delta;
-        } else if (SkyRoads.keyboard.keyDown) {
-            SkyRoads.vehicle.velocity -= SkyRoads.vehicle.acceleration * SkyRoads.delta;
-        }
         SkyRoads.vehicle.position.z += SkyRoads.vehicle.velocity;
 
         mesh.position.x = SkyRoads.vehicle.position.x;
