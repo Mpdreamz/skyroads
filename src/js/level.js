@@ -6,6 +6,7 @@ var Level = (function() {
 		addTile({ x: 2,	z: 0, h: 20 });
 		addTile({ x: 3,	z: 0, h: 20 });
 		addTile({ x: 4,	z: 2, h: 20 });
+		addTile({ x: 5,	z: 0, h: 40 });
 	}
 
 	function getTileAt(x, z) {
@@ -39,11 +40,20 @@ var Level = (function() {
 		return tiles;
 	}
 
+	function getMeshes() {
+		var meshes = [];
+		_.each(tiles, function(tile) {
+			meshes.push(tile.mesh);
+		});
+		return meshes;
+	}
+
 	init();
 
 	return {
 		getTileAt : getTileAt,
 		getTiles: getTiles,
+		getMeshes: getMeshes,
 		addTile: addTile,
 		removeTile: removeTile,
 		positionOccupied: positionOccupied
