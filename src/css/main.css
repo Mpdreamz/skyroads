@@ -31,6 +31,10 @@
 	border: 1px solid #000;
 }
 
+#editorWindow td.occupied {
+	background-color: orange;
+}
+
 #editorWindow td:hover {
-	background:orange;
+	background: orange;
 }

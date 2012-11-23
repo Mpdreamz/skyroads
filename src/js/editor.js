@@ -5,6 +5,7 @@ var editor = (function() {
 		$el = $('#editorWindow');
 
 		render();
+		renderFilledCells();
 
 
 		$el.scrollTop($table.height());
@@ -15,6 +16,7 @@ var editor = (function() {
 
 		Level.addTile({ x: x, z: z});
 		Scene.updateScene();
+		renderFilledCells();
 	}
 
 
@@ -33,6 +35,19 @@ var editor = (function() {
 				$td.click(onClickCell);
 			}
 		}
+	}
+
+	function renderFilledCells() {
+		$el.find('td').each(function(i, td) {
+			var x = $(td).attr('data-x'),
+				z = $(td).attr('data-z');
+			if ( Level.positionOccupied(x, z) ) {
+				$(td).addClass('occupied');
+			}
+			else {
+				$(td).removeClass('occupied');	
+			}
+		});
 	}
 
 	$(init);

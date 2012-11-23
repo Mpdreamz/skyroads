@@ -24,15 +24,10 @@ var Tile = (function (x, z, h) {
         mesh.scale.z = SkyRoads.cell.size.x;
     }
 
-    function equals(tile) {
-        return ( tile.mesh.position.x == mesh.position.x && tile.mesh.position.z == mesh.position.z );
-    }
-
     init();
 
     return {
         mesh: mesh,
-        update: update,
-        equals: equals
+        update: update
     };
 });
