@@ -52,6 +52,12 @@ var Keyboard = (function() {
         if (SkyRoads.keyboard.keyDown) {
             SkyRoads.vehicle.velocity -= SkyRoads.vehicle.acceleration * SkyRoads.delta;
         }
+        if (SkyRoads.keyboard.keyLeft) {
+            SkyRoads.vehicle.position.x += SkyRoads.vehicle.horizontalVelocity * SkyRoads.delta;
+        }
+        if (SkyRoads.keyboard.keyRight) {
+            SkyRoads.vehicle.position.x -= SkyRoads.vehicle.horizontalVelocity * SkyRoads.delta;
+        }
     }
 
 	$(init);

@@ -17,6 +17,7 @@ var SkyRoads = (function() {
     var vehicle = {
         velocity : 0,
         acceleration : 10,
+        horizontalVelocity : 1000,
         size : { x: 50, y: 30, z: 50 },
         position : { x:0, y:20, z:0 }
     }
