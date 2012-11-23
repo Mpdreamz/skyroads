@@ -9,7 +9,7 @@ var Vehicle = (function () {
     }
 
     var update = function () {
-        SkyRoads.vehicle.position.z += SkyRoads.vehicle.velocity;
+        SkyRoads.vehicle.position.z -= SkyRoads.vehicle.velocity;
 
         mesh.position.x = SkyRoads.vehicle.position.x;
         mesh.position.y = SkyRoads.vehicle.position.y;

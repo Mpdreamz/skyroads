@@ -47,10 +47,10 @@ var Keyboard = (function() {
 
 	var update = function () {
         if (SkyRoads.keyboard.keyUp) {
-            SkyRoads.vehicle.velocity -= SkyRoads.vehicle.acceleration * SkyRoads.delta;
+            SkyRoads.vehicle.velocity += SkyRoads.vehicle.acceleration * SkyRoads.delta;
         }
         if (SkyRoads.keyboard.keyDown) {
-            SkyRoads.vehicle.velocity += SkyRoads.vehicle.deceleration * SkyRoads.delta;
+            SkyRoads.vehicle.velocity -= SkyRoads.vehicle.deceleration * SkyRoads.delta;
         }
         SkyRoads.vehicle.velocity = Math.min(SkyRoads.vehicle.velocity, SkyRoads.vehicle.maximumVelocity);
         SkyRoads.vehicle.velocity = Math.max(0, SkyRoads.vehicle.velocity);
