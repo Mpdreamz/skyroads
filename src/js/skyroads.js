@@ -3,6 +3,11 @@ var SkyRoads = (function() {
     var time = 0;
     var delta = 0;
 
+    var world = {
+        gravity : 350,
+        bounciness : 0.75
+    };
+
     var cell = {
         size : { x: 200, y: 10 },
         maxGrid: { x: 7, y: 50, z: 1000 }
@@ -16,20 +21,21 @@ var SkyRoads = (function() {
     };
 
     var vehicle = {
-        velocity : 0,
+        velocity :  { x: 0, y: 0, z: 0 },
         acceleration : 10,
         deceleration : 50,
-        horizontalVelocity : 1000,
-        maximumVelocity : 50,
+        maximumVelocity : { x: 1000, y: 4000, z: 50 },
         size : { x: 50, y: 30, z: 50 },
-        position : { x:0, y:20, z:0 }
+        position : { x:0, y:20, z:0 },
+        canJump : true
     };
 
     var keyboard = {
         keyUp : false,
         keyDown : false,
         keyLeft : false,
-        keyRight : false
+        keyRight : false,
+        spacebar : false
     };
 
 
@@ -37,6 +43,7 @@ var SkyRoads = (function() {
     return {
         time: time,
         delta: delta,
+        world: world,
         vehicle: vehicle,
         cell: cell,
         camera: camera,
