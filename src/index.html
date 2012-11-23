@@ -2,12 +2,18 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css">
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="css/font-awesome-ie7.css">
+
 	</head>
 	<body>
 		<script type="text/javascript" src="libs/jquery-1.8.2.js"></script>
 		<script type="text/javascript" src="libs/underscore-min.js"></script>
 		<script type="text/javascript" src="libs/dat.gui.min.js"></script>
 		<script type="text/javascript" src="libs/three.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 		<script type="text/javascript" src="js/prototypes/number.js"></script>
 		<script type="text/javascript" src="js/skyroads.js"></script>
@@ -22,6 +28,12 @@
 		<script type="text/javascript" src="js/editor.js"></script>
 
 		<div id="fullPage">
+			<select id="level-selector">
+				<option value="the-first-level">1. The first level</option>
+			</select>
+			<button id="level-load">Load!</button></br />
+
+
 			<div id="gameWindow">
 			</div>
 
@@ -29,25 +41,30 @@
 				
 				<div id="cellEditor">
 				</div>
-				<select id="pen-type">
-					<option value="basic">Basic block</option>
-					<option value="booster">Booster block</option>
-					<option value="explosive">Explosive block</option>
-				</select><br />
-				<select id="pen">
-					<option value="square">Square</option>
-					<option value="horizontal-line">Horizontal line</option>
-					<option value="vertical-line">Vertical line</option>
-				</select><br />
-				<select id="pen-size">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-				</select>
+				<p>
+					<select id="pen-type">
+						<option value="basic">Basic block</option>
+						<option value="booster">Booster block</option>
+						<option value="explosive">Explosive block</option>
+					</select><br />
+					<select id="pen">
+						<option value="square">Square</option>
+						<option value="horizontal-line">Horizontal line</option>
+						<option value="vertical-line">Vertical line</option>
+					</select><br />
+					<select id="pen-size">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+					</select></br>
+				</p>
+				<button id="save">Save!</button></br />
+				<textarea id="level-output" title="Click and press CTRL+C to copy..." onclick="this.style.borderColor = 'orange'; 
+  this.select();" style="min-width:50%;" height="1"></textarea>
 			</div>
 		</div>
 

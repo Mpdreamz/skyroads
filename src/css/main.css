@@ -8,7 +8,7 @@
 }
 
 #gameWindow {
-	background:url(/images/stars.jpg);
+	background:url(/img/stars.jpg);
 	background-size: cover;
 	background-position:70% 30%;
 	overflow:hidden;
@@ -32,6 +32,11 @@
 	background-color: gray;
 }
 
+#cellEditor table {
+	border-collapse: separate;
+	border-spacing: 2px;
+}
+
 #cellEditor td {
 	width: 30px;
 	height: 30px;
@@ -41,6 +46,9 @@
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE */
     user-select: none; /* CSS3 */
+
+    border-collapse: separate;
+	border-spacing: 2px;
 }
 
 #cellEditor td.booster {
@@ -54,5 +62,7 @@
 }
 
 #cellEditor .hover {
-	background: orange !important;
+	text-align:center;
+	color:white;
+	background: black !important;
 }

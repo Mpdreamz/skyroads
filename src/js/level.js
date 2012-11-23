@@ -2,10 +2,7 @@ var Level = (function() {
 	var tiles = [];
 
 	function init() {
-		addTile({ x: 1,	z: 0, h: 40 });
-		addTile({ x: 2,	z: 0, h: 20 });
-		addTile({ x: 3,	z: 0, h: 20 });
-		addTile({ x: 4,	z: 2, h: 20 });
+		
 	}
 
 	function getTileAt(x, z) {
@@ -19,14 +16,14 @@ var Level = (function() {
 	// tileProps: x, z, h, type
 	function addTile(tileProps) {
 		if ( !positionOccupied(tileProps.x, tileProps.z) ) {
-			var tile = new Tile(tileProps)
+			var tile = new Tile(tileProps);
 			tiles.push( tile );
 		}
-		else { 
+		else {
 			removeTile(tileProps.x, tileProps.z);
-			var tile = new Tile(tileProps)
-			tiles.push( tile );
-		} 
+			var newTile = new Tile(tileProps);
+			tiles.push( newTile );
+		}
 
 	}
 	function removeTile(columnX, columnZ) {
@@ -55,7 +52,12 @@ var Level = (function() {
 		tile.cell.h += 20;
 		tile.update();
 	}
-
+	function loadFromJsonData(data) {
+		tiles = [];
+		_.each(data, function (cell) {
+			addTile(cell);
+		});
+	}
 
 	init();
 
@@ -66,6 +68,7 @@ var Level = (function() {
 		getTiles: getTiles,
 		addTile: addTile,
 		removeTile: removeTile,
-		positionOccupied: positionOccupied
+		positionOccupied: positionOccupied,
+		loadFromJsonData: loadFromJsonData
 	};
 }());

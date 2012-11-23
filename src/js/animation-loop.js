@@ -14,16 +14,6 @@ var Scene = (function () {
             scene.add(t.mesh);
         });
         
-        // for (var depth =0; depth < 1000; depth++)
-        // {
-        //     var cellWidth = 200;
-        //     for (var column = 0; column < 7; column++)
-        //     {
-        //         tile = new Tile(column * cellWidth - 3 * cellWidth, 0, depth * cellWidth);
-        //         scene.add(tile.mesh);
-        //     }
-        // }
-
         keyboard = new Keyboard();
         vehicle = new Vehicle();
         scene.add(vehicle.mesh);
@@ -69,6 +59,13 @@ var Scene = (function () {
         renderer.render(scene, camera.mesh);
     };
 
+    function getActiveTile()
+    {
+        if (!vehicle)
+            return null;
+        return Level.getTileAt(vehicle.mesh.position.x, vehicle.mesh.position.z);
+    }
+
     $(function() {
         initScene();
         animate();
@@ -76,6 +73,7 @@ var Scene = (function () {
     });
 
     return {
+        getActiveTile : getActiveTile,
         updateScene: updateScene
     };
 

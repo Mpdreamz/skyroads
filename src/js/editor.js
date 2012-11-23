@@ -1,18 +1,62 @@
 var editor = (function() {
-	var $el, $table, $pen, $penSize, $penType;
+	var $el, $table, $pen, $penSize, $penType, $saveButton;
 
 	function init() {
 		$el = $('#cellEditor');
 		$pen = $("#pen");
 		$penSize = $("#pen-size");
 		$penType = $("#pen-type");
+		$saveButton = $("#save");
+		$loadButton = $("#level-load");
+
+
+		$saveButton.click(save);
+		$loadButton.click(loadLevel);
 
 		render();
 		renderFilledCells();
 
-		$el.scrollTop($table.height());
+		$el.mousemove(function () {
+			var $realHover = $("#cellEditor .real-hover");
+			if (!$realHover)
+				return;
 
+			var x = $realHover.data("x");
+			var z = $realHover.data("z");
+
+			var elements = $realHover.add(getElements(x, z));
+			elements.addClass("hover");
+
+			var operation = "icon-plus-sign";
+			if (event.shiftKey)
+				operation = "icon-arrow-up";
+			else if (event.ctrlKey)
+				operation = "icon-remove-sign";
+
+			elements.addClass(operation);
+		});
+
+		$el.scrollTop($table.height());
 	}
+
+	function save() {
+		var cells = _.map(Level.getTiles(), function (tile) {
+			return tile.cell;
+		});
+
+		$("#level-output").text(JSON.stringify(cells));
+	}
+	function loadLevel() {
+		var levelData = $.getJSON("/levels/" + $("#level-selector").val() + ".json")
+			.done(function (data) {
+				Level.loadFromJsonData(data);
+				renderFilledCells();
+				Scene.updateScene();
+			});
+		
+	}
+
+
 	function onClickCell () {
 		var x = $(this).data("x");
 		var z = $(this).data("z");
@@ -45,12 +89,12 @@ var editor = (function() {
 					break;
 			}
 
-			$(this).removeClass("basic");
-			$(this).removeClass("booster");
-			$(this).removeClass("explosive");
+			$(this).removeClass("basic booster explosive");
 
 			if (operation != "remove")
+			{
 				$(this).addClass(type);
+			}
 			
 		});
 
@@ -63,11 +107,20 @@ var editor = (function() {
 	{
 		var x = $(this).data("x");
 		var z = $(this).data("z");
+		$(this).addClass("real-hover");
 		var elements = $(this).add(getElements(x, z));
 		elements.addClass("hover");
+
+		var operation = "icon-plus-sign";
+		if (event.shiftKey)
+			operation = "icon-arrow-up";
+		else if (event.ctrlKey)
+			operation = "icon-remove-sign";
+
+		elements.addClass(operation);
 	}
 
-	function getElements(x, z ) {
+	function getElements(x, z) {
 		x = parseInt(x, 10);
 		z = parseInt(z, 10);
 		var type = $pen.val();
@@ -91,8 +144,9 @@ var editor = (function() {
 	{
 		var x = $(this).data("x");
 		var z = $(this).data("z");
+		$(this).removeClass("real-hover");
 		var elements = $(this).add(getElements(x, z));
-		elements.removeClass("hover");
+		elements.removeClass("hover icon-plus-sign icon-remove-sign icon-arrow-up");
 	}
 
 
