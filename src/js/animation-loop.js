@@ -4,7 +4,8 @@ var Scene = (function () {
     var vehicle, camera, keyboard;
     
     var currentTime = new Date().getTime();
-
+    var SkyRoadsCopy = utils.deepCopy(SkyRoads);
+    console.log(SkyRoadsCopy);
     var initScene = function init() {
 
         scene = new THREE.Scene();
@@ -74,7 +75,8 @@ var Scene = (function () {
 
     return {
         getActiveTile : getActiveTile,
-        updateScene: updateScene
+        updateScene: updateScene,
+        SkyRoadsCopy: SkyRoadsCopy
     };
 
 })();
