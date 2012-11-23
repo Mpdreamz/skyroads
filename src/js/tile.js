@@ -3,7 +3,7 @@ var Tile = (function (x, z, h) {
 
     function init () {
         var g = new THREE.CubeGeometry( 1, 1, 1 );
-        var m = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
+        var m = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
 
         mesh = new THREE.Mesh( g, m );
         

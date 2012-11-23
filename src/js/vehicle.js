@@ -62,6 +62,14 @@ var Vehicle = (function () {
         updateState();
         move();
         scale();
+
+        _.each(Level.tiles, function(tile) {
+            tile.mesh.material.color.setHex(0xff0000);
+        });
+        var tile = Level.getTileAt(mesh.position.x, mesh.position.z);
+        if (tile) {
+            tile.mesh.material.color.setHex(0x00ff00);
+        }
     }
 
     init();
