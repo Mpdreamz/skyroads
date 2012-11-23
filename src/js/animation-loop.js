@@ -1,7 +1,7 @@
 var Scene = (function () {
     var scene, renderer;
 
-    var vehicle, camera, keyboard;
+    var vehicle, camera, keyboard, light;
     
     var currentTime = new Date().getTime();
     var SkyRoadsCopy = utils.deepCopy(SkyRoads);
@@ -21,8 +21,17 @@ var Scene = (function () {
         scene.add(vehicle.mesh);
 
         camera = new Camera();
+        
+        // add subtle ambient lighting
+        var ambientLight = new THREE.AmbientLight(0x222222);
+        scene.add(ambientLight);
 
-        renderer = new THREE.CanvasRenderer();
+        //
+        var directionalLight = new THREE.DirectionalLight(0xffffff);
+        directionalLight.position.set(1, 1, -1).normalize();
+        scene.add(directionalLight);
+
+        renderer = new THREE.WebGLRenderer();
         renderer.setSize( $('#gameWindow').width(), $('#gameWindow').height() );
 
         $('#gameWindow').append( renderer.domElement );

@@ -26,17 +26,15 @@ var Tile = (function (tileProps) {
     function _createMaterial() {
         switch(cell.type) {
             case "booster":
-                return new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+                return new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
             case "explosive":
-                return new THREE.MeshBasicMaterial( { color: 0xff0000 } ); 
+                return new THREE.MeshLambertMaterial( { color: 0xff0000 } );
             case "start":
-                return new THREE.MeshBasicMaterial( { color: 0xFF7400 } ); 
+                return new THREE.MeshLambertMaterial( { color: 0xFF7400 } );
             case "end":
-                return new THREE.MeshBasicMaterial( { color: 0xCD0074 } ); 
-
-                
+                return new THREE.MeshLambertMaterial( { color: 0xCD0074 } );
             default:
-                return new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+                return new THREE.MeshLambertMaterial( { color: 0x0000ff } );
         }
 
     }

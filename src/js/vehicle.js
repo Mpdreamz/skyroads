@@ -3,7 +3,7 @@ var Vehicle = (function () {
 
     function init() {
         var g = new THREE.CubeGeometry( 1, 1, 1 );
-        var m = new THREE.MeshBasicMaterial( { color: 0x999fff } );
+        var m = new THREE.MeshLambertMaterial( { color: 0x999fff } );
         mesh =  new THREE.Mesh( g, m );
         dead = false;
         update();
