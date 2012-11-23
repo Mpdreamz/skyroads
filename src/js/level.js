@@ -58,14 +58,18 @@ var Level = (function() {
 			addTile(cell);
 		});
 		
-		SkyRoads = utils.deepCopy(Scene.SkyRoadsCopy);
-		StateEditor.init();
+		restart();
 	}
 
 	function getMeshes() {
 		return _.map(tiles, function (tile) { return tile.mesh; } );
 	}
 
+	function restart() {
+		SkyRoads = utils.deepCopy(Scene.SkyRoadsCopy);
+		StateEditor.init();
+		$("#death-screen").hide();
+	}
 
 	init();
 
@@ -78,6 +82,7 @@ var Level = (function() {
 		removeTile: removeTile,
 		positionOccupied: positionOccupied,
 		getMeshes: getMeshes,
-		loadFromJsonData: loadFromJsonData
+		loadFromJsonData: loadFromJsonData,
+		restart: restart
 	};
 }());

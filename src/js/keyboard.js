@@ -20,6 +20,10 @@ var Keyboard = (function() {
 				SkyRoads.keyboard.spacebar = true;
 				break;
 		}
+
+		if (SkyRoads.vehicle.dead) {
+			Level.restart();
+		}
 	};
 
 	var onKeyUp = function (e) {
