@@ -2,11 +2,26 @@ var Level = (function() {
 	var tiles = [];
 
 	function init() {
-		addTile({ x: 1,	z: 0, h: 40 });
+		addTile({ x: 1,	z: 0, h: 60 });
 		addTile({ x: 2,	z: 0, h: 20 });
 		addTile({ x: 3,	z: 0, h: 20 });
+		addTile({ x: 4,	z: 0, h: 20 });
+		addTile({ x: 5,	z: 0, h: 60 });
+		addTile({ x: 1,	z: 1, h: 60 });
+		addTile({ x: 2,	z: 1, h: 20 });
+		addTile({ x: 3,	z: 1, h: 20 });
+		addTile({ x: 4,	z: 1, h: 20 });
+		addTile({ x: 5,	z: 1, h: 60 });
+		addTile({ x: 1,	z: 2, h: 60 });
+		addTile({ x: 2,	z: 2, h: 20 });
+		addTile({ x: 3,	z: 2, h: 20 });
 		addTile({ x: 4,	z: 2, h: 20 });
-		addTile({ x: 5,	z: 0, h: 40 });
+		addTile({ x: 5,	z: 2, h: 60 });
+		addTile({ x: 1,	z: 3, h: 60 });
+		addTile({ x: 2,	z: 3, h: 60 });
+		addTile({ x: 3,	z: 3, h: 60 });
+		addTile({ x: 4,	z: 3, h: 60 });
+		addTile({ x: 5,	z: 3, h: 60 });
 	}
 
 	function getTileAt(x, z) {
