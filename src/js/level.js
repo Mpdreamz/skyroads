@@ -19,13 +19,27 @@ var Level = (function() {
 	// tileProps: x, z, h, type
 	function addTile(tileProps) {
 		var cellWidth = SkyRoads.cell.size.x;
+
 		var tile = new Tile(
 				tileProps.x	* cellWidth - Math.floor(SkyRoads.cell.maxGrid.x / 2) * cellWidth,
 				-tileProps.z * cellWidth,
 				tileProps.h || 20
 			);
 		tile.type = tileProps.type || 'full';
-		tiles.push( tile );
+
+		// check if this tile space was already occupied. If so, do nothing
+		var isAlreadyPresent = false;
+
+		_.each(tiles, function(t) {
+			if ( t.equals(tile) ) {
+				isAlreadyPresent = true;
+			}
+
+		});
+
+		if ( !isAlreadyPresent ) {
+			tiles.push( tile );
+		}
 
 		console.log(tile.mesh.material.color);
 	}
