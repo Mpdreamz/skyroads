@@ -38,14 +38,29 @@ var Vehicle = (function () {
         }
         SkyRoads.vehicle.velocity.y -= SkyRoads.world.gravity * SkyRoads.delta;
 
+        var v = SkyRoads.vehicle;
+        var pos = v.position;
+        var boxRadiusX = v.size.x / 2;
+        var boxRadiusZ = v.size.z / 2;
+
+        // We could be exploding
         if ( hasFrontalCollisions() ) {
             console.log('explosion');
         }
+
+        // Or pushing up against the side of a block
         else if (hasLateralCollisions()) {
 
             SkyRoads.vehicle.velocity.x = 0;
         }
 
+        // Or we're dropping into space...
+        else if ( Level.getTileAt( pos.x - boxRadiusX, pos.z - boxRadiusZ) === undefined &&
+                  Level.getTileAt( pos.x - boxRadiusX, pos.z + boxRadiusZ) === undefined &&
+                  Level.getTileAt( pos.x + boxRadiusX, pos.z - boxRadiusZ) === undefined &&
+                  Level.getTileAt( pos.x + boxRadiusX, pos.z + boxRadiusZ) === undefined) {
+            console.log('dropping into space');
+        }
 
         SkyRoads.vehicle.position.x += SkyRoads.vehicle.velocity.x * SkyRoads.delta;
         SkyRoads.vehicle.position.y += SkyRoads.vehicle.velocity.y * SkyRoads.delta;
