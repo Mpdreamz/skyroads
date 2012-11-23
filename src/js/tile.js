@@ -1,6 +1,6 @@
 // tileProps: x, z, h, type
 var Tile = (function (tileProps) {
-    var mesh, height, cell;
+    var mesh, cell;
 
 
     function setColor() {

@@ -30,45 +30,55 @@ var Vehicle = (function () {
         SkyRoads.vehicle.velocity.x = Math.min(SkyRoads.vehicle.velocity.x, SkyRoads.vehicle.maximumVelocity.x);
         SkyRoads.vehicle.velocity.x = Math.max(SkyRoads.vehicle.velocity.x, -SkyRoads.vehicle.maximumVelocity.x);
 
-        // jump
-        var minHeight = 40;
-        SkyRoads.vehicle.canJump = SkyRoads.vehicle.position.y === minHeight;
-        if (SkyRoads.keyboard.spacebar && SkyRoads.vehicle.canJump) {
-            SkyRoads.vehicle.velocity.y = SkyRoads.vehicle.maximumVelocity.y;
-        }
-        SkyRoads.vehicle.velocity.y -= SkyRoads.world.gravity * SkyRoads.delta;
-
-        var v = SkyRoads.vehicle;
-        var pos = v.position;
-        var boxRadiusX = v.size.x / 2;
-        var boxRadiusZ = v.size.z / 2;
-
+        // collision detection
         // We could be exploding
         if ( hasFrontalCollisions() ) {
             console.log('explosion');
         }
-
         // Or pushing up against the side of a block
         else if (hasLateralCollisions()) {
 
             SkyRoads.vehicle.velocity.x = 0;
         }
 
-        // Or we're dropping into space...
-        else if ( Level.getTileAt( pos.x - boxRadiusX, pos.z - boxRadiusZ) === undefined &&
-                  Level.getTileAt( pos.x - boxRadiusX, pos.z + boxRadiusZ) === undefined &&
-                  Level.getTileAt( pos.x + boxRadiusX, pos.z - boxRadiusZ) === undefined &&
-                  Level.getTileAt( pos.x + boxRadiusX, pos.z + boxRadiusZ) === undefined) {
-            console.log('dropping into space');
+        // jumping
+        var minHeight = getMinHeight();
+        SkyRoads.vehicle.canJump = SkyRoads.vehicle.position.y === minHeight;
+        if (SkyRoads.keyboard.spacebar && SkyRoads.vehicle.canJump) {
+            SkyRoads.vehicle.velocity.y = SkyRoads.vehicle.maximumVelocity.y;
         }
+        SkyRoads.vehicle.velocity.y -= SkyRoads.world.gravity * SkyRoads.delta;
 
         SkyRoads.vehicle.position.x += SkyRoads.vehicle.velocity.x * SkyRoads.delta;
         SkyRoads.vehicle.position.y += SkyRoads.vehicle.velocity.y * SkyRoads.delta;
         SkyRoads.vehicle.position.z -= SkyRoads.vehicle.velocity.z * SkyRoads.delta;
+
+        // falling
         if (SkyRoads.vehicle.position.y < minHeight) {
             SkyRoads.vehicle.position.y = minHeight;
             SkyRoads.vehicle.velocity.y = -SkyRoads.vehicle.velocity.y * SkyRoads.world.bounciness;
         }
+    }
+
+    function getMinHeight() {
+        var pos = SkyRoads.vehicle.position;
+        var boxRadiusX = SkyRoads.vehicle.size.x / 2;
+        var boxRadiusY = SkyRoads.vehicle.size.y / 2;
+        var boxRadiusZ = SkyRoads.vehicle.size.z / 2;
+
+        var cornerTiles = [];
+        cornerTiles.push(Level.getTileAt( pos.x - boxRadiusX, pos.z - boxRadiusZ));
+        cornerTiles.push(Level.getTileAt( pos.x - boxRadiusX, pos.z + boxRadiusZ));
+        cornerTiles.push(Level.getTileAt( pos.x + boxRadiusX, pos.z - boxRadiusZ));
+        cornerTiles.push(Level.getTileAt( pos.x + boxRadiusX, pos.z + boxRadiusZ));
+
+        var minHeight = -1000;
+        _.each(cornerTiles, function(tile) {
+            if (tile !== undefined) {
+                minHeight = Math.max(minHeight, tile.cell.h);
+            }
+        });
+        return minHeight + boxRadiusY + 1;
     }
 
     function move() {
