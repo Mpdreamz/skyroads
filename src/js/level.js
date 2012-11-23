@@ -8,6 +8,14 @@ var Level = (function() {
 		addTile({ x: 4,	z: 2, h: 20 });
 	}
 
+	function getTileAt(x, z) {
+		var radius = SkyRoads.cell.size.x / 2;
+		return _.find(tiles, function(tile) {
+			return (x >= tile.mesh.position.x - radius && x <= tile.mesh.position.x + radius) &&
+				(z >= tile.mesh.position.z - radius && z <= tile.mesh.position.z + radius);
+		});
+	}
+
 	// tileProps: x, z, h, type
 	function addTile(tileProps) {
 		var cellWidth = SkyRoads.cell.size.x;
@@ -39,6 +47,7 @@ var Level = (function() {
 	init();
 
 	return {
+		getTileAt : getTileAt,
 		tiles: tiles,
 		addTile: addTile,
 		positionOccupied: positionOccupied
