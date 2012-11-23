@@ -1,14 +1,11 @@
 var Scene = (function () {
-    var camera, scene, renderer;
+    var scene, renderer;
 
-    var vehicle, ghostCameraTarget, keyboard;
+    var vehicle, camera, keyboard;
     
     var currentTime = new Date().getTime();
 
     var initScene = function init() {
-
-        camera = new THREE.PerspectiveCamera( SkyRoads.camera.fov, window.innerWidth / window.innerHeight, 1, 10000 );
-        camera.position.z = 1000;
 
         scene = new THREE.Scene();
 
@@ -26,9 +23,7 @@ var Scene = (function () {
         vehicle = new Vehicle();
         scene.add(vehicle.mesh);
 
-        ghostCameraTarget = new GhostCameraTarget();
-        //scene.add(ghostCameraTarget.mesh);
-
+        camera = new Camera();
         renderer = new THREE.CanvasRenderer();
         renderer.setSize( window.innerWidth, window.innerHeight );
 
@@ -47,21 +42,10 @@ var Scene = (function () {
         SkyRoads.time += SkyRoads.delta;
 
         keyboard.update();
+        camera.update();
         vehicle.update();
-        ghostCameraTarget.update();
 
-        SkyRoads.camera.position.x = SkyRoads.vehicle.position.x + SkyRoads.camera.offsetPosition.x;
-        SkyRoads.camera.position.y = SkyRoads.vehicle.position.y + SkyRoads.camera.offsetPosition.y;
-        SkyRoads.camera.position.z = SkyRoads.vehicle.position.z + SkyRoads.camera.offsetPosition.z;
-
-        camera.position.x = SkyRoads.camera.position.x;
-        camera.position.y = SkyRoads.camera.position.y;
-        camera.position.z = SkyRoads.camera.position.z;
-
-        camera.lookAt(ghostCameraTarget.mesh.position);
-
-        renderer.render( scene, camera );
-
+        renderer.render(scene, camera.mesh);
     }
 
     $(function() {
@@ -105,6 +89,37 @@ var Tile = (function (x, y, z) {
         update: update
     }
 })
+
+var Camera = (function () {
+    var mesh, target;
+
+    var init = function() {
+        mesh = new THREE.PerspectiveCamera( SkyRoads.camera.fov, window.innerWidth / window.innerHeight, 1, 10000 );
+        target = new GhostCameraTarget();
+        mesh.lookAt(target.mesh.position);
+
+        update();
+    }
+
+    var update = function() {
+        SkyRoads.camera.position.x = SkyRoads.vehicle.position.x + SkyRoads.camera.offsetPosition.x;
+        SkyRoads.camera.position.y = SkyRoads.vehicle.position.y + SkyRoads.camera.offsetPosition.y;
+        SkyRoads.camera.position.z = SkyRoads.vehicle.position.z + SkyRoads.camera.offsetPosition.z;
+
+        mesh.position.x = SkyRoads.camera.position.x;
+        mesh.position.y = SkyRoads.camera.position.y;
+        mesh.position.z = SkyRoads.camera.position.z;
+
+        target.update();
+    }
+
+    init();
+
+    return {
+        mesh: mesh,
+        update: update
+    }
+});
 
 var GhostCameraTarget = (function () {
     var mesh;
