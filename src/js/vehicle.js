@@ -30,7 +30,7 @@ var Vehicle = (function () {
         }
         SkyRoads.vehicle.velocity.x = Math.min(SkyRoads.vehicle.velocity.x, SkyRoads.vehicle.maximumVelocity.x);
         SkyRoads.vehicle.velocity.x = Math.max(SkyRoads.vehicle.velocity.x, -SkyRoads.vehicle.maximumVelocity.x);
-        SkyRoads.vehicle.position.x += SkyRoads.vehicle.velocity.x * SkyRoads.delta;
+        SkyRoads.vehicle.position.x += SkyRoads.vehicle.velocity.x;
 
         // jump
         var minHeight = 20;
