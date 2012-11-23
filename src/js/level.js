@@ -44,10 +44,19 @@ var Level = (function() {
 		return isAlreadyPresent;
 	}
 
+	function getMeshes() {
+		var result = [];
+		_.each(tiles, function(tile) {
+			result.push(tile.mesh);
+		});
+		return result;
+	}
+
 	init();
 
 	return {
-		getTileAt : getTileAt,
+		getTileAt: getTileAt,
+		getMeshes: getMeshes,
 		tiles: tiles,
 		addTile: addTile,
 		positionOccupied: positionOccupied

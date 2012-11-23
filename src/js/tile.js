@@ -27,6 +27,7 @@ var Tile = (function (x, z, h) {
     init();
 
     return {
+        height: height,
         mesh: mesh,
         update: update
     };
