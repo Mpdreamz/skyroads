@@ -39,6 +39,19 @@ var Level = (function() {
 	function getTiles() {
 		return tiles;
 	}
+	function increaseTileHeight(columnX, columnZ)
+	{
+		var tile = _.find(tiles, function(t) {
+			return t.cell.x == columnX && t.cell.z == columnZ;
+		});
+		if (!tile)
+			return;
+		tile.cell.h = tile.cell.h % 140;
+		tile.cell.h += 20;
+		console.log(tile.cell.h)
+		tile.update();
+	}
+
 
 	function getMeshes() {
 		var meshes = [];
@@ -50,7 +63,9 @@ var Level = (function() {
 
 	init();
 
+
 	return {
+		increaseTileHeight: increaseTileHeight,
 		getTileAt : getTileAt,
 		getTiles: getTiles,
 		getMeshes: getMeshes,

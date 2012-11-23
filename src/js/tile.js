@@ -2,28 +2,56 @@
 var Tile = (function (tileProps) {
     var mesh, height, cell;
 
-    function init (tileProps) {
-        var g = new THREE.CubeGeometry( 1, 1, 1 );
-        var m = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
 
+    function setColor() {
+         switch(cell.type) {
+            case "booster":
+                mesh.material.color.setHex(0x00ff00);
+                break;
+            case "explosive":
+                mesh.material.color.setHex(0xff0000);
+                break;
+            default:
+                mesh.material.color.setHex(0x0000ff);
+                break;
+        }
+    }
+
+    function _createMaterial() {
+        switch(cell.type) {
+            case "booster":
+                return new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+            case "explosive":
+                return new THREE.MeshBasicMaterial( { color: 0xff0000 } ); 
+            default:
+                return new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        }
+
+    }
+
+
+    function init(tileProps) {
         
         cell = tileProps;
         cell.type = tileProps.type || 'full';
         cell.h = tileProps.h || 20;
 
+        var g = new THREE.CubeGeometry( 1, 1, 1 );
+        var m = _createMaterial();
+
         mesh = new THREE.Mesh( g, m );
         
-        var cellWidth = SkyRoads.cell.size.x;
-        mesh.position.x = tileProps.x * cellWidth - Math.floor(SkyRoads.cell.maxGrid.x / 2) * cellWidth;
-        mesh.position.y = 0 + (cell.h / 2);
-        mesh.position.z = - cell.z * cellWidth;
-
         mesh._isTile = true;
 
         update();
     }
 
     function update() {
+        var cellWidth = SkyRoads.cell.size.x;
+        mesh.position.x = cell.x * cellWidth - Math.floor(SkyRoads.cell.maxGrid.x / 2) * cellWidth;
+        mesh.position.y = 0 + (cell.h / 2);
+        mesh.position.z = - cell.z * cellWidth;
+
         mesh.scale.x = SkyRoads.cell.size.x;
         mesh.scale.y = cell.h || SkyRoads.cell.size.y;
         mesh.scale.z = SkyRoads.cell.size.x;
@@ -34,6 +62,7 @@ var Tile = (function (tileProps) {
     return {
         mesh: mesh,
         update: update,
-        cell: cell
+        cell: cell,
+        setColor : setColor
     };
 });
