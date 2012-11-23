@@ -27,32 +27,58 @@
 		
 		<script type="text/javascript" src="js/editor.js"></script>
 
+<div class="navbar navbar-inverse">
+              <div class="navbar-inner">
+                <div class="container">
+                  <a class="brand" href="#">Level</a>
+                  <div class="nav-collapse collapse navbar-responsive-collapse">
+                    <form class="navbar-search pull-left" action="">
+	                      <select id="level-selector">
+	                      	<option value="" selected="selected">--------</option>
+							<option value="the-first-level">1. The first level</option>
+							<option value="the-second-level">2. The second level</option>
+						</select>
+                    </form>
+                    <!-- <ul class="nav pull-right">
+                      <li><a href="#">Link</a></li>
+                      <li class="divider-vertical"></li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Action</a></li>
+                          <li><a href="#">Another action</a></li>
+                          <li><a href="#">Something else here</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#">Separated link</a></li>
+                        </ul>
+                      </li>
+                    </ul> -->
+                  </div><!-- /.nav-collapse -->
+                </div>
+              </div><!-- /navbar-inner -->
+            </div>
+
 		<div id="fullPage">
-			<select id="level-selector">
-				<option value="the-first-level">1. The first level</option>
-				<option value="the-second-level">2. The second level</option>
-			</select>
-			<button id="level-load">Load!</button></br />
-
-
 			<div id="gameWindow">
 			</div>
 
 			<div id="editorWindow">
-				
-				<div id="cellEditor">
-				</div>
-				<p>
+				<div class="navbar">
+				<div class="navbar-inner">
+				<div class="container">
+
+				<div class="nav-collapse collapse navbar-responsive-collapse">
+				<form class="navbar-search pull-left" action="">
 					<select id="pen-type">
 						<option value="basic">Basic block</option>
 						<option value="booster">Booster block</option>
 						<option value="explosive">Explosive block</option>
-					</select><br />
+					</select>
 					<select id="pen">
 						<option value="square">Square</option>
 						<option value="horizontal-line">Horizontal line</option>
 						<option value="vertical-line">Vertical line</option>
-					</select><br />
+					</select>
 					<select id="pen-size">
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -61,7 +87,17 @@
 						<option value="5">5</option>
 						<option value="6">6</option>
 						<option value="7">7</option>
-					</select></br>
+					</select>
+				</form>
+				</div>
+				</div>
+             	</div>
+             	</div>
+
+				<div id="cellEditor">
+				</div>
+				<p>
+					</br>
 				</p>
 				<button id="save">Save!</button></br />
 				<textarea id="level-output" title="Click and press CTRL+C to copy..." onclick="this.style.borderColor = 'orange'; 

@@ -7,11 +7,10 @@ var editor = (function() {
 		$penSize = $("#pen-size");
 		$penType = $("#pen-type");
 		$saveButton = $("#save");
-		$loadButton = $("#level-load");
 
 
 		$saveButton.click(save);
-		$loadButton.click(loadLevel);
+		$("#level-selector").change(loadLevel);
 
 		render();
 		renderFilledCells();
@@ -46,14 +45,22 @@ var editor = (function() {
 
 		$("#level-output").text(JSON.stringify(cells));
 	}
-	function loadLevel() {
-		var levelData = $.getJSON("/levels/" + $("#level-selector").val() + ".json")
-			.done(function (data) {
-				Level.loadFromJsonData(data);
-				renderFilledCells();
-				Scene.updateScene();
-			});
-		
+	function loadLevel(e) {
+		e.preventDefault();
+		if (!$("#level-selector").val())
+		{
+			Level.loadFromJsonData([{ x: 3,	z: 0, h: 20 }]);
+			renderFilledCells();
+			Scene.updateScene();
+		}
+		else {
+			var levelData = $.getJSON("/levels/" + $("#level-selector").val() + ".json")
+				.done(function (data) {
+					Level.loadFromJsonData(data);
+					renderFilledCells();
+					Scene.updateScene();
+				});
+		}
 	}
 
 
@@ -169,7 +176,12 @@ var editor = (function() {
 	}
 
 	function renderFilledCells() {
-		_.each(Level.getTiles(), function(t) { 
+		var elements = $el.find(".basic, .booster, .explosive");
+		elements.removeClass("basic");
+		elements.removeClass("booster");
+		elements.removeClass("explosive");
+
+		_.each(Level.getTiles(), function(t) {
 			var $td = $("td[data-x='"+t.cell.x+"'][data-z='"+t.cell.z+"']");
 			$td.removeClass("basic");
 			$td.removeClass("booster");
