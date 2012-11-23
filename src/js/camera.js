@@ -10,14 +10,13 @@ var Camera = (function () {
 
     var update = function() {
         SkyRoads.camera.position.x = SkyRoads.camera.offsetPosition.x;
-        SkyRoads.camera.position.y = SkyRoads.vehicle.position.y + SkyRoads.camera.offsetPosition.y;
+        SkyRoads.camera.position.y = SkyRoads.camera.offsetPosition.y;
         SkyRoads.camera.position.z = SkyRoads.vehicle.position.z + SkyRoads.camera.offsetPosition.z;
 
         camera.position.x = SkyRoads.camera.position.x;
         camera.position.y = SkyRoads.camera.position.y;
         camera.position.z = SkyRoads.camera.position.z;
 
-        target.position.y = SkyRoads.vehicle.position.y;
         target.position.z = SkyRoads.vehicle.position.z - SkyRoads.camera.targetOffset;
         camera.lookAt(target.position);
     };
