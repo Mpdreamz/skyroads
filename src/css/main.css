@@ -43,10 +43,15 @@
     user-select: none; /* CSS3 */
 }
 
-#cellEditor td.occupied {
+#cellEditor td.booster {
+	background-color: green;
+}
+#cellEditor td.explosive {
+	background-color: red;
+}
+#cellEditor td.basic {
 	background-color: blue;
 }
-
 
 #cellEditor .hover {
 	background: orange !important;

@@ -22,6 +22,12 @@ var Level = (function() {
 			var tile = new Tile(tileProps)
 			tiles.push( tile );
 		}
+		else { 
+			removeTile(tileProps.x, tileProps.z);
+			var tile = new Tile(tileProps)
+			tiles.push( tile );
+		} 
+
 	}
 	function removeTile(columnX, columnZ) {
 		tiles = _.reject(tiles, function(t){ return t.cell.x == columnX && t.cell.z == columnZ; });
@@ -47,7 +53,6 @@ var Level = (function() {
 			return;
 		tile.cell.h = tile.cell.h % 140;
 		tile.cell.h += 20;
-		console.log(tile.cell.h)
 		tile.update();
 	}
 

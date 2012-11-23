@@ -33,7 +33,7 @@ var Tile = (function (tileProps) {
     function init(tileProps) {
         
         cell = tileProps;
-        cell.type = tileProps.type || 'full';
+        cell.type = tileProps.type || 'basic';
         cell.h = tileProps.h || 20;
 
         var g = new THREE.CubeGeometry( 1, 1, 1 );

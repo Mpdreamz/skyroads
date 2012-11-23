@@ -45,7 +45,13 @@ var editor = (function() {
 					break;
 			}
 
-			$(this).toggleClass("occupied", operation != "remove");
+			$(this).removeClass("basic");
+			$(this).removeClass("booster");
+			$(this).removeClass("explosive");
+
+			if (operation != "remove")
+				$(this).addClass(type);
+			
 		});
 
 		Scene.updateScene();
@@ -111,7 +117,10 @@ var editor = (function() {
 	function renderFilledCells() {
 		_.each(Level.getTiles(), function(t) { 
 			var $td = $("td[data-x='"+t.cell.x+"'][data-z='"+t.cell.z+"']");
-			$td.addClass('occupied');
+			$td.removeClass("basic");
+			$td.removeClass("booster");
+			$td.removeClass("explosive");
+			$td.addClass(t.cell.type || "basic");
 		});
 	}
 
