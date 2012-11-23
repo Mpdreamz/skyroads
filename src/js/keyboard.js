@@ -1,34 +1,40 @@
 var Keyboard = (function() {
 
-
-	var accelerate = function () {
-		SkyRoads.time += 10;
-	}
-	var decelerate = function () {
-		SkyRoads.time -= 10;	
-	}
-	var moveLeft = function () {
-		SkyRoads.vehicle.position.x += 10;
-	}
-	var moveRight = function () {
-		SkyRoads.vehicle.position.x -= 10;	
-	}
-
 	var onKeyDown = function (e) {
 		var keyCode = e.which;
 
 		switch(keyCode) {
 			case 38:
-				accelerate();
+				SkyRoads.keyboard.keyUp = true;
 				break;
 			case 40:
-				decelerate();
+				SkyRoads.keyboard.keyDown = true;
 				break;
 			case 37:
-				moveLeft();
+				SkyRoads.keyboard.keyLeft = true;
 				break;
 			case 39:
-				moveRight();
+				SkyRoads.keyboard.keyRight = true;
+				break;
+			
+		}
+	}
+
+	var onKeyUp = function (e) {
+		var keyCode = e.which;
+
+		switch(keyCode) {
+			case 38:
+				SkyRoads.keyboard.keyUp = false;
+				break;
+			case 40:
+				SkyRoads.keyboard.keyDown = false;
+				break;
+			case 37:
+				SkyRoads.keyboard.keyLeft = false;
+				break;
+			case 39:
+				SkyRoads.keyboard.keyRight = false;
 				break;
 			
 		}
@@ -40,6 +46,7 @@ var Keyboard = (function() {
 
 	var init = function () {
 		$(document).keydown(onKeyDown);
+		$(document).keyup(onKeyUp);
 	}
 
 

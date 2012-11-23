@@ -1,6 +1,7 @@
 var SkyRoads = (function() {
     
     var time = 0;
+    var delta = 0;
 
     var cell = {
         size : { x: 200, y: 10 }
@@ -13,16 +14,26 @@ var SkyRoads = (function() {
     };
 
     var vehicle = {
-        acceleration : 5,
+        velocity : 0,
+        acceleration : 10,
         size : { x: 50, y: 30, z: 50 },
         position : { x:0, y:20, z:0 }
     }
 
+    var keyboard = {
+        keyUp : false,
+        keyDown : false,
+        keyLeft : false,
+        keyRight : false
+    };
+
     return {
         time: time,
+        delta: delta,
         vehicle: vehicle,
         cell: cell,
-        camera: camera
+        camera: camera,
+        keyboard: keyboard
     }
 
 })();

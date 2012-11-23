@@ -1,7 +1,8 @@
 var StateEditor = (function()
 {
+    var gui;
 	var init = function() {
-        var gui = new dat.GUI();
+        gui = new dat.GUI();
         object2Folder(gui, SkyRoads);
 	}
 
@@ -21,14 +22,14 @@ var StateEditor = (function()
             else {
                 if (parentKey == "rotation")
                 {
-                    gui.add(obj, key, -180, 180);
+                    gui.add(obj, key, -180, 180).listen();
                 }
                 else if (parentKey == "size")
                 {
-                    gui.add(obj, key, 0, 1000);
+                    gui.add(obj, key, 0, 1000).listen();
                 }
                 else {
-                    gui.add(obj, key, -1000, 1000);
+                    gui.add(obj, key, -1000, 1000).listen();
                 }
             }
             
@@ -38,6 +39,6 @@ var StateEditor = (function()
     init();
 
     return {
-    	
+    	gui: gui
     }
 })();

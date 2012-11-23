@@ -2,6 +2,8 @@ var Scene = (function () {
     var camera, scene, renderer;
 
     var vehicle, ghostCameraTarget;
+    
+    var currentTime = new Date().getTime();
 
     var initScene = function init() {
 
@@ -37,10 +39,15 @@ var Scene = (function () {
         // note: three.js includes requestAnimationFrame shim
         requestAnimationFrame( animate );
 
+        var newTime = new Date().getTime();
+        SkyRoads.delta = (newTime - currentTime) / 1000;
+        currentTime = newTime;
+
+        SkyRoads.time += SkyRoads.delta;
+
         camera.position.x = SkyRoads.camera.position.x;
         camera.position.y = SkyRoads.camera.position.y;
         camera.position.z = SkyRoads.time * SkyRoads.vehicle.acceleration + SkyRoads.camera.position.z;
-
 
         vehicle.update();
         ghostCameraTarget.update();
@@ -126,9 +133,6 @@ var Vehicle = (function () {
         var m = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
         mesh =  new THREE.Mesh( g, m );
         update();
-    }
-
-    var update = function () {
 
         mesh.position.x = SkyRoads.vehicle.position.x;
         mesh.position.y = SkyRoads.vehicle.position.y;
@@ -137,6 +141,16 @@ var Vehicle = (function () {
         mesh.scale.x = SkyRoads.vehicle.size.x;
         mesh.scale.y = SkyRoads.vehicle.size.y;
         mesh.scale.z = SkyRoads.vehicle.size.z;
+    }
+
+    var update = function () {
+        if (SkyRoads.keyboard.keyUp) {
+            SkyRoads.vehicle.velocity += SkyRoads.vehicle.acceleration * SkyRoads.delta;
+        } else if (SkyRoads.keyboard.keyDown) {
+            SkyRoads.vehicle.velocity -= SkyRoads.vehicle.acceleration * SkyRoads.delta;
+        }
+
+        mesh.position.z += SkyRoads.vehicle.velocity;
     }
 
     init();
