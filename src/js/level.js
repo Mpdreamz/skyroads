@@ -2,7 +2,7 @@ var Level = (function() {
 	var tiles = [];
 
 	function init() {
-		addTile({ x: Math.floor(SkyRoads.cell.maxGrid.x / 2),	z: 0, h: 20 });
+		addTile({ x: Math.floor(SkyRoads.cell.maxGrid.x / 2),	z: 0, h: 20, type: "start" });
 	}
 
 	function getTileAt(x, z) {
@@ -52,7 +52,6 @@ var Level = (function() {
 		tile.update();
 	}
 	function loadFromJsonData(data) {
-		console.log(Scene.SkyRoadsCopy, SkyRoads);
 		tiles = [];
 		_.each(data, function (cell) {
 			addTile(cell);

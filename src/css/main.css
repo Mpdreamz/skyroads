@@ -78,6 +78,14 @@
 #cellEditor td.basic {
 	background-color: blue;
 }
+#cellEditor td.start {
+	background-color: #FF7400;
+}
+#cellEditor td.end {
+	background-color: #CD0074;
+}
+
+
 
 #cellEditor .hover {
 	display:table-cell;

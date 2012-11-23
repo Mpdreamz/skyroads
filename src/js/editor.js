@@ -49,7 +49,7 @@ var editor = (function() {
 		e.preventDefault();
 		if (!$("#level-selector").val())
 		{
-			Level.loadFromJsonData([{ x: Math.floor(SkyRoads.cell.maxGrid.x / 2),	z: 0, h: 20 }]);
+			Level.loadFromJsonData([{ x: Math.floor(SkyRoads.cell.maxGrid.x / 2),	z: 0, h: 20, type: "start" }]);
 			renderFilledCells();
 			Scene.updateScene();
 		}

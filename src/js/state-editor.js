@@ -9,11 +9,12 @@ var StateEditor = (function()
 
         gui = new dat.GUI();
         object2Folder(gui, SkyRoads);
-    }
+	}
 
-	function object2Folder(gui, obj, parentKey) {
-        $.each(obj, function(key, value)
-        {
+	function object2Folder(gui, obj, parentKey)
+    {
+        $.each(obj, function(key, value) 
+        { 
             if (typeof(value) == "function")
                 return;
 
@@ -38,7 +39,7 @@ var StateEditor = (function()
             }
             
         });
-    }
+    };
     
     init();
 
