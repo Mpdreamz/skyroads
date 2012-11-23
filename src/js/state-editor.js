@@ -39,6 +39,7 @@ var StateEditor = (function()
     init();
 
     return {
+        init: init,
     	gui: gui
     }
 })();

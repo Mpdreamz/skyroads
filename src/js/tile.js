@@ -11,6 +11,12 @@ var Tile = (function (tileProps) {
             case "explosive":
                 mesh.material.color.setHex(0xff0000);
                 break;
+            case "start":
+                mesh.material.color.setHex(0xFF7400);
+                break;
+            case "end":
+                mesh.material.color.setHex(0xCD0074);
+                break;
             default:
                 mesh.material.color.setHex(0x0000ff);
                 break;
@@ -23,6 +29,12 @@ var Tile = (function (tileProps) {
                 return new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
             case "explosive":
                 return new THREE.MeshBasicMaterial( { color: 0xff0000 } ); 
+            case "start":
+                return new THREE.MeshBasicMaterial( { color: 0xFF7400 } ); 
+            case "end":
+                return new THREE.MeshBasicMaterial( { color: 0xCD0074 } ); 
+
+                
             default:
                 return new THREE.MeshBasicMaterial( { color: 0x0000ff } );
         }
