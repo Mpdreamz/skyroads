@@ -17,7 +17,6 @@ var StateEditor = (function()
             {
                 var g = gui.addFolder(key);
                 object2Folder(g, value, key);
-                g.open()
             }
             else {
                 if (parentKey == "rotation")
@@ -31,6 +30,7 @@ var StateEditor = (function()
                 else {
                     gui.add(obj, key, -1000, 1000).listen();
                 }
+                //gui.close()
             }
             
         });

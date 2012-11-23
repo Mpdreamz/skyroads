@@ -9,7 +9,7 @@ var Scene = (function () {
 
         scene = new THREE.Scene();
 
-        _.each(Level.tiles, function(tile) {
+        _.each(Level.getTiles(), function(tile) {
             var t = tile;
             scene.add(t.mesh);
         });
@@ -44,12 +44,7 @@ var Scene = (function () {
             }
         }
 
-        // _.each(tilesCache, function (tile) {
-        //     scene.remove(tile.mesh);
-        //     renderer.deallocateObject(tile.mesh);
-        // });
-
-        _.each(Level.tiles, function(tile) {
+        _.each(Level.getTiles(), function(tile) {
             var t = tile;
             scene.add(t.mesh);
         });

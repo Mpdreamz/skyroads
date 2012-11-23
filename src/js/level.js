@@ -18,38 +18,34 @@ var Level = (function() {
 
 	// tileProps: x, z, h, type
 	function addTile(tileProps) {
-		var cellWidth = SkyRoads.cell.size.x;
-
 		if ( !positionOccupied(tileProps.x, tileProps.z) ) {
-			var tile = new Tile(
-					tileProps.x	* cellWidth - Math.floor(SkyRoads.cell.maxGrid.x / 2) * cellWidth,
-					-tileProps.z * cellWidth,
-					tileProps.h || 20
-				);
-			tile.type = tileProps.type || 'full';
+			var tile = new Tile(tileProps)
 			tiles.push( tile );
 		}
 	}
+	function removeTile(columnX, columnZ) {
+		tiles = _.reject(tiles, function(t){ return t.cell.x == columnX && t.cell.z == columnZ; });
+	}
 
-	function positionOccupied(x, z) {
-		var isAlreadyPresent = false;
+
+	function positionOccupied(columnX, columnZ) {
 		var cellWidth = SkyRoads.cell.size.x;
 
-		_.each(tiles, function(t) {
-			if ( t.mesh.position.x == x * cellWidth - Math.floor(SkyRoads.cell.maxGrid.x / 2) * cellWidth &&
-				t.mesh.position.z == -(z * cellWidth) ) {
-				isAlreadyPresent = true;
-			}
+		return _.any(tiles, function(t) {
+			return t.cell.x == columnX && t.cell.z == columnZ;
 		});
-		return isAlreadyPresent;
+	}
+	function getTiles() {
+		return tiles;
 	}
 
 	init();
 
 	return {
 		getTileAt : getTileAt,
-		tiles: tiles,
+		getTiles: getTiles,
 		addTile: addTile,
+		removeTile: removeTile,
 		positionOccupied: positionOccupied
 	};
 }());

@@ -3,6 +3,10 @@
 	padding:0;
 }
 
+#fullPage {
+	padding:40px;
+}
+
 #gameWindow {
 	background:url(/images/stars.jpg);
 	background-size: cover;
@@ -14,6 +18,13 @@
 }
 
 #editorWindow {
+	width: 50%;
+	height: 500px;
+	overflow-y:auto;
+	float: left;
+}
+
+#cellEditor {
 	width: 380px;
 	height: 500px;
 	overflow-y:auto;
@@ -21,20 +32,22 @@
 	background-color: gray;
 }
 
-#editorWindow table {
-	display: block;
-}
-
-#editorWindow td {
-	width: 50px;
-	height: 50px;
+#cellEditor td {
+	width: 30px;
+	height: 30px;
 	border: 1px solid #000;
+    -webkit-user-select: none; /* Safari, Chrome */
+    -khtml-user-select: none; /* Konqueror */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE */
+    user-select: none; /* CSS3 */
 }
 
-#editorWindow td.occupied {
-	background-color: orange;
+#cellEditor td.occupied {
+	background-color: blue;
 }
 
-#editorWindow td:hover {
+
+#cellEditor .hover {
 	background: orange;
 }
