@@ -52,10 +52,12 @@ var Level = (function() {
 		tile.update();
 	}
 	function loadFromJsonData(data) {
+		console.log(Scene.SkyRoadsCopy, SkyRoads);
 		tiles = [];
 		_.each(data, function (cell) {
 			addTile(cell);
 		});
+		SkyRoads = utils.deepCopy(Scene.SkyRoadsCopy);
 	}
 
 	function getMeshes() {
