@@ -2,7 +2,7 @@ var Level = (function() {
 	var tiles = [];
 
 	function init() {
-		addTile({ x: 3,	z: 0, h: 20 });
+		addTile({ x: Math.floor(SkyRoads.cell.maxGrid.x / 2),	z: 0, h: 20 });
 	}
 
 	function getTileAt(x, z) {
