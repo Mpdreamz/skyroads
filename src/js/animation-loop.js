@@ -29,7 +29,7 @@ var Scene = (function () {
         scene.add(vehicle.mesh);
 
         camera = new Camera();
-        renderer = new THREE.CanvasRenderer();
+        renderer = new THREE.WebGLRenderer();
         renderer.setSize( $('#gameWindow').width(), $('#gameWindow').height() );
 
         $('#gameWindow').append( renderer.domElement );
