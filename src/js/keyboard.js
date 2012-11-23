@@ -46,21 +46,6 @@ var Keyboard = (function() {
 	};
 
 	var update = function () {
-        if (SkyRoads.keyboard.keyUp) {
-            SkyRoads.vehicle.velocity += SkyRoads.vehicle.acceleration * SkyRoads.delta;
-        }
-        if (SkyRoads.keyboard.keyDown) {
-            SkyRoads.vehicle.velocity -= SkyRoads.vehicle.deceleration * SkyRoads.delta;
-        }
-        SkyRoads.vehicle.velocity = Math.min(SkyRoads.vehicle.velocity, SkyRoads.vehicle.maximumVelocity);
-        SkyRoads.vehicle.velocity = Math.max(0, SkyRoads.vehicle.velocity);
-
-        if (SkyRoads.keyboard.keyLeft) {
-            SkyRoads.vehicle.position.x -= SkyRoads.vehicle.horizontalVelocity * SkyRoads.delta;
-        }
-        if (SkyRoads.keyboard.keyRight) {
-            SkyRoads.vehicle.position.x += SkyRoads.vehicle.horizontalVelocity * SkyRoads.delta;
-        }
     };
 
 	$(init);
