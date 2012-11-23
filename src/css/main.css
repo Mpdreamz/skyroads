@@ -49,5 +49,5 @@
 
 
 #cellEditor .hover {
-	background: orange;
+	background: orange !important;
 }

@@ -1,10 +1,11 @@
 var editor = (function() {
-	var $el, $table, $pen, $penSize;
+	var $el, $table, $pen, $penSize, $penType;
 
 	function init() {
 		$el = $('#cellEditor');
 		$pen = $("#pen");
 		$penSize = $("#pen-size");
+		$penType = $("#pen-type");
 
 		render();
 		renderFilledCells();
@@ -16,16 +17,35 @@ var editor = (function() {
 		var x = $(this).data("x");
 		var z = $(this).data("z");
 
-		var occupied = Level.positionOccupied(x, z);
+		var type = $penType.val();
+
+		var operation = "add";
+		if (event.shiftKey)
+			operation = "raise";
+		else if (event.ctrlKey)
+			operation = "remove";
+
 		var elements = getElements(x, z);
 		$.each(elements, function () {
 			var lx = $(this).data("x");
 			var lz = $(this).data("z");
-			if (occupied)
-				Level.removeTile(lx, lz);
-			else
-				Level.addTile({ x: lx, z: lz});
-			$(this).toggleClass("occupied", !occupied);
+			switch (operation)
+			{
+				case "add":
+					Level.addTile({ x: lx, z: lz, type : type});
+					break;
+				case "raise":
+					if (!Level.positionOccupied(lx, lz))
+						Level.addTile({ x: lx, z: lz, type : type });
+
+					Level.increaseTileHeight(lx, lz);
+					break;
+				case "remove":
+					Level.removeTile(lx, lz);
+					break;
+			}
+
+			$(this).toggleClass("occupied", operation != "remove");
 		});
 
 		Scene.updateScene();
@@ -45,17 +65,17 @@ var editor = (function() {
 		x = parseInt(x, 10);
 		z = parseInt(z, 10);
 		var type = $pen.val();
-		var size = parseInt($penSize.val(), 10) - 1;
-		return $("#cellEditor tr:gt("+ ((SkyRoads.cell.maxGrid.z - z) - 5) +"):lt("+ ((SkyRoads.cell.maxGrid.z - z) + 5) +") td").filter(function (index) {
+		var size = parseInt($penSize.val(), 10);
+		return $("#cellEditor tr:gt("+ ((SkyRoads.cell.maxGrid.z - z) - 10) +"):lt("+ ((SkyRoads.cell.maxGrid.z - z) + 10) +") td").filter(function (index) {
 			var lx = $(this).data("x");
 			var lz = $(this).data("z");
 			switch(type) {
 				case "square":
-					return lx >= x && lx <= x + size && lz >= z && lz <= z + size;
+					return lx >= x && lx < (x + size) && lz >= z && lz < (z + size);
 				case "vertical-line":
-					return lz >= z && lz <= z + size && lx == x;
+					return lz >= z && lz < (z + size) && lx == x;
 				case "horizontal-line":
-					return lx >= x && lx <= x + size  && lz == z;
+					return lx >= x && lx < (x + size) && lz == z;
 			}
 			return false;
 		});

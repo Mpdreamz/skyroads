@@ -3,7 +3,7 @@ var Vehicle = (function () {
 
     function init() {
         var g = new THREE.CubeGeometry( 1, 1, 1 );
-        var m = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+        var m = new THREE.MeshBasicMaterial( { color: 0x00ffff } );
         mesh =  new THREE.Mesh( g, m );
         update();
     }
@@ -64,7 +64,7 @@ var Vehicle = (function () {
         scale();
 
         _.each(Level.getTiles(), function(tile) {
-            tile.mesh.material.color.setHex(0xff0000);
+            tile.setColor();
         });
         var tile = Level.getTileAt(mesh.position.x, mesh.position.z);
         if (tile) {
