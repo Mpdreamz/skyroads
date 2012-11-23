@@ -9,7 +9,8 @@ var SkyRoads = (function() {
     };
 
     var cell = {
-        size : { x: 200, y: 10 }
+        size : { x: 200, y: 10 },
+        maxGrid: { x: 7, y: 50, z: 1000 }
     };
 
     var camera = {
@@ -36,6 +37,8 @@ var SkyRoads = (function() {
         keyRight : false,
         spacebar : false
     };
+
+
 
     return {
         time: time,

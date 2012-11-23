@@ -1,9 +1,36 @@
-body {
-	margin:0px;
-	padding:0px;
+* {
+	margin:0;
+	padding:0;
+}
+
+#gameWindow {
 	background:url(/images/stars.jpg);
 	background-size: cover;
 	background-position:70% 30%;
 	overflow:hidden;
+	width: 50%;
+	height: 500px;
+	float: left;
+}
 
+#editorWindow {
+	width: 380px;
+	height: 500px;
+	overflow-y:auto;
+	float: left;
+	background-color: gray;
+}
+
+#editorWindow table {
+	display: block;
+}
+
+#editorWindow td {
+	width: 50px;
+	height: 50px;
+	border: 1px solid #000;
+}
+
+#editorWindow td:hover {
+	background:orange;
 }
