@@ -9,23 +9,28 @@ var Vehicle = (function () {
     }
 
     function updateState() {
+        // forward
         if (SkyRoads.keyboard.keyUp) {
-            SkyRoads.vehicle.velocity += SkyRoads.vehicle.acceleration * SkyRoads.delta;
+            SkyRoads.vehicle.velocity.z += SkyRoads.vehicle.acceleration * SkyRoads.delta;
         }
         if (SkyRoads.keyboard.keyDown) {
-            SkyRoads.vehicle.velocity -= SkyRoads.vehicle.deceleration * SkyRoads.delta;
+            SkyRoads.vehicle.velocity.z -= SkyRoads.vehicle.deceleration * SkyRoads.delta;
         }
-        SkyRoads.vehicle.velocity = Math.min(SkyRoads.vehicle.velocity, SkyRoads.vehicle.maximumVelocity);
-        SkyRoads.vehicle.velocity = Math.max(0, SkyRoads.vehicle.velocity);
+        SkyRoads.vehicle.velocity.z = Math.min(SkyRoads.vehicle.velocity.z, SkyRoads.vehicle.maximumVelocity.z);
+        SkyRoads.vehicle.velocity.z = Math.max(0, SkyRoads.vehicle.velocity.z);
+        SkyRoads.vehicle.position.z -= SkyRoads.vehicle.velocity.z;
 
+        // left / right
+        SkyRoads.vehicle.velocity.x = 0;
         if (SkyRoads.keyboard.keyLeft) {
-            SkyRoads.vehicle.position.x -= SkyRoads.vehicle.horizontalVelocity * SkyRoads.delta;
+            SkyRoads.vehicle.velocity.x -= SkyRoads.vehicle.maximumVelocity.x;
         }
         if (SkyRoads.keyboard.keyRight) {
-            SkyRoads.vehicle.position.x += SkyRoads.vehicle.horizontalVelocity * SkyRoads.delta;
+            SkyRoads.vehicle.velocity.x += SkyRoads.vehicle.maximumVelocity.x;
         }
-
-        SkyRoads.vehicle.position.z -= SkyRoads.vehicle.velocity;
+        SkyRoads.vehicle.velocity.x = Math.min(SkyRoads.vehicle.velocity.x, SkyRoads.vehicle.maximumVelocity.x);
+        SkyRoads.vehicle.velocity.x = Math.max(SkyRoads.vehicle.velocity.x, -SkyRoads.vehicle.maximumVelocity.x);
+        SkyRoads.vehicle.position.x += SkyRoads.vehicle.velocity.x * SkyRoads.delta;
     }
 
     function move() {
