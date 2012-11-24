@@ -1,8 +1,8 @@
-@font-face{ /* for IE */
+@font-face{ 
 font-family:'dodger';
     src:url('/font/dodger.eot');
 }
-@font-face { /* for non-IE */
+@font-face { 
     font-family: 'dodger';
     font-weight: normal;
     font-style: normal;
@@ -11,11 +11,11 @@ font-family:'dodger';
         url('/font/dodger.svg#webfont') format('svg');
 }
 
-@font-face{ /* for IE */
+@font-face{ 
 font-family:'neuropol';
     src:url('/font/neuropol.eot');
 }
-@font-face { /* for non-IE */
+@font-face { 
     font-family: 'neuropol';
     font-weight: normal;
     font-style: normal;
@@ -27,6 +27,13 @@ font-family:'neuropol';
 * {
 	margin:0;
 	padding:0;
+}
+
+ul {
+	list-style-type: none;
+	background-image: url('/img/stars-thumb.jpg');
+	background-position: 0 50%;
+	background-repeat: no-repeat;
 }
 
 #fullPage {
@@ -41,14 +48,10 @@ font-family:'neuropol';
 }
 
 #menuWindow {
-	background:url(/img/stars.jpg);
-	background-size: cover;
-	background-position:70% 30%;
+	background:url(/img/stars3.jpg);
 	overflow:hidden;
 	width: 100%;
 	height: 100%;
-	position: relative;
-	z-index: 1000;
 }
 
 #menuWindow ul {
@@ -58,7 +61,7 @@ font-family:'neuropol';
 }
 
 #menuWindow h1 {
-	font-family: "dodger";
+	font-family: "dodger", sans-serif;
 	font-size: 50px;
 	color: #fff;
 	line-height: 100px;
@@ -69,14 +72,14 @@ font-family:'neuropol';
 	display: block;
 	width: auto;
 	margin: 10px 0 10px 0;
-	font-family: "neuropol";
+	font-family: "neuropol", sans-serif;
 	font-size: 16px;
 	color: #fff;
 	text-decoration: none;
 }
 #menuWindow a:hover {
 	margin: 10px 0 10px 0;
-	font-family: "neuropol";
+	font-family: "neuropol", sans-serif;
 	font-size: 16px;
 	color: #fff;
 	text-decoration: underline;
@@ -128,10 +131,6 @@ font-family:'neuropol';
 	height: 500px;
 	overflow-y:auto;
 	float: left;
-}
-
-#cellEditor table {
-	
 }
 
 #cellEditor td {
@@ -187,4 +186,8 @@ font-family:'neuropol';
 
 #cellEditor td.player-on-tile {
 	background: yellow;
+}
+
+.left {
+	float: left;
 }
