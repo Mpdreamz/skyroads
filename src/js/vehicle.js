@@ -150,6 +150,7 @@ var Vehicle = (function () {
         if (tile) {
             tile.mesh.material.color.setHex(0x00ff00);
         }
+
     }
 
     init();

@@ -49,7 +49,7 @@ var editor = (function() {
 		e.preventDefault();
 		if (!$("#level-selector").val())
 		{
-			Level.loadFromJsonData([{ x: Math.floor(SkyRoads.cell.maxGrid.x / 2),	z: 0, h: 20, type: "start" }]);
+			//Level.loadFromJsonData([{ x: Math.floor(SkyRoads.cell.maxGrid.x / 2),	z: 0, h: 20, type: "start" }]);
 			renderFilledCells();
 			Scene.updateScene();
 		}
@@ -177,16 +177,20 @@ var editor = (function() {
 	}
 
 	function renderFilledCells() {
-		var elements = $el.find(".basic, .booster, .explosive");
+		var elements = $el.find(".basic, .booster, .explosive, .start, .end");
 		elements.removeClass("basic");
 		elements.removeClass("booster");
 		elements.removeClass("explosive");
+		elements.removeClass("start");
+		elements.removeClass("end");
 
 		_.each(Level.getTiles(), function(t) {
 			var $td = $("td[data-x='"+t.cell.x+"'][data-z='"+t.cell.z+"']");
 			$td.removeClass("basic");
 			$td.removeClass("booster");
 			$td.removeClass("explosive");
+			$td.removeClass("start");
+			$td.removeClass("end");
 			$td.addClass(t.cell.type || "basic");
 		});
 	}

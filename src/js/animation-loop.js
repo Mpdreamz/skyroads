@@ -51,8 +51,22 @@ var Scene = (function () {
         _.each(Level.getTiles(), function(tile) {
             var t = tile;
             scene.add(t.mesh);
+
+            // When we find the start tile, place the vehicle on it at the beginning
+            if (t.cell.type == "start") {
+                console.log("Found starting tile", tile);
+                SkyRoads.vehicle.position.x = t.cell.x * SkyRoads.cell.size.x - (Math.floor(SkyRoads.cell.maxGrid.x / 2) * SkyRoads.cell.size.x);
+                SkyRoads.vehicle.position.y = t.cell.h;
+                SkyRoads.vehicle.position.z = -t.cell.z * SkyRoads.cell.size.x;
+                
+                vehicle.mesh.position.x = t.cell.x * SkyRoads.cell.size.x - (Math.floor(SkyRoads.cell.maxGrid.x / 2) * SkyRoads.cell.size.x);
+                vehicle.mesh.position.y = t.cell.h;
+                vehicle.mesh.position.z = -t.cell.z * SkyRoads.cell.size.x;
+            }
         });
+        console.log(SkyRoads.vehicle.position, vehicle.mesh.position);
         renderer.render(scene, camera.mesh);
+
     }
 
     var animate = function animate() {
