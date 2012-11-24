@@ -2,7 +2,6 @@ var Keyboard = (function() {
 
 	var onKeyDown = function (e) {
 		var keyCode = e.which;
-		console.log(keyCode);
 		switch(keyCode) {
 			case 87: // w
 			case 38:
