@@ -31,10 +31,17 @@ font-family:'neuropol';
 
 ul {
 	list-style-type: none;
-	background-image: url('/img/stars-thumb.jpg');
 	background-position: 0 50%;
 	background-repeat: no-repeat;
 }
+
+#block1 { background-image: url('/img/stars-thumb.jpg'); }
+#block2 { background-image: url('/img/stars4-thumb.jpg'); }
+#block3 { background-image: url('/img/stars5-thumb.jpg'); }
+#block4 { background-image: url('/img/stars6-thumb.jpg'); }
+
+
+	
 
 #fullPage {
 	padding:40px;
@@ -48,7 +55,8 @@ ul {
 }
 
 #menuBackground {
-	background:url(/img/stars3.jpg);
+	background:url(/img/stars6.jpg);
+	background-size: cover;
 }
 
 #levels {
