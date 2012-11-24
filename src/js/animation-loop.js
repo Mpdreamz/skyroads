@@ -85,7 +85,7 @@ var Scene = (function () {
         if (SkyRoads.restart) {
             Level.restart();
             vehicle.move();
-        } else if (!SkyRoads.vehicle.dead && !SkyRoads.behicle.winning) {
+        } else if (!SkyRoads.vehicle.dead && !SkyRoads.vehicle.winning) {
             keyboard.update();
             camera.update();
             vehicle.update();
