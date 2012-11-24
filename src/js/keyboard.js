@@ -2,17 +2,21 @@ var Keyboard = (function() {
 
 	var onKeyDown = function (e) {
 		var keyCode = e.which;
-
+		console.log(keyCode);
 		switch(keyCode) {
+			case 87: // w
 			case 38:
 				SkyRoads.keyboard.keyUp = true;
 				break;
+			case 83: // s
 			case 40:
 				SkyRoads.keyboard.keyDown = true;
 				break;
+			case 65: // a
 			case 37:
 				SkyRoads.keyboard.keyLeft = true;
 				break;
+			case 68: // d
 			case 39:
 				SkyRoads.keyboard.keyRight = true;
 				break;
@@ -30,18 +34,19 @@ var Keyboard = (function() {
 		var keyCode = e.which;
 
 		switch(keyCode) {
-			case 27:
-				window.location = "#";
-
+			case 87: // w
 			case 38:
 				SkyRoads.keyboard.keyUp = false;
 				break;
+			case 83: // s
 			case 40:
 				SkyRoads.keyboard.keyDown = false;
 				break;
+			case 65: // a
 			case 37:
 				SkyRoads.keyboard.keyLeft = false;
 				break;
+			case 68: // d
 			case 39:
 				SkyRoads.keyboard.keyRight = false;
 				break;
