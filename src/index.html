@@ -26,44 +26,21 @@
 		<script type="text/javascript" src="js/tile.js"></script>
 		<script type="text/javascript" src="js/level.js"></script>
 		<script type="text/javascript" src="js/keyboard.js"></script>
+		<script type="text/javascript" src="js/events.js"></script>
 		
 		<script type="text/javascript" src="js/editor.js"></script>
 
-		<div class="navbar navbar-inverse">
-              <div class="navbar-inner">
-                <div class="container">
-                  <a class="brand" href="#">Level</a>
-                  <div class="nav-collapse collapse navbar-responsive-collapse">
-                    <form class="navbar-search pull-left" action="">
-	                      <select id="level-selector">
-	                      	<option value="" selected="selected">--------</option>
-							<option value="the-first-level">1. The first level</option>
-							<option value="the-second-level">2. The second level</option>
-							<option value="q42-rules">42. Q42 Rules</option>
-						</select>
-                    </form>
-                    <!-- <ul class="nav pull-right">
-                      <li><a href="#">Link</a></li>
-                      <li class="divider-vertical"></li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="#">Action</a></li>
-                          <li><a href="#">Another action</a></li>
-                          <li><a href="#">Something else here</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">Separated link</a></li>
-                        </ul>
-                      </li>
-                    </ul> -->
-                  </div><!-- /.nav-collapse -->
-                </div>
-              </div><!-- /navbar-inner -->
-            </div>
-
-
+		
 		<div id="fullPage">
 			<div class="gameContainer">
+				<div id="menuWindow">
+					<ul>
+						<li><a href="#the-first-level">1. The first level</a></li>
+						<li><a href="#the-second-level">2. The second level</a></li>
+						<li><a href="#q42-rules">42. Q42 Rules</a></li>
+
+					</ul>
+				</div>
 				<div id="gameWindow">
 				</div>
 				<div id="death-screen">

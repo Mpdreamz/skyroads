@@ -6,7 +6,8 @@ var editor = (function() {
 		$saveButton = $("#save");
 
 		$saveButton.click(save);
-		$("#level-selector").change(loadLevel);
+
+		$(document).bind("level-loaded", renderFilledCells);
 
 		render();
 		renderFilledCells();
@@ -37,26 +38,6 @@ var editor = (function() {
 
 		$("#level-output").text(JSON.stringify(cells));
 	}
-
-	function loadLevel(e) {
-		e.preventDefault();
-		if (!$("#level-selector").val())
-		{
-			Level.loadFromJsonData([{ x: Math.floor(SkyRoads.cell.maxGrid.x / 2),	z: 0, h: 20, type: "start" }]);
-			renderFilledCells();
-			Scene.updateScene();
-		}
-		else {
-			var levelData = $.getJSON("/levels/" + $("#level-selector").val() + ".json?t=" + new Date().getTime())
-				.done(function (data) {
-					Level.loadFromJsonData(data);
-					renderFilledCells();
-					Scene.updateScene();
-				});
-		}
-		$("#level-selector").blur();
-	}
-
 
 	function onClickCell () {
 		var x = $(this).data("x");
@@ -223,3 +204,4 @@ var editor = (function() {
 		updateEditorWindow: updateEditorWindow
 	};
 }());
+

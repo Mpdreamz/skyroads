@@ -71,7 +71,7 @@ var Scene = (function () {
     function updateDelta() {
         var newTime = new Date().getTime();
         SkyRoads.delta = (newTime - currentTime) / 1000;
-        if (SkyRoads.delta == 0 || SkyRoads.delta > 1000)
+        if (SkyRoads.delta === 0 || SkyRoads.delta > 1000)
             SkyRoads.delta = 1 / 60;
         currentTime = newTime;
     }
@@ -96,7 +96,7 @@ var Scene = (function () {
             $('#winning-screen').show();
         }
         renderer.render(scene, camera.mesh);
-    };
+    }
 
     function getActiveTile()
     {
