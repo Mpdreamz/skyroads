@@ -109,11 +109,11 @@ var editor = (function() {
 					break;
 			}
 
-			$(this).removeClass("basic booster explosive");
+			$(this).removeClass("basic booster explosive start end");
 
 			if (operation != "remove")
 			{
-				$(this).addClass(pen.type);
+				$(this).addClass(pen.block);
 			}
 			
 		});
