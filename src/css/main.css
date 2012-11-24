@@ -11,6 +11,19 @@ font-family:'dodger';
         url('/font/dodger.svg#webfont') format('svg');
 }
 
+@font-face{ /* for IE */
+font-family:'neuropol';
+    src:url('/font/neuropol.eot');
+}
+@font-face { /* for non-IE */
+    font-family: 'neuropol';
+    font-weight: normal;
+    font-style: normal;
+    src:url(http://:/) format("No-IE-404"),url('/font/neuropol.woff') format('woff'), 
+        url('/font/neuropol.ttf') format('truetype'), 
+        url('/font/neuropol.svg#webfont') format('svg');
+}
+
 * {
 	margin:0;
 	padding:0;
@@ -64,14 +77,14 @@ ul {
 	display: block;
 	width: auto;
 	margin: 10px 0 10px 0;
-	font-family: "dodger";
+	font-family: "neuropol";
 	font-size: 16px;
 	color: #fff;
 	text-decoration: none;
 }
 #menuWindow a:hover {
 	margin: 10px 0 10px 0;
-	font-family: "dodger";
+	font-family: "neuropol";
 	font-size: 16px;
 	color: #fff;
 	text-decoration: underline;
