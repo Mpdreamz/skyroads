@@ -53,11 +53,12 @@ var Vehicle = (function (scene) {
         if ( hasFrontalCollisions() ) {
             if ( SkyRoads.vehicle.velocity.z > 250 ) {
                 SkyRoads.vehicle.dead = true;
+                Scene.killVehicle();
             }
             else {
                 SkyRoads.vehicle.velocity.z = 0;
             }
-            Scene.killVehicle();
+            
         }
         // Or pushing up against the side of a block
         else if (hasLateralCollisions()) {
