@@ -2,7 +2,7 @@ var Vehicle = (function (scene) {
     var mesh;
 
     function init() {
-         var jsonLoader = new THREE.JSONLoader();
+        var jsonLoader = new THREE.JSONLoader();
         jsonLoader.load( "/js/models/spaceship.js", function( geometry ) { createScene( geometry ) } );
 
         // load binary model
@@ -183,6 +183,10 @@ var Vehicle = (function (scene) {
     }
 
     function update() {
+        if (!mesh) {
+            return;
+        }
+
         updateState();
         move();
         scale();
