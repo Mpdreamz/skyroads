@@ -86,7 +86,7 @@ var Vehicle = (function () {
         SkyRoads.vehicle.position.z -= SkyRoads.vehicle.velocity.z * SkyRoads.delta;
 
         // detect death by falling
-        if (SkyRoads.vehicle.position.y < -5000) {
+        if (SkyRoads.vehicle.position.y < -50) {
             console.log("death by falling");
             SkyRoads.vehicle.dead = true;
             Scene.killVehicle();
