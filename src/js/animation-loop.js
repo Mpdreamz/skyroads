@@ -90,8 +90,8 @@ var Scene = (function () {
             explosion.stop();
         } else if (SkyRoads.time > 1 && !SkyRoads.vehicle.dead && !SkyRoads.vehicle.winning) {
             keyboard.update();
-            camera.update();
             vehicle.update();
+            camera.update();
         } else if (SkyRoads.vehicle.dead) {
             $("#death-screen").show();
             explosion.update();
