@@ -30,6 +30,9 @@ var Keyboard = (function() {
 		var keyCode = e.which;
 
 		switch(keyCode) {
+			case 27:
+				window.location = "#";
+
 			case 38:
 				SkyRoads.keyboard.keyUp = false;
 				break;

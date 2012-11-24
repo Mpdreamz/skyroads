@@ -73,6 +73,15 @@ var Level = (function() {
 
 	init();
 
+	function load(level) {
+		var levelData = $.getJSON("/levels/" + level + ".json?t=" + new Date().getTime())
+			.done(function (data) {
+				Level.loadFromJsonData(data);
+				Scene.updateScene();
+				$(document).trigger("level-loaded");
+			});
+	}
+
 
 	return {
 		increaseTileHeight: increaseTileHeight,
@@ -83,6 +92,7 @@ var Level = (function() {
 		positionOccupied: positionOccupied,
 		getMeshes: getMeshes,
 		loadFromJsonData: loadFromJsonData,
-		restart: restart
+		restart: restart,
+		load : load
 	};
 }());

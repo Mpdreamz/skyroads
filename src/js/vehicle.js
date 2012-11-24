@@ -1,13 +1,30 @@
-var Vehicle = (function () {
+var Vehicle = (function (scene) {
     var mesh;
 
     function init() {
-        var g = new THREE.CubeGeometry( 1, 1, 1 );
-        var m = new THREE.MeshLambertMaterial( { color: 0x999fff } );
-        mesh =  new THREE.Mesh( g, m );
+         var jsonLoader = new THREE.JSONLoader();
+        jsonLoader.load( "/js/models/spaceship.js", function( geometry ) { createScene( geometry ) } );
+
+        // load binary model
+
+        // var binLoader = new THREE.BinaryLoader();
+        // binLoader.load( "Model_bin.js", function( geometry ) { createScene( geometry) } );
+
+        // var g = new THREE.CubeGeometry( 1, 1, 1 );
+        
+        // mesh =  new THREE.Mesh( g, m );
         dead = false;
-        update();
     }
+
+
+    function createScene( geometry ) {
+         //var m = new THREE.MeshLambertMaterial( { color: 0x999fff } );
+         mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
+
+         scene.add(mesh);
+         update();
+    }
+
 
     function updateState() {
         // forward
@@ -119,6 +136,12 @@ var Vehicle = (function () {
         mesh.position.y = SkyRoads.vehicle.position.y;
         mesh.position.z = SkyRoads.vehicle.position.z;
         editor.updateEditorWindow(mesh.position);
+
+        mesh.rotation.x = SkyRoads.vehicle.rotation.x;
+        mesh.rotation.y = SkyRoads.vehicle.rotation.y;
+        mesh.rotation.z = SkyRoads.vehicle.rotation.z;
+
+
     }
 
     function scale() {
@@ -145,6 +168,9 @@ var Vehicle = (function () {
     }
 
     function hasCollisions(directionVector, boxRadius) {
+        if (!mesh)
+            return;
+
         var originPoint = mesh.position.clone();
         originPoint = originPoint.subSelf(new THREE.Vector3(0, SkyRoads.vehicle.size.y / 2, 0));
 
