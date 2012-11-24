@@ -94,7 +94,9 @@ var Scene = (function () {
             camera.update();
         } else if (SkyRoads.vehicle.dead) {
             $("#death-screen").show();
+            vehicle.update();
             explosion.update();
+            camera.update();
         } else if (SkyRoads.vehicle.winning) {
             $('#winning-screen').show();
         }
