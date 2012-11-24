@@ -190,12 +190,30 @@ var editor = (function() {
 		});
 	}
 
+	var prevTile = null;
 	function updateEditorWindow(position) {
 		// calculate in what row we are now, and what the scrollTop is for that row.
-		var bottom = 500 + Math.abs( position.z * (30.0 / SkyRoads.cell.size.x) );
-		if ($el) {
-			$el.scrollTop($table.height() - bottom);
+		if (!$el)
+			return;
+
+
+		if (prevTile)
+		{
+			prevTile.removeClass("player-on-tile");
 		}
+		var tile = Level.getTileAt(position.x, position.z); 
+
+		var currentEditorTile = $el.find("td[data-x='"+tile.cell.x+"'][data-z='"+tile.cell.z+"']");
+		if (currentEditorTile)
+		{
+			currentEditorTile.addClass("player-on-tile");
+			prevTile = currentEditorTile;
+		}
+
+		// var bottom = 500 + Math.abs( position.z * (30.0 / SkyRoads.cell.size.x) );
+		// if ($el) {
+		// 	$el.scrollTop($table.height() - bottom);
+		// }
 	}
 
 	$(init);
