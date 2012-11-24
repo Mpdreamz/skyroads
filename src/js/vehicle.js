@@ -67,6 +67,11 @@ var Vehicle = (function () {
                 console.log("Death by touching explosive tile");
                 SkyRoads.vehicle.dead = true;
             }
+               else if (tile && tile.cell && tile.cell.type === "end") {
+                // We reached the end of the level without dying!
+                console.log('winning!');
+                SkyRoads.vehicle.winning = true;
+            }
         }
 
         SkyRoads.vehicle.position.x += SkyRoads.vehicle.velocity.x * SkyRoads.delta;

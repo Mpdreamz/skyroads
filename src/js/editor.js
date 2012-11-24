@@ -202,7 +202,7 @@ var editor = (function() {
 			prevTile.removeClass("player-on-tile");
 		}
 		var tile = Level.getTileAt(position.x, position.z);
-		if (!tile.cell) {
+		if (!tile || !tile.cell) {
 			return;
 		}
 		var currentEditorTile = $el.find("td[data-x='"+tile.cell.x+"'][data-z='"+tile.cell.z+"']");
