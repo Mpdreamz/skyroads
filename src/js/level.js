@@ -68,6 +68,7 @@ var Level = (function() {
 		SkyRoads = utils.deepCopy(Scene.SkyRoadsCopy);
 		StateEditor.init();
 		$("#death-screen").hide();
+		$("#winning-screen").hide();
 	}
 
 	init();

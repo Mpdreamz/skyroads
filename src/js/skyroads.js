@@ -28,7 +28,8 @@ var SkyRoads = (function() {
         size : { x: 50, y: 30, z: 50 },
         position : { x:0, y:36, z:0 },
         canJump : true,
-        dead: false
+        dead: false,
+        winning: false
     };
 
     var keyboard = {

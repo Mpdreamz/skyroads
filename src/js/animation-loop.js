@@ -79,12 +79,15 @@ var Scene = (function () {
         currentTime = newTime;
 
         SkyRoads.time += SkyRoads.delta;
-        if (SkyRoads.time > 2 && !SkyRoads.vehicle.dead) {
+        if (SkyRoads.time > 2 && !SkyRoads.vehicle.dead && !SkyRoads.vehicle.winning) {
             keyboard.update();
             camera.update();
             vehicle.update();
         } else if (SkyRoads.vehicle.dead) {
             $("#death-screen").show();
+        }
+        else if (SkyRoads.vehicle.winning) {
+            $('#winning-screen').show();
         }
         renderer.render(scene, camera.mesh);
     };
