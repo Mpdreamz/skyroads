@@ -54,7 +54,7 @@ var editor = (function() {
 			Scene.updateScene();
 		}
 		else {
-			var levelData = $.getJSON("/levels/" + $("#level-selector").val() + ".json")
+			var levelData = $.getJSON("/levels/" + $("#level-selector").val() + ".json?t=" + new Date().getTime())
 				.done(function (data) {
 					Level.loadFromJsonData(data);
 					renderFilledCells();
