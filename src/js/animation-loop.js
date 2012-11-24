@@ -111,8 +111,11 @@ var Scene = (function () {
     }
 
     function killVehicle() {
-        vehicle.destroy();
-        explosion.start();
+        if (!SkyRoads.vehicle.dead) {
+            SkyRoads.vehicle.dead = true;
+            vehicle.destroy();
+            explosion.start();
+        }
     }
 
     $(function() {

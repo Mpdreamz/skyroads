@@ -27,85 +27,84 @@ var Vehicle = (function (scene) {
 
 
     function updateState() {
-        // forward
-        if (SkyRoads.keyboard.keyUp) {
-            SkyRoads.vehicle.velocity.z += SkyRoads.vehicle.acceleration * SkyRoads.delta;
-        }
-        if (SkyRoads.keyboard.keyDown) {
-            SkyRoads.vehicle.velocity.z -= SkyRoads.vehicle.deceleration * SkyRoads.delta;
-        }
-        SkyRoads.vehicle.velocity.z = Math.min(SkyRoads.vehicle.velocity.z, SkyRoads.vehicle.maximumVelocity.z);
-        SkyRoads.vehicle.velocity.z = Math.max(0, SkyRoads.vehicle.velocity.z);
-
-        // left / right
-        SkyRoads.vehicle.velocity.x = 0;
-        if (SkyRoads.keyboard.keyLeft) {
-            SkyRoads.vehicle.velocity.x -= SkyRoads.vehicle.maximumVelocity.x;
-        }
-        if (SkyRoads.keyboard.keyRight) {
-            SkyRoads.vehicle.velocity.x += SkyRoads.vehicle.maximumVelocity.x;
-        }
-        SkyRoads.vehicle.velocity.x = Math.min(SkyRoads.vehicle.velocity.x, SkyRoads.vehicle.maximumVelocity.x);
-        SkyRoads.vehicle.velocity.x = Math.max(SkyRoads.vehicle.velocity.x, -SkyRoads.vehicle.maximumVelocity.x);
-
-        // collision detection
-        // We could be exploding
-        if ( hasFrontalCollisions() ) {
-            if ( SkyRoads.vehicle.velocity.z > 250 ) {
-                SkyRoads.vehicle.dead = true;
-                Scene.killVehicle();
+        if (!SkyRoads.vehicle.dead && !SkyRoads.vehicle.winning) {
+            // forward
+            if (SkyRoads.keyboard.keyUp) {
+                SkyRoads.vehicle.velocity.z += SkyRoads.vehicle.acceleration * SkyRoads.delta;
             }
-            else {
-                SkyRoads.vehicle.velocity.z = 0;
+            if (SkyRoads.keyboard.keyDown) {
+                SkyRoads.vehicle.velocity.z -= SkyRoads.vehicle.deceleration * SkyRoads.delta;
             }
-            
-        }
-        // Or pushing up against the side of a block
-        else if (hasLateralCollisions()) {
+            SkyRoads.vehicle.velocity.z = Math.min(SkyRoads.vehicle.velocity.z, SkyRoads.vehicle.maximumVelocity.z);
+            SkyRoads.vehicle.velocity.z = Math.max(0, SkyRoads.vehicle.velocity.z);
 
+            // left / right
             SkyRoads.vehicle.velocity.x = 0;
-        }
-
-        // falling
-        var tileHeight = getMinHeight();
-        SkyRoads.vehicle.velocity.y -= SkyRoads.world.gravity * SkyRoads.delta;
-        if (isCollidingWithFloor()) {
-            SkyRoads.vehicle.position.y = tileHeight;
-            SkyRoads.vehicle.velocity.y = 0;
-
-            // jumping
-            if (SkyRoads.keyboard.spacebar) {
-                SkyRoads.vehicle.velocity.y = SkyRoads.vehicle.maximumVelocity.y;
+            if (SkyRoads.keyboard.keyLeft) {
+                SkyRoads.vehicle.velocity.x -= SkyRoads.vehicle.maximumVelocity.x;
             }
-        }
-
-        // Handle special tile properties
-        var tile = Level.getTileAt(mesh.position.x, mesh.position.z);
-        if (tile) {
-            // 1. Booster tile
-            if (tile.cell.type === "booster") {
-                SkyRoads.vehicle.velocity.z += SkyRoads.world.boostAcceleration * SkyRoads.delta;
-                SkyRoads.vehicle.velocity.z = Math.min(SkyRoads.vehicle.velocity.z, SkyRoads.vehicle.maximumVelocity.z);
+            if (SkyRoads.keyboard.keyRight) {
+                SkyRoads.vehicle.velocity.x += SkyRoads.vehicle.maximumVelocity.x;
             }
-            else if (tile.cell.type === "explosive" && SkyRoads.vehicle.position.y >= tile.cell.h && SkyRoads.vehicle.position.y <= (tile.cell.h + 20)) {
-                SkyRoads.vehicle.dead = true;
+            SkyRoads.vehicle.velocity.x = Math.min(SkyRoads.vehicle.velocity.x, SkyRoads.vehicle.maximumVelocity.x);
+            SkyRoads.vehicle.velocity.x = Math.max(SkyRoads.vehicle.velocity.x, -SkyRoads.vehicle.maximumVelocity.x);
+
+            // collision detection
+            // We could be exploding
+            if ( hasFrontalCollisions() ) {
+                if ( SkyRoads.vehicle.velocity.z > 250 ) {
+                    Scene.killVehicle();
+                }
+                else {
+                    SkyRoads.vehicle.velocity.z = 0;
+                }
+                
+            }
+            // Or pushing up against the side of a block
+            else if (hasLateralCollisions()) {
+
+                SkyRoads.vehicle.velocity.x = 0;
+            }
+
+            // falling
+            var tileHeight = getMinHeight();
+            SkyRoads.vehicle.velocity.y -= SkyRoads.world.gravity * SkyRoads.delta;
+            if (isCollidingWithFloor()) {
+                SkyRoads.vehicle.position.y = tileHeight;
+                SkyRoads.vehicle.velocity.y = 0;
+
+                // jumping
+                if (SkyRoads.keyboard.spacebar) {
+                    SkyRoads.vehicle.velocity.y = SkyRoads.vehicle.maximumVelocity.y;
+                }
+            }
+
+            // Handle special tile properties
+            var tile = Level.getTileAt(mesh.position.x, mesh.position.z);
+            if (tile) {
+                // 1. Booster tile
+                if (tile.cell.type === "booster") {
+                    SkyRoads.vehicle.velocity.z += SkyRoads.world.boostAcceleration * SkyRoads.delta;
+                    SkyRoads.vehicle.velocity.z = Math.min(SkyRoads.vehicle.velocity.z, SkyRoads.vehicle.maximumVelocity.z);
+                }
+                else if (tile.cell.type === "explosive" && SkyRoads.vehicle.position.y >= tile.cell.h && SkyRoads.vehicle.position.y <= (tile.cell.h + 20)) {
+                    Scene.killVehicle();
+                }
+                else if (tile && tile.cell && tile.cell.type === "end") {
+                    // We reached the end of the level without dying!
+                    SkyRoads.vehicle.winning = true;
+                }
+            }
+
+            SkyRoads.vehicle.position.x += SkyRoads.vehicle.velocity.x * SkyRoads.delta;
+            SkyRoads.vehicle.position.y += SkyRoads.vehicle.velocity.y * SkyRoads.delta;
+
+            // detect death by falling
+            if (SkyRoads.vehicle.position.y < -SkyRoads.world.killDepth) {
                 Scene.killVehicle();
             }
-            else if (tile && tile.cell && tile.cell.type === "end") {
-                // We reached the end of the level without dying!
-                SkyRoads.vehicle.winning = true;
-            }
         }
-
-        SkyRoads.vehicle.position.x += SkyRoads.vehicle.velocity.x * SkyRoads.delta;
-        SkyRoads.vehicle.position.y += SkyRoads.vehicle.velocity.y * SkyRoads.delta;
         SkyRoads.vehicle.position.z -= SkyRoads.vehicle.velocity.z * SkyRoads.delta;
-
-        // detect death by falling
-        if (SkyRoads.vehicle.position.y < -SkyRoads.world.killDepth) {
-            SkyRoads.vehicle.dead = true;
-            Scene.killVehicle();
-        }
     }
 
     function getMinHeight() {
