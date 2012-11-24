@@ -34,7 +34,7 @@ var Vehicle = (function () {
         // collision detection
         // We could be exploding
         if ( hasFrontalCollisions() ) {
-            if ( SkyRoads.vehicle.velocity.z > 40 ) {
+            if ( SkyRoads.vehicle.velocity.z > 250 ) {
                 console.log('explosion');
                 SkyRoads.vehicle.dead = true;
             }
