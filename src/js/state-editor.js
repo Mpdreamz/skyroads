@@ -13,8 +13,7 @@ var StateEditor = (function()
 
 	function object2Folder(gui, obj, parentKey)
     {
-        $.each(obj, function(key, value) 
-        { 
+        $.each(obj, function(key, value) {
             if (typeof(value) == "function")
                 return;
 
@@ -39,8 +38,8 @@ var StateEditor = (function()
             }
             
         });
-    };
-    
+    }
+
     init();
 
     return {

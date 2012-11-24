@@ -31,8 +31,8 @@ var Scene = (function () {
         directionalLight.position.set(1, 1, -1).normalize();
         scene.add(directionalLight);
 
-        renderer = new THREE.WebGLRenderer();
-        //renderer = new THREE.CanvasRenderer();
+        //renderer = new THREE.WebGLRenderer();
+        renderer = new THREE.CanvasRenderer();
         renderer.setSize( $('#gameWindow').width(), $('#gameWindow').height() );
 
         $('#gameWindow').append( renderer.domElement );
@@ -51,6 +51,18 @@ var Scene = (function () {
         _.each(Level.getTiles(), function(tile) {
             var t = tile;
             scene.add(t.mesh);
+
+            // When we find the start tile, place the vehicle on it at the beginning
+            if (t.cell.type == "start") {
+                console.log("Found starting tile", tile);
+                SkyRoads.vehicle.position.x = t.cell.x * SkyRoads.cell.size.x - (Math.floor(SkyRoads.cell.maxGrid.x / 2) * SkyRoads.cell.size.x);
+                SkyRoads.vehicle.position.y = t.cell.h + (SkyRoads.vehicle.size.y / 2) + 1;
+                SkyRoads.vehicle.position.z = - t.cell.z * SkyRoads.cell.size.x; // Because there is no cell.size.z.
+                
+                vehicle.mesh.position.x = t.cell.x * SkyRoads.cell.size.x - (Math.floor(SkyRoads.cell.maxGrid.x / 2) * SkyRoads.cell.size.x);
+                vehicle.mesh.position.y = t.cell.h + (SkyRoads.vehicle.size.y / 2) + 1;
+                vehicle.mesh.position.z = - t.cell.z * SkyRoads.cell.size.x; // Because there is no cell.size.z.
+            }
         });
         renderer.render(scene, camera.mesh);
 

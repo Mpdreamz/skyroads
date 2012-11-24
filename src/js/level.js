@@ -16,7 +16,7 @@ var Level = (function() {
 	// tileProps: x, z, h, type
 	function addTile(tileProps) {
 		if ( !positionOccupied(tileProps.x, tileProps.z) ) {
-			var tile = new Tile(tileProps)
+			var tile = new Tile(tileProps);
 			tiles.push( tile );
 		}
 		else {
