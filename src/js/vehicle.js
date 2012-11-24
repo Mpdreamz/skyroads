@@ -190,15 +190,6 @@ var Vehicle = (function (scene) {
         updateState();
         move();
         scale();
-
-        _.each(Level.getTiles(), function(tile) {
-            tile.setColor();
-        });
-        var tile = Level.getTileAt(mesh.position.x, mesh.position.z);
-        if (tile) {
-            tile.mesh.material.color.setHex(0xffff00);
-        }
-
     }
 
     init();
