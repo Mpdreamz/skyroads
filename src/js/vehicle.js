@@ -52,7 +52,7 @@ var Vehicle = (function (scene) {
             // collision detection
             // We could be exploding
             if ( hasFrontalCollisions() ) {
-                if ( SkyRoads.vehicle.velocity.z > 250 ) {
+                if ( SkyRoads.vehicle.velocity.z > 500 ) {
                     Scene.killVehicle();
                 }
                 else {
