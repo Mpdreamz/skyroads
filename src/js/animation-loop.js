@@ -64,7 +64,6 @@ var Scene = (function () {
                 vehicle.mesh.position.z = - t.cell.z * SkyRoads.cell.size.x; // Because there is no cell.size.z.
             }
         });
-        console.log(SkyRoads.vehicle.position, vehicle.mesh.position);
         renderer.render(scene, camera.mesh);
 
     }
