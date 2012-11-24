@@ -59,9 +59,9 @@ var Vehicle = (function () {
             if (tile.cell.type === "booster") {
                 SkyRoads.vehicle.acceleration += 5;
             }
-            else if (tile.cell.type === "explosive" && SkyRoads.vehicle.position.y === tile.cell.h + 1) {
+            else if (tile.cell.type === "explosive" && SkyRoads.vehicle.position.y >= tile.cell.h && SkyRoads.vehicle.position.y <= (tile.cell.h + 20)) {
                 console.log("Death by touching explosive tile");
-                SkyRoads.dead = true;
+                SkyRoads.vehicle.dead = true;
             }
         }
 
