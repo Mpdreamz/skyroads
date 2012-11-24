@@ -5,7 +5,6 @@ var Vehicle = (function () {
         var g = new THREE.CubeGeometry( 1, 1, 1 );
         var m = new THREE.MeshLambertMaterial( { color: 0x999fff } );
         mesh =  new THREE.Mesh( g, m );
-        dead = false;
         update();
     }
 
@@ -66,6 +65,11 @@ var Vehicle = (function () {
             else if (tile.cell.type === "explosive" && SkyRoads.vehicle.position.y >= tile.cell.h && SkyRoads.vehicle.position.y <= (tile.cell.h + 20)) {
                 console.log("Death by touching explosive tile");
                 SkyRoads.vehicle.dead = true;
+            }
+            else if (tile.cell.type === "end") {
+                // We reached the end of the level without dying!
+                console.log('winning!');
+                SkyRoads.vehicle.winning = true;
             }
         }
 
@@ -162,7 +166,6 @@ var Vehicle = (function () {
 
     return {
         update: update,
-        mesh: mesh,
-        dead: dead
+        mesh: mesh
     };
 });

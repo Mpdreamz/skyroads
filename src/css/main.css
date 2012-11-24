@@ -36,6 +36,18 @@
 	color: #fff;
 }
 
+#winning-screen {
+	display: none;
+	position: absolute;
+	width: 100%;
+	margin-top: 50%;
+	top: 0;
+	text-align: center;
+	font-family: "Comic Sans MS";
+	font-size: 50px;
+	color: #fff;
+}
+
 #editorWindow {
 	width: 50%;
 	height: 580px;
