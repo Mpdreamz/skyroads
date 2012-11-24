@@ -60,8 +60,21 @@ var Level = (function() {
 		SkyRoads.restart = true;
 	}
 
-	function getMeshes() {
-		return _.map(tiles, function (tile) { return tile.mesh; } );
+	function getMeshes(tile) {
+		if (!tile || !tile.cell)
+			return;
+
+		var x = tile.cell.x;
+		var z = tile.cell.z;
+		var radius = 3;
+		var surroudingTiles = _.filter(tiles, function (t) {
+			var lx = t.cell.x;
+			var lz = t.cell.z;
+			return lx >= (x - radius) && lx < (x + radius) && lz >= (z - radius) && lz < (z + radius);
+		});
+
+
+		return _.map(surroudingTiles, function (t) { return t.mesh; } );
 	}
 
 	function restart() {
