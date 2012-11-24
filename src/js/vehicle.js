@@ -43,17 +43,21 @@ var Vehicle = (function () {
             SkyRoads.vehicle.velocity.x = 0;
         }
 
-        // jumping
-        var minHeight = getMinHeight();
-        SkyRoads.vehicle.canJump = SkyRoads.vehicle.position.y === minHeight;
-        if (SkyRoads.keyboard.spacebar && SkyRoads.vehicle.canJump) {
-            SkyRoads.vehicle.velocity.y = SkyRoads.vehicle.maximumVelocity.y;
-        }
+        // falling
+        var tileHeight = getMinHeight();
         SkyRoads.vehicle.velocity.y -= SkyRoads.world.gravity * SkyRoads.delta;
+        if (isCollidingWithFloor()) {
+            SkyRoads.vehicle.position.y = tileHeight;
+            SkyRoads.vehicle.velocity.y = 0;
+
+            // jumping
+            if (SkyRoads.keyboard.spacebar) {
+                SkyRoads.vehicle.velocity.y = SkyRoads.vehicle.maximumVelocity.y;
+            }
+        }
 
         // Handle special tile properties
         var tile = Level.getTileAt(mesh.position.x, mesh.position.z);
-
         if (tile) {
             // 1. Booster tile
             if (tile.cell.type === "booster") {
@@ -69,11 +73,6 @@ var Vehicle = (function () {
         SkyRoads.vehicle.position.y += SkyRoads.vehicle.velocity.y * SkyRoads.delta;
         SkyRoads.vehicle.position.z -= SkyRoads.vehicle.velocity.z * SkyRoads.delta;
 
-        // falling
-        if (SkyRoads.vehicle.position.y < minHeight && SkyRoads.vehicle.position.y > -50) {
-            SkyRoads.vehicle.position.y = minHeight;
-            SkyRoads.vehicle.velocity.y = -SkyRoads.vehicle.velocity.y * SkyRoads.world.bounciness;
-        }
         // detect death by falling
         if (SkyRoads.vehicle.position.y < -5000) {
             console.log("death by falling");
@@ -88,10 +87,10 @@ var Vehicle = (function () {
         var boxRadiusZ = SkyRoads.vehicle.size.z / 2;
 
         var cornerTiles = [];
-        cornerTiles.push(Level.getTileAt( pos.x - boxRadiusX, pos.z - boxRadiusZ));
-        cornerTiles.push(Level.getTileAt( pos.x - boxRadiusX, pos.z + boxRadiusZ));
-        cornerTiles.push(Level.getTileAt( pos.x + boxRadiusX, pos.z - boxRadiusZ));
-        cornerTiles.push(Level.getTileAt( pos.x + boxRadiusX, pos.z + boxRadiusZ));
+        cornerTiles.push(Level.getTileAt(pos.x - boxRadiusX, pos.z - boxRadiusZ));
+        cornerTiles.push(Level.getTileAt(pos.x - boxRadiusX, pos.z + boxRadiusZ));
+        cornerTiles.push(Level.getTileAt(pos.x + boxRadiusX, pos.z - boxRadiusZ));
+        cornerTiles.push(Level.getTileAt(pos.x + boxRadiusX, pos.z + boxRadiusZ));
 
         var minHeight = -100000;
         _.each(cornerTiles, function(tile) {
@@ -125,6 +124,11 @@ var Vehicle = (function () {
         var boxRadiusZ = SkyRoads.vehicle.size.z / 2;
         var directionVector = new THREE.Vector3(0, 0, -SkyRoads.vehicle.velocity.z);
         return hasCollisions(directionVector, boxRadiusZ);
+    }
+
+    function isCollidingWithFloor() {
+        var directionVector = new THREE.Vector3(0, SkyRoads.vehicle.velocity.y, 0);
+        return hasCollisions(directionVector, 0);
     }
 
     function hasCollisions(directionVector, boxRadius) {
