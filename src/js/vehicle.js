@@ -216,6 +216,7 @@ var Vehicle = (function (scene) {
         move: move,
         spawn: spawn,
         destroy: destroy,
-        getActiveTile: getActiveTile
+        getActiveTile: getActiveTile,
+        getMinHeight: getMinHeight
     };
 });
