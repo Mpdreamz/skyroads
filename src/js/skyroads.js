@@ -33,6 +33,12 @@ var SkyRoads = (function() {
         winning: false
     };
 
+    var explosion = {
+        color: 0xfabe82,
+        size: 40,
+        speed: 4
+    };
+
     var keyboard = {
         keyUp : false,
         keyDown : false,
@@ -51,7 +57,8 @@ var SkyRoads = (function() {
         cell: cell,
         camera: camera,
         keyboard: keyboard,
-        restart: restart
+        restart: restart,
+        explosion: explosion
     };
 
 })();

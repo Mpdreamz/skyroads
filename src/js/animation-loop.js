@@ -1,7 +1,7 @@
 var Scene = (function () {
     var scene, renderer;
 
-    var vehicle, camera, keyboard, light;
+    var vehicle, camera, keyboard, light, explosion;
     
     var currentTime = new Date().getTime();
     var SkyRoadsCopy = utils.deepCopy(SkyRoads);
@@ -30,6 +30,9 @@ var Scene = (function () {
         var directionalLight = new THREE.DirectionalLight(0xffffff);
         directionalLight.position.set(1, 1, -1).normalize();
         scene.add(directionalLight);
+
+        explosion = new Explosion();
+        scene.add(explosion.particleSystem);
 
         renderer = new THREE.WebGLRenderer();
         //renderer = new THREE.CanvasRenderer();
@@ -89,6 +92,7 @@ var Scene = (function () {
             keyboard.update();
             camera.update();
             vehicle.update();
+            explosion.update();
         } else if (SkyRoads.vehicle.dead) {
             $("#death-screen").show();
         }
