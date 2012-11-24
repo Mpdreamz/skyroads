@@ -52,7 +52,6 @@ var Vehicle = (function (scene) {
         // We could be exploding
         if ( hasFrontalCollisions() ) {
             if ( SkyRoads.vehicle.velocity.z > 250 ) {
-                SkyRoads.vehicle.dead = true;
                 Scene.killVehicle();
             }
             else {
@@ -88,7 +87,6 @@ var Vehicle = (function (scene) {
                 SkyRoads.vehicle.velocity.z = Math.min(SkyRoads.vehicle.velocity.z, SkyRoads.vehicle.maximumVelocity.z);
             }
             else if (tile.cell.type === "explosive" && SkyRoads.vehicle.position.y >= tile.cell.h && SkyRoads.vehicle.position.y <= (tile.cell.h + 20)) {
-                SkyRoads.vehicle.dead = true;
                 Scene.killVehicle();
             }
             else if (tile && tile.cell && tile.cell.type === "end") {
@@ -103,7 +101,6 @@ var Vehicle = (function (scene) {
 
         // detect death by falling
         if (SkyRoads.vehicle.position.y < -SkyRoads.world.killDepth) {
-            SkyRoads.vehicle.dead = true;
             Scene.killVehicle();
         }
     }
