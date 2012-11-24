@@ -31,8 +31,8 @@ var Scene = (function () {
 
         explosion = new Explosion(scene);
 
-        //renderer = new THREE.WebGLRenderer();
-        renderer = new THREE.CanvasRenderer();
+        renderer = new THREE.WebGLRenderer();
+        //renderer = new THREE.CanvasRenderer();
         renderer.setSize( $('#gameWindow').width(), $('#gameWindow').height() );
 
         $('#gameWindow').append( renderer.domElement );
@@ -93,12 +93,12 @@ var Scene = (function () {
             vehicle.update();
             camera.update();
         } else if (SkyRoads.vehicle.dead) {
-            $("#death-screen").show();
             vehicle.update();
             explosion.update();
             camera.update();
         } else if (SkyRoads.vehicle.winning) {
-            $('#winning-screen').show();
+            vehicle.update();
+            camera.update();
         }
         renderer.render(scene, camera.mesh);
     }
@@ -112,21 +112,30 @@ var Scene = (function () {
 
     function killVehicle() {
         if (!SkyRoads.vehicle.dead) {
+            $("#death-screen").show();
             SkyRoads.vehicle.dead = true;
             vehicle.destroy();
             explosion.start();
         }
     }
 
+    function winLevel() {
+        if (!SkyRoads.vehicle.winning) {
+            // We reached the end of the level without dying!
+            $('#winning-screen').show();
+            SkyRoads.vehicle.winning = true;
+        }
+    }
+
     $(function() {
         initScene();
         animate();
-
     });
 
     return {
         getActiveTile : getActiveTile,
         updateScene: updateScene,
+        winLevel: winLevel,
         killVehicle: killVehicle,
         SkyRoadsCopy: SkyRoadsCopy
     };
