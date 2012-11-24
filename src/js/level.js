@@ -47,7 +47,7 @@ var Level = (function() {
 		});
 		if (!tile)
 			return;
-		tile.cell.h = tile.cell.h % 140;
+		tile.cell.h = tile.cell.h % 200;
 		tile.cell.h += 20;
 		tile.update();
 	}

@@ -31,8 +31,8 @@ var Scene = (function () {
         directionalLight.position.set(1, 1, -1).normalize();
         scene.add(directionalLight);
 
-        //renderer = new THREE.WebGLRenderer();
-        renderer = new THREE.CanvasRenderer();
+        renderer = new THREE.WebGLRenderer();
+        //renderer = new THREE.CanvasRenderer();
         renderer.setSize( $('#gameWindow').width(), $('#gameWindow').height() );
 
         $('#gameWindow').append( renderer.domElement );
@@ -85,7 +85,7 @@ var Scene = (function () {
         if (SkyRoads.restart) {
             Level.restart();
             vehicle.move();
-        } else if (!SkyRoads.vehicle.dead && !SkyRoads.vehicle.winning) {
+        } else if (SkyRoads.time > 1 && !SkyRoads.vehicle.dead && !SkyRoads.vehicle.winning) {
             keyboard.update();
             camera.update();
             vehicle.update();
