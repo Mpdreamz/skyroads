@@ -52,7 +52,6 @@ var Vehicle = (function (scene) {
         // We could be exploding
         if ( hasFrontalCollisions() ) {
             if ( SkyRoads.vehicle.velocity.z > 250 ) {
-                console.log('explosion');
                 SkyRoads.vehicle.dead = true;
             }
             else {
@@ -87,13 +86,11 @@ var Vehicle = (function (scene) {
                 SkyRoads.vehicle.acceleration += 5;
             }
             else if (tile.cell.type === "explosive" && SkyRoads.vehicle.position.y >= tile.cell.h && SkyRoads.vehicle.position.y <= (tile.cell.h + 20)) {
-                console.log("Death by touching explosive tile");
                 SkyRoads.vehicle.dead = true;
                 Scene.killVehicle();
             }
             else if (tile && tile.cell && tile.cell.type === "end") {
                 // We reached the end of the level without dying!
-                console.log('winning!');
                 SkyRoads.vehicle.winning = true;
             }
         }
@@ -104,7 +101,6 @@ var Vehicle = (function (scene) {
 
         // detect death by falling
         if (SkyRoads.vehicle.position.y < -SkyRoads.world.killDepth) {
-            console.log("death by falling");
             SkyRoads.vehicle.dead = true;
             Scene.killVehicle();
         }

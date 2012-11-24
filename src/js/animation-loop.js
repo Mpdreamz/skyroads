@@ -5,7 +5,6 @@ var Scene = (function () {
     
     var currentTime = new Date().getTime();
     var SkyRoadsCopy = utils.deepCopy(SkyRoads);
-    console.log(SkyRoadsCopy);
 
     var initScene = function init() {
 
