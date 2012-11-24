@@ -8,7 +8,6 @@ var editor = (function() {
 		$penType = $("#pen-type");
 		$saveButton = $("#save");
 
-
 		$saveButton.click(save);
 		$("#level-selector").change(loadLevel);
 
@@ -35,7 +34,7 @@ var editor = (function() {
 			elements.addClass(operation);
 		});
 
-		$el.scrollTop($table.height());
+		$table.scrollTop($table.height());
 	}
 
 	function save() {
@@ -45,11 +44,12 @@ var editor = (function() {
 
 		$("#level-output").text(JSON.stringify(cells));
 	}
+
 	function loadLevel(e) {
 		e.preventDefault();
 		if (!$("#level-selector").val())
 		{
-			//Level.loadFromJsonData([{ x: Math.floor(SkyRoads.cell.maxGrid.x / 2),	z: 0, h: 20, type: "start" }]);
+			Level.loadFromJsonData([{ x: Math.floor(SkyRoads.cell.maxGrid.x / 2),	z: 0, h: 20, type: "start" }]);
 			renderFilledCells();
 			Scene.updateScene();
 		}
@@ -195,9 +195,17 @@ var editor = (function() {
 		});
 	}
 
+	function updateEditorWindow(position) {
+		// calculate in what row we are now, and what the scrollTop is for that row.
+		var bottom = 500 + Math.abs( position.z * (30.0 / SkyRoads.cell.size.x) );
+		if ($el) {
+			$el.scrollTop($table.height() - bottom);
+		}
+	}
+
 	$(init);
 
 	return {
-
+		updateEditorWindow: updateEditorWindow
 	};
 }());

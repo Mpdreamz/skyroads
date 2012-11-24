@@ -106,6 +106,7 @@ var Vehicle = (function () {
         mesh.position.x = SkyRoads.vehicle.position.x;
         mesh.position.y = SkyRoads.vehicle.position.y;
         mesh.position.z = SkyRoads.vehicle.position.z;
+        editor.updateEditorWindow(mesh.position);
     }
 
     function scale() {
