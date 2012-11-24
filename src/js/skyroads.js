@@ -7,7 +7,7 @@ var SkyRoads = (function() {
     var world = {
         gravity : 10000,
         bounciness : 0.75,
-        boostAcceleration: 1000,
+        boostAcceleration: 2000,
         killDepth : 500
     };
 
@@ -25,9 +25,9 @@ var SkyRoads = (function() {
 
     var vehicle = {
         velocity :  { x: 0, y: 0, z: 0 },
-        acceleration : 250,
-        deceleration : 1000,
-        maximumVelocity : { x: 1000, y: 2500, z: 2000 },
+        acceleration : 750,
+        deceleration : 2500,
+        maximumVelocity : { x: 1000, y: 2500, z: 4000 },
         size : { x: 15, y: 15, z: 20 },
         rotation: { x : 0, y: 3.141527, z: 0 },
         position : { x:0, y:36, z:0 },
