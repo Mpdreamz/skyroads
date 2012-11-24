@@ -71,6 +71,14 @@ var Level = (function() {
 		$("#winning-screen").hide();
 	}
 
+	function getStartTile() {
+		return _.find(Level.getTiles(), function(tile) {
+            if (tile.cell.type == "start") {
+                return tile; 
+            }
+        });
+	}
+
 	init();
 
 	function load(level) {
@@ -93,6 +101,7 @@ var Level = (function() {
 		getMeshes: getMeshes,
 		loadFromJsonData: loadFromJsonData,
 		restart: restart,
-		load : load
+		load : load,
+		getStartTile : getStartTile
 	};
 }());
