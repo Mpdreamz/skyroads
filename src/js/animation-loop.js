@@ -31,8 +31,8 @@ var Scene = (function () {
 
         explosion = new Explosion(scene);
 
-        renderer = new THREE.WebGLRenderer();
-        //renderer = new THREE.CanvasRenderer();
+        //renderer = new THREE.WebGLRenderer();
+        renderer = new THREE.CanvasRenderer();
         renderer.setSize( $('#gameWindow').width(), $('#gameWindow').height() );
 
         $('#gameWindow').append( renderer.domElement );
