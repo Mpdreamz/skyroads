@@ -36,7 +36,8 @@ var SkyRoads = (function() {
     var explosion = {
         color: 0xfabe82,
         size: 40,
-        speed: 4
+        speed: 4,
+        duration: 5
     };
 
     var keyboard = {

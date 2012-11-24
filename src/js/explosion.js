@@ -1,7 +1,18 @@
-var Explosion = (function () {
+var Explosion = (function (scene) {
     var particleSystem, particles, particleCount = 1800, origin;
+    var time, done;
 
     function init() {
+        time = 0;
+        done = true;
+    }
+
+    function start() {
+        time = SkyRoads.time;
+        done = false;
+        
+        origin = new THREE.Vector3(SkyRoads.vehicle.position.x, SkyRoads.vehicle.position.y, SkyRoads.vehicle.position.z);
+        particles = new THREE.Geometry();
         var pMaterial = new THREE.ParticleBasicMaterial({
             color: SkyRoads.explosion.color,
             size: SkyRoads.explosion.size,
@@ -9,9 +20,6 @@ var Explosion = (function () {
             blending: THREE.AdditiveBlending,
             transparent: true
         });
-
-        origin = new THREE.Vector3(SkyRoads.vehicle.position.x, SkyRoads.vehicle.position.y, SkyRoads.vehicle.position.z);
-        particles = new THREE.Geometry();
         for(var p = 0; p < particleCount; p++) {
             // create a particle with random
             // position values, -250 -> 250
@@ -31,9 +39,14 @@ var Explosion = (function () {
         // create the particle system
         particleSystem = new THREE.ParticleSystem(particles, pMaterial);
         particleSystem.sortParticles = true;
+        scene.add(particleSystem);
     }
 
     function update() {
+        if (done) {
+            return;
+        }
+
         var pCount = particleCount;
         while(pCount--) {
             // get the particle
@@ -49,12 +62,22 @@ var Explosion = (function () {
         // flag to the particle system
         // that we've changed its vertices.
         particleSystem.geometry.__dirtyVertices = true;
+
+        if (SkyRoads.time - time > SkyRoads.explosion.duration) {
+            stop();
+        }
+    }
+
+    function stop() {
+        done = true;
+        scene.remove(particleSystem);
     }
 
     init();
 
     return {
-        particleSystem: particleSystem,
-        update: update
+        update: update,
+        start: start,
+        stop: stop
     };
 });
