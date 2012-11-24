@@ -25,7 +25,7 @@ var SkyRoads = (function() {
         velocity :  { x: 0, y: 0, z: 0 },
         acceleration : 250,
         deceleration : 1000,
-        maximumVelocity : { x: 1000, y: 2500, z: 5000 },
+        maximumVelocity : { x: 1000, y: 2500, z: 2000 },
         size : { x: 50, y: 30, z: 50 },
         position : { x:0, y:36, z:0 },
         canJump : true,

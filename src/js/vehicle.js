@@ -34,8 +34,13 @@ var Vehicle = (function () {
         // collision detection
         // We could be exploding
         if ( hasFrontalCollisions() ) {
-            console.log('explosion');
-            SkyRoads.vehicle.dead = true;
+            if ( SkyRoads.vehicle.velocity.z > 250 ) {
+                console.log('explosion');
+                SkyRoads.vehicle.dead = true;
+            }
+            else {
+                SkyRoads.vehicle.velocity.z = 0;
+            }
             Scene.killVehicle();
         }
         // Or pushing up against the side of a block
@@ -161,7 +166,7 @@ var Vehicle = (function () {
         });
         var tile = Level.getTileAt(mesh.position.x, mesh.position.z);
         if (tile) {
-            tile.mesh.material.color.setHex(0x00ff00);
+            tile.mesh.material.color.setHex(0xffff00);
         }
 
     }
