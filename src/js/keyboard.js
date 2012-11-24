@@ -31,7 +31,7 @@ var Keyboard = (function() {
 
 		switch(keyCode) {
 			case 27:
-				window.location.replace("/");
+				window.location = "#";
 
 			case 38:
 				SkyRoads.keyboard.keyUp = false;

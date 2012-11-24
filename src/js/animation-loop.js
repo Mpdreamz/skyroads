@@ -17,8 +17,7 @@ var Scene = (function () {
         });
         
         keyboard = new Keyboard();
-        vehicle = new Vehicle();
-        scene.add(vehicle.mesh);
+        vehicle = new Vehicle(scene);
 
         camera = new Camera();
         
@@ -55,13 +54,13 @@ var Scene = (function () {
             // When we find the start tile, place the vehicle on it at the beginning
             if (t.cell.type == "start") {
                 console.log("Found starting tile", tile);
-                SkyRoads.vehicle.position.x = t.cell.x * SkyRoads.cell.size.x - (Math.floor(SkyRoads.cell.maxGrid.x / 2) * SkyRoads.cell.size.x);
-                SkyRoads.vehicle.position.y = t.cell.h + (SkyRoads.vehicle.size.y / 2) + 1;
-                SkyRoads.vehicle.position.z = - t.cell.z * SkyRoads.cell.size.x; // Because there is no cell.size.z.
+                // SkyRoads.vehicle.position.x = t.cell.x * SkyRoads.cell.size.x - (Math.floor(SkyRoads.cell.maxGrid.x / 2) * SkyRoads.cell.size.x);
+                // SkyRoads.vehicle.position.y = t.cell.h + (SkyRoads.vehicle.size.y / 2) + 1;
+                // SkyRoads.vehicle.position.z = - t.cell.z * SkyRoads.cell.size.x; // Because there is no cell.size.z.
                 
-                vehicle.mesh.position.x = t.cell.x * SkyRoads.cell.size.x - (Math.floor(SkyRoads.cell.maxGrid.x / 2) * SkyRoads.cell.size.x);
-                vehicle.mesh.position.y = t.cell.h + (SkyRoads.vehicle.size.y / 2) + 1;
-                vehicle.mesh.position.z = - t.cell.z * SkyRoads.cell.size.x; // Because there is no cell.size.z.
+                // vehicle.mesh.position.x = t.cell.x * SkyRoads.cell.size.x - (Math.floor(SkyRoads.cell.maxGrid.x / 2) * SkyRoads.cell.size.x);
+                // vehicle.mesh.position.y = t.cell.h + (SkyRoads.vehicle.size.y / 2) + 1;
+                // vehicle.mesh.position.z = - t.cell.z * SkyRoads.cell.size.x; // Because there is no cell.size.z.
             }
         });
         renderer.render(scene, camera.mesh);
