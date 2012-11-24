@@ -6,7 +6,8 @@ var SkyRoads = (function() {
 
     var world = {
         gravity : 10000,
-        bounciness : 0.75
+        bounciness : 0.75,
+        killDepth : 500
     };
 
     var cell = {
@@ -37,7 +38,7 @@ var SkyRoads = (function() {
     var explosion = {
         color: 0xfabe82,
         size: 40,
-        speed: 4,
+        speed: 5,
         duration: 5
     };
 
