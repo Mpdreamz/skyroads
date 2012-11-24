@@ -168,11 +168,15 @@ var Vehicle = (function (scene) {
         if (!mesh)
             return;
 
+        var meshes = Level.getMeshes(getActiveTile());
+        if (!meshes || !meshes.length)
+            return;
+
         var originPoint = mesh.position.clone();
         originPoint = originPoint.subSelf(new THREE.Vector3(0, SkyRoads.vehicle.size.y / 2, 0));
 
         var ray = new THREE.Ray(originPoint, directionVector.clone().normalize());
-        var collisionResults = ray.intersectObjects(Level.getMeshes());
+        var collisionResults = ray.intersectObjects(meshes);
         if (collisionResults.length > 0 && (collisionResults[0].distance - boxRadius) < directionVector.length() * SkyRoads.delta) {
             return true;
         }
