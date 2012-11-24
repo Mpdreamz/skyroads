@@ -87,7 +87,7 @@ var Scene = (function () {
         if (SkyRoads.restart) {
             Level.restart();
             vehicle.move();
-            scene.add(vehicle.mesh);
+            vehicle.spawn();
             explosion.stop();
         } else if (SkyRoads.time > 1 && !SkyRoads.vehicle.dead && !SkyRoads.vehicle.winning) {
             keyboard.update();
@@ -100,17 +100,17 @@ var Scene = (function () {
             $('#winning-screen').show();
         }
         renderer.render(scene, camera.mesh);
-    };
+    }
 
     function getActiveTile()
     {
         if (!vehicle)
             return null;
-        return Level.getTileAt(vehicle.mesh.position.x, vehicle.mesh.position.z);
+        return vehicle.getActiveTile();
     }
 
     function killVehicle() {
-        scene.remove(vehicle.mesh);
+        vehicle.destroy();
         explosion.start();
     }
 

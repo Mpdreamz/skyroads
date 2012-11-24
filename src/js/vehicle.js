@@ -2,7 +2,7 @@ var Vehicle = (function (scene) {
     var mesh;
 
     function init() {
-         var jsonLoader = new THREE.JSONLoader();
+        var jsonLoader = new THREE.JSONLoader();
         jsonLoader.load( "/js/models/spaceship.js", function( geometry ) { createScene( geometry ) } );
 
         // load binary model
@@ -21,7 +21,7 @@ var Vehicle = (function (scene) {
          //var m = new THREE.MeshLambertMaterial( { color: 0x999fff } );
          mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
 
-         scene.add(mesh);
+         spawn();
          update();
     }
 
@@ -103,7 +103,7 @@ var Vehicle = (function (scene) {
         SkyRoads.vehicle.position.z -= SkyRoads.vehicle.velocity.z * SkyRoads.delta;
 
         // detect death by falling
-        if (SkyRoads.vehicle.position.y < -5000) {
+        if (SkyRoads.vehicle.position.y < -SkyRoads.world.killDepth) {
             console.log("death by falling");
             SkyRoads.vehicle.dead = true;
             Scene.killVehicle();
@@ -183,25 +183,38 @@ var Vehicle = (function (scene) {
     }
 
     function update() {
+        if (!mesh) {
+            return;
+        }
+
         updateState();
         move();
         scale();
-
-        _.each(Level.getTiles(), function(tile) {
-            tile.setColor();
-        });
-        var tile = Level.getTileAt(mesh.position.x, mesh.position.z);
-        if (tile) {
-            tile.mesh.material.color.setHex(0xffff00);
-        }
-
     }
 
     init();
 
+    function spawn() {
+        scene.add(mesh);
+    }
+
+    function destroy() {
+        scene.remove(mesh);
+    }
+
+    function getActiveTile()
+    {
+        if (!mesh) {
+            return null;
+        }
+        return Level.getTileAt(mesh.position.x, mesh.position.z);
+    }
+
     return {
         update: update,
-        mesh: mesh,
-        move: move
+        move: move,
+        spawn: spawn,
+        destroy: destroy,
+        getActiveTile: getActiveTile
     };
 });
