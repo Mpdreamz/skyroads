@@ -207,11 +207,19 @@ var Vehicle = (function (scene) {
         scene.remove(mesh);
     }
 
+    function getActiveTile()
+    {
+        if (!mesh) {
+            return null;
+        }
+        return Level.getTileAt(mesh.position.x, mesh.position.z);
+    }
+
     return {
         update: update,
-        mesh: mesh,
         move: move,
         spawn: spawn,
-        destroy: destroy
+        destroy: destroy,
+        getActiveTile: getActiveTile
     };
 });

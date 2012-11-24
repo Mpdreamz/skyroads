@@ -100,13 +100,13 @@ var Scene = (function () {
             $('#winning-screen').show();
         }
         renderer.render(scene, camera.mesh);
-    };
+    }
 
     function getActiveTile()
     {
         if (!vehicle)
             return null;
-        return Level.getTileAt(vehicle.mesh.position.x, vehicle.mesh.position.z);
+        return vehicle.getActiveTile();
     }
 
     function killVehicle() {
