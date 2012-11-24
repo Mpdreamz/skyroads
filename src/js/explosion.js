@@ -1,5 +1,5 @@
 var Explosion = (function (scene) {
-    var particleSystem, particles, particleCount = 1800, origin;
+    var particleSystem, particles, particleCount = 1800;
     var time, done;
 
     function init() {
@@ -7,11 +7,15 @@ var Explosion = (function (scene) {
         done = true;
     }
 
+    function getOrigin() {
+        return new THREE.Vector3(SkyRoads.vehicle.position.x, SkyRoads.vehicle.position.y, SkyRoads.vehicle.position.z);
+    }
+
     function start() {
         time = SkyRoads.time;
         done = false;
-        
-        origin = new THREE.Vector3(SkyRoads.vehicle.position.x, SkyRoads.vehicle.position.y, SkyRoads.vehicle.position.z);
+
+        var origin = getOrigin();
         particles = new THREE.Geometry();
         var pMaterial = new THREE.ParticleBasicMaterial({
             color: SkyRoads.explosion.color,
@@ -47,6 +51,7 @@ var Explosion = (function (scene) {
             return;
         }
 
+        var origin = getOrigin();
         var pCount = particleCount;
         while(pCount--) {
             // get the particle
