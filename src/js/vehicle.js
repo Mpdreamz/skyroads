@@ -91,8 +91,7 @@ var Vehicle = (function (scene) {
                     Scene.killVehicle();
                 }
                 else if (tile && tile.cell && tile.cell.type === "end") {
-                    // We reached the end of the level without dying!
-                    SkyRoads.vehicle.winning = true;
+                    Scene.winLevel();
                 }
             }
 
@@ -129,9 +128,11 @@ var Vehicle = (function (scene) {
     }
 
     function move() {
-        mesh.position.x = SkyRoads.vehicle.position.x;
-        mesh.position.y = SkyRoads.vehicle.position.y;
-        mesh.position.z = SkyRoads.vehicle.position.z;
+        if (!SkyRoads.vehicle.winning) {
+            mesh.position.x = SkyRoads.vehicle.position.x;
+            mesh.position.y = SkyRoads.vehicle.position.y;
+            mesh.position.z = SkyRoads.vehicle.position.z;
+        }
         editor.updateEditorWindow(mesh.position);
 
         mesh.rotation.x = SkyRoads.vehicle.rotation.x;
