@@ -8,8 +8,6 @@ $(function () {
 			$("#gameWindow").show();
 			Level.load(level);
 		}
-
-
 	});
 
 });
