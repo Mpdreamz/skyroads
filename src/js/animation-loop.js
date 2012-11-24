@@ -87,7 +87,7 @@ var Scene = (function () {
         if (SkyRoads.restart) {
             Level.restart();
             vehicle.move();
-            scene.add(vehicle.mesh);
+            vehicle.spawn();
             explosion.stop();
         } else if (SkyRoads.time > 1 && !SkyRoads.vehicle.dead && !SkyRoads.vehicle.winning) {
             keyboard.update();
@@ -110,7 +110,7 @@ var Scene = (function () {
     }
 
     function killVehicle() {
-        scene.remove(vehicle.mesh);
+        vehicle.destroy();
         explosion.start();
     }
 

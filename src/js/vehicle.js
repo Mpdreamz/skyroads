@@ -21,7 +21,7 @@ var Vehicle = (function (scene) {
          //var m = new THREE.MeshLambertMaterial( { color: 0x999fff } );
          mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
 
-         scene.add(mesh);
+         spawn();
          update();
     }
 
@@ -199,9 +199,19 @@ var Vehicle = (function (scene) {
 
     init();
 
+    function spawn() {
+        scene.add(mesh);
+    }
+
+    function destroy() {
+        scene.remove(mesh);
+    }
+
     return {
         update: update,
         mesh: mesh,
-        move: move
+        move: move,
+        spawn: spawn,
+        destroy: destroy
     };
 });
