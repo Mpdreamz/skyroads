@@ -81,7 +81,7 @@ var Scene = (function () {
         // note: three.js includes requestAnimationFrame shim
         requestAnimationFrame( animate );
         updateDelta();
-console.log(SkyRoads.vehicle.velocity.z, SkyRoads.vehicle.maximumVelocity.z);
+
         SkyRoads.time += SkyRoads.delta;
         if (SkyRoads.restart) {
             Level.restart();
