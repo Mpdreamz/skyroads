@@ -11,8 +11,7 @@ $(function () {
 			Level.load(level);
 		}
 		else { 
-			$("#gameWindow").hide();
-			$("#menuWindow").show();
+			window.location.href = "/welcome.html";
 		}
 	});
 
