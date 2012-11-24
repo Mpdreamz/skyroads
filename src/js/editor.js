@@ -201,8 +201,10 @@ var editor = (function() {
 		{
 			prevTile.removeClass("player-on-tile");
 		}
-		var tile = Level.getTileAt(position.x, position.z); 
-
+		var tile = Level.getTileAt(position.x, position.z);
+		if (!tile.cell) {
+			return;
+		}
 		var currentEditorTile = $el.find("td[data-x='"+tile.cell.x+"'][data-z='"+tile.cell.z+"']");
 		if (currentEditorTile)
 		{
@@ -212,7 +214,6 @@ var editor = (function() {
 
 		// var bottom = 500 + Math.abs( position.z * (30.0 / SkyRoads.cell.size.x) );
 		// if ($el) {
-		// 	$el.scrollTop($table.height() - bottom);
 		// }
 	}
 
