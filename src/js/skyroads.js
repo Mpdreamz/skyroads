@@ -13,7 +13,7 @@ var SkyRoads = (function() {
 
     var cell = {
         size : { x: 200, y: 10 },
-        maxGrid: { x: 9, y: 50, z: 400 }
+        maxGrid: { x: 9, y: 50, z: 800 }
     };
 
     var camera = {
