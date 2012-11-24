@@ -85,7 +85,10 @@
 	background-color: #CD0074;
 }
 
+.btn-left-align button {
+	text-align: left;
 
+}
 
 #cellEditor .hover {
 	display:table-cell;

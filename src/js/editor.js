@@ -1,11 +1,8 @@
 var editor = (function() {
-	var $el, $table, $pen, $penSize, $penType, $saveButton;
+	var $el, $table, $saveButton;
 
 	function init() {
 		$el = $('#cellEditor');
-		$pen = $("#pen");
-		$penSize = $("#pen-size");
-		$penType = $("#pen-type");
 		$saveButton = $("#save");
 
 		$saveButton.click(save);
@@ -13,6 +10,14 @@ var editor = (function() {
 
 		render();
 		renderFilledCells();
+
+
+		$(".btn-toggle").click(function () {
+			var hl = $(this).data("highlight");
+			$(this).find("button").removeClass(hl).removeClass("selected");
+			$(event.target).closest("button").addClass(hl).addClass("selected");
+
+		});
 
 		$el.mousemove(function () {
 			var $realHover = $("#cellEditor .real-hover");
@@ -35,6 +40,13 @@ var editor = (function() {
 		});
 
 		$table.scrollTop($table.height());
+	}
+
+	function getPen() {
+		var penSize = parseInt($("#pen-size button.selected").data("value"), 10);
+		var penType = $("#pen-type button.selected").data("value");
+		var blockType = $("#block-type button.selected").data("value");
+		return { size : penSize, type: penType, block : blockType};
 	}
 
 	function save() {
@@ -69,7 +81,7 @@ var editor = (function() {
 		var x = $(this).data("x");
 		var z = $(this).data("z");
 
-		var type = $penType.val();
+		var pen = getPen();
 
 		var operation = "add";
 		if (event.shiftKey)
@@ -84,11 +96,11 @@ var editor = (function() {
 			switch (operation)
 			{
 				case "add":
-					Level.addTile({ x: lx, z: lz, type : type});
+					Level.addTile({ x: lx, z: lz, type : pen.block});
 					break;
 				case "raise":
 					if (!Level.positionOccupied(lx, lz))
-						Level.addTile({ x: lx, z: lz, type : type });
+						Level.addTile({ x: lx, z: lz, type : pen.block });
 
 					Level.increaseTileHeight(lx, lz);
 					break;
@@ -101,7 +113,7 @@ var editor = (function() {
 
 			if (operation != "remove")
 			{
-				$(this).addClass(type);
+				$(this).addClass(pen.type);
 			}
 			
 		});
@@ -131,12 +143,14 @@ var editor = (function() {
 	function getElements(x, z) {
 		x = parseInt(x, 10);
 		z = parseInt(z, 10);
-		var type = $pen.val();
-		var size = parseInt($penSize.val(), 10);
+
+		var pen = getPen();
+		var size = pen.size;
+
 		return $("#cellEditor tr:gt("+ ((SkyRoads.cell.maxGrid.z - z) - 10) +"):lt("+ ((SkyRoads.cell.maxGrid.z - z) + 10) +") td").filter(function (index) {
 			var lx = $(this).data("x");
 			var lz = $(this).data("z");
-			switch(type) {
+			switch(pen.type) {
 				case "square":
 					return lx >= x && lx < (x + size) && lz >= z && lz < (z + size);
 				case "vertical-line":
