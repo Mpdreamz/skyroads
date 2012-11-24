@@ -47,11 +47,17 @@ ul {
 	position: relative;
 }
 
-#menuWindow {
+#menuBackground {
 	background:url(/img/stars3.jpg);
+}
+
+#levels {
+	margin: 0 auto 0 auto;
+	width: 900px;
+}
+
+#menuWindow {
 	overflow:hidden;
-	width: 100%;
-	height: 100%;
 }
 
 #menuWindow ul {
