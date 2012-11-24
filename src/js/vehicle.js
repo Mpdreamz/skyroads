@@ -163,7 +163,6 @@ var Vehicle = (function () {
     return {
         update: update,
         mesh: mesh,
-        dead: dead,
         move: move
     };
 });

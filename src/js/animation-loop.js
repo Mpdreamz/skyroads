@@ -51,8 +51,19 @@ var Scene = (function () {
         _.each(Level.getTiles(), function(tile) {
             var t = tile;
             scene.add(t.mesh);
+
+            // When we find the start tile, place the vehicle on it at the beginning
+            if (t.cell.type == "start") {
+                console.log("Found starting tile", tile);
+                SkyRoads.vehicle.position.x = t.cell.x * SkyRoads.cell.size.x - (Math.floor(SkyRoads.cell.maxGrid.x / 2) * SkyRoads.cell.size.x);
+                SkyRoads.vehicle.position.y = t.cell.h + (SkyRoads.vehicle.size.y / 2) + 1;
+                SkyRoads.vehicle.position.z = - t.cell.z * SkyRoads.cell.size.x; // Because there is no cell.size.z.
+                
+                vehicle.mesh.position.x = t.cell.x * SkyRoads.cell.size.x - (Math.floor(SkyRoads.cell.maxGrid.x / 2) * SkyRoads.cell.size.x);
+                vehicle.mesh.position.y = t.cell.h + (SkyRoads.vehicle.size.y / 2) + 1;
+                vehicle.mesh.position.z = - t.cell.z * SkyRoads.cell.size.x; // Because there is no cell.size.z.
+            }
         });
-        console.log(SkyRoads.vehicle.position, vehicle.mesh.position);
         renderer.render(scene, camera.mesh);
 
     }
@@ -74,12 +85,15 @@ var Scene = (function () {
         if (SkyRoads.restart) {
             Level.restart();
             vehicle.move();
-        } else if (!SkyRoads.vehicle.dead) {
+        } else if (!SkyRoads.vehicle.dead && !SkyRoads.behicle.winning) {
             keyboard.update();
             camera.update();
             vehicle.update();
         } else if (SkyRoads.vehicle.dead) {
             $("#death-screen").show();
+        }
+        else if (SkyRoads.vehicle.winning) {
+            $('#winning-screen').show();
         }
         renderer.render(scene, camera.mesh);
     };

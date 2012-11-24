@@ -21,7 +21,7 @@ var Keyboard = (function() {
 				break;
 		}
 
-		if (SkyRoads.vehicle.dead) {
+		if (SkyRoads.vehicle.dead || SkyRoads.vehicle.winning) {
 			SkyRoads.restart = true;
 		}
 	};

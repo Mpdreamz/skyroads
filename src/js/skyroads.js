@@ -11,7 +11,7 @@ var SkyRoads = (function() {
 
     var cell = {
         size : { x: 200, y: 10 },
-        maxGrid: { x: 9, y: 50, z: 1000 }
+        maxGrid: { x: 9, y: 50, z: 400 }
     };
 
     var camera = {
@@ -29,7 +29,8 @@ var SkyRoads = (function() {
         size : { x: 50, y: 30, z: 50 },
         position : { x:0, y:36, z:0 },
         canJump : true,
-        dead: false
+        dead: false,
+        winning: false
     };
 
     var keyboard = {

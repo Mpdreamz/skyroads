@@ -11,6 +11,7 @@ var editor = (function() {
 		render();
 		renderFilledCells();
 
+		$el.niceScroll();
 
 		$(".btn-toggle").click(function () {
 			var hl = $(this).data("highlight");
@@ -19,27 +20,7 @@ var editor = (function() {
 
 		});
 
-		$el.mousemove(function () {
-			var $realHover = $("#cellEditor .real-hover");
-			if (!$realHover)
-				return;
-
-			var x = $realHover.data("x");
-			var z = $realHover.data("z");
-
-			var elements = $realHover.add(getElements(x, z));
-			elements.addClass("hover");
-
-			var operation = "icon-plus-sign";
-			if (event.shiftKey)
-				operation = "icon-arrow-up";
-			else if (event.ctrlKey)
-				operation = "icon-remove-sign";
-
-			elements.addClass(operation);
-		});
-
-		$table.scrollTop($table.height());
+		$el.scrollTop($table.height());
 	}
 
 	function getPen() {
@@ -147,7 +128,7 @@ var editor = (function() {
 		var pen = getPen();
 		var size = pen.size;
 
-		return $("#cellEditor tr:gt("+ ((SkyRoads.cell.maxGrid.z - z) - 10) +"):lt("+ ((SkyRoads.cell.maxGrid.z - z) + 10) +") td").filter(function (index) {
+		return $("#cellEditor tr:gt("+ ((SkyRoads.cell.maxGrid.z - z) - 6) +"):lt("+ ((SkyRoads.cell.maxGrid.z - z) + 6) +") td").filter(function (index) {
 			var lx = $(this).data("x");
 			var lz = $(this).data("z");
 			switch(pen.type) {
@@ -209,12 +190,30 @@ var editor = (function() {
 		});
 	}
 
+	var prevTile = null;
 	function updateEditorWindow(position) {
 		// calculate in what row we are now, and what the scrollTop is for that row.
-		var bottom = 500 + Math.abs( position.z * (30.0 / SkyRoads.cell.size.x) );
-		if ($el) {
-			$el.scrollTop($table.height() - bottom);
+		if (!$el)
+			return;
+
+
+		if (prevTile)
+		{
+			prevTile.removeClass("player-on-tile");
 		}
+		var tile = Level.getTileAt(position.x, position.z); 
+
+		var currentEditorTile = $el.find("td[data-x='"+tile.cell.x+"'][data-z='"+tile.cell.z+"']");
+		if (currentEditorTile)
+		{
+			currentEditorTile.addClass("player-on-tile");
+			prevTile = currentEditorTile;
+		}
+
+		// var bottom = 500 + Math.abs( position.z * (30.0 / SkyRoads.cell.size.x) );
+		// if ($el) {
+		// 	$el.scrollTop($table.height() - bottom);
+		// }
 	}
 
 	$(init);
