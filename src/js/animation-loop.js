@@ -52,7 +52,6 @@ var Scene = (function () {
             var t = tile;
             scene.add(t.mesh);
         });
-        console.log(SkyRoads.vehicle.position, vehicle.mesh.position);
         renderer.render(scene, camera.mesh);
 
     }

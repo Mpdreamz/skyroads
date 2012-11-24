@@ -39,32 +39,34 @@
 #editorWindow {
 	width: 50%;
 	height: 580px;
-	overflow-y:auto;
 	float: left;
 }
 
 #cellEditor {
-	width: 380px;
+	width: 240px;
 	height: 500px;
 	overflow-y:auto;
 	float: left;
 }
 
 #cellEditor table {
-	border-collapse: separate;
-	border-spacing: 2px;
+	
 }
 
 #cellEditor td {
-	width: 30px;
-	height: 30px;
+	width: 20px !important;
+	height: 20px;
 	border: 1px solid #000;
+
     -webkit-user-select: none; /* Safari, Chrome */
     -khtml-user-select: none; /* Konqueror */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE */
     user-select: none; /* CSS3 */
-
+border-top-color: rgba(0, 0, 0, 0.14902);
+border-right-color: rgba(0, 0, 0, 0.14902);
+border-bottom-color: rgba(0, 0, 0, 0.247059);
+border-left-color: rgba(0, 0, 0, 0.14902);
     border-collapse: separate;
 	border-spacing: 2px;
 }
@@ -92,10 +94,10 @@
 
 #cellEditor .hover {
 	display:table-cell;
-	width: 30px;
-	height: 30px;
+	width: 20px;
+	height: 20px;
 	margin-top: 0px;
-	line-height: 30px;
+	line-height: 20px;
 	vertical-align: text-top;
 	text-align:center;
 	color:white;
