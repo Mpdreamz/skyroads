@@ -57,7 +57,7 @@ var Level = (function() {
 			addTile(cell);
 		});
 		
-		restart();
+		SkyRoads.restart = true;
 	}
 
 	function getMeshes() {
