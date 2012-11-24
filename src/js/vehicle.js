@@ -83,7 +83,8 @@ var Vehicle = (function (scene) {
         if (tile) {
             // 1. Booster tile
             if (tile.cell.type === "booster") {
-                SkyRoads.vehicle.acceleration += 5;
+                SkyRoads.vehicle.velocity.z += SkyRoads.world.boostAcceleration * SkyRoads.delta;
+                SkyRoads.vehicle.velocity.z = Math.min(SkyRoads.vehicle.velocity.z, SkyRoads.vehicle.maximumVelocity.z);
             }
             else if (tile.cell.type === "explosive" && SkyRoads.vehicle.position.y >= tile.cell.h && SkyRoads.vehicle.position.y <= (tile.cell.h + 20)) {
                 SkyRoads.vehicle.dead = true;

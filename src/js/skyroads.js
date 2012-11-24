@@ -7,6 +7,7 @@ var SkyRoads = (function() {
     var world = {
         gravity : 10000,
         bounciness : 0.75,
+        boostAcceleration: 1000,
         killDepth : 500
     };
 
