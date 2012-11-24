@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css"> -->
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="css/font-awesome-ie7.css">
+
+	</head>
+	<body>
+		<script type="text/javascript" src="libs/jquery-1.8.2.js"></script>
+		<script type="text/javascript" src="libs/underscore-min.js"></script>
+		<script type="text/javascript" src="libs/dat.gui.min.js"></script>
+		<script type="text/javascript" src="libs/three.js"></script>
+		<script type="text/javascript" src="libs/three.js"></script>
+		<script type="text/javascript" src="libs/jquery.nicescroll.js"></script>
+
+		<script type="text/javascript" src="js/prototypes/number.js"></script>
+		<script type="text/javascript" src="js/utils.js"></script>
+		<script type="text/javascript" src="js/skyroads.js"></script>
+		<script type="text/javascript" src="js/state-editor.js"></script>
+		<script type="text/javascript" src="js/animation-loop.js"></script>
+		<script type="text/javascript" src="js/camera.js"></script>
+		<script type="text/javascript" src="js/vehicle.js"></script>
+		<script type="text/javascript" src="js/tile.js"></script>
+		<script type="text/javascript" src="js/level.js"></script>
+		<script type="text/javascript" src="js/keyboard.js"></script>
+<<<<<<< HEAD
+		<script type="text/javascript" src="js/events.js"></script>
+=======
+		<script type="text/javascript" src="js/explosion.js"></script>
+>>>>>>> 9cd7576a6cba8e04195344b92ec99cb2ad1ddf67
+		
+		<script type="text/javascript" src="js/editor.js"></script>
+
+		
+		<div id="fullPage">
+			<div class="gameContainer">
+				<div id="menuWindow">
+					<ul>
+						<li><a href="#the-first-level">1. The first level</a></li>
+						<li><a href="#the-second-level">2. The second level</a></li>
+						<li><a href="#q42-rules">42. Q42 Rules</a></li>
+
+					</ul>
+				</div>
+				<div id="gameWindow">
+				</div>
+				<div id="death-screen">
+					You're dead!
+				</div>
+				<div id="winning-screen">
+					Level completed! Winning!
+				</div>
+			</div>
+
+			<div id="editorWindow">
+
+				<div id="cellEditor">
+				</div>
+
+				<div id="pen-size" class="btn-group btn-toggle btn-group-vertical"  data-highlight="btn-primary">
+				  <button class="btn btn-primary selected" data-value="1">1</button>
+				  <button class="btn" data-value="2">2</button>
+				  <button class="btn" data-value="3">3</button>
+				  <button class="btn" data-value="4">4</button>
+				  <button class="btn" data-value="5">5</button>
+				  <button class="btn" data-value="6">6</button>
+				  <button class="btn" data-value="7">7</button>
+				</div>
+				<div id="block-type" class="btn-group btn-group-vertical btn-left-align btn-toggle" data-highlight="btn-warning">
+	              <button type="button" data-value="basic" class="btn btn-warning selected"><i class="icon-align-left"></i>Basic block</button>
+	              <button type="button" data-value="booster" class="btn"><i class="icon-align-center"></i>Booster block</button>
+	              <button type="button" data-value="explosive" class="btn"><i class="icon-align-right"></i>Explosive block</button>
+	              <button type="button" data-value="start" class="btn"><i class="icon-align-justify"></i>Start block</button>
+	              <button type="button" data-value="end" class="btn"><i class="icon-align-justify"></i>End block</button>
+	            </div>
+	            <div id="pen-type" class="btn-group btn-group-vertical btn-left-align btn-toggle" data-highlight="btn-success">
+	              <button type="button" data-value="square" class="btn btn-success selected"><i class="icon-align-left"></i>Square</button>
+	              <button type="button" data-value="horizontal-line" class="btn"><i class="icon-align-center"></i>Horizontal line</button>
+	              <button type="button" data-value="vertical-line" class="btn"><i class="icon-align-right"></i>Vertical line</button>
+	            </div>
+	            
+				<p>
+					</br>
+				</p>
+				<button id="save">Save!</button></br />
+				<textarea id="level-output" title="Click and press CTRL+C to copy..." onclick="this.style.borderColor = 'orange'; 
+  this.select();" style="min-width:50%;" height="1"></textarea>
+			</div>
+		</div>
+
+
+	</body>
+</html>

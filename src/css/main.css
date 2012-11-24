@@ -1,3 +1,16 @@
+@font-face{ /* for IE */
+font-family:'dodger';
+    src:url('/font/dodger.eot');
+}
+@font-face { /* for non-IE */
+    font-family: 'dodger';
+    font-weight: normal;
+    font-style: normal;
+    src:url(http://:/) format("No-IE-404"),url('/font/dodger.woff') format('woff'), 
+        url('/font/dodger.ttf') format('truetype'), 
+        url('/font/dodger.svg#webfont') format('svg');
+}
+
 * {
 	margin:0;
 	padding:0;
@@ -40,7 +53,7 @@
 	margin-top: 50%;
 	top: 0;
 	text-align: center;
-	font-family: "sans-serif";
+	font-family: "dodger", "sans-serif";
 	font-size: 50px;
 	color: #fff;
 }
@@ -52,7 +65,7 @@
 	margin-top: 50%;
 	top: 0;
 	text-align: center;
-	font-family: "sans-serif";
+	font-family: "dodger", "sans-serif";
 	font-size: 50px;
 	color: #fff;
 }
