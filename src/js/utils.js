@@ -1,7 +1,7 @@
 var utils = (function() {
 	function deepCopy(object) {
-		return $.extend(true, {}, object);
-		
+		var json = JSON.stringify(object);
+		return JSON.parse(json);
 	}
 
 	return {

@@ -57,18 +57,24 @@ var Scene = (function () {
 
     }
 
-    var animate = function animate() {
-        // note: three.js includes requestAnimationFrame shim
-        requestAnimationFrame( animate );
-
+    function updateDelta() {
         var newTime = new Date().getTime();
         SkyRoads.delta = (newTime - currentTime) / 1000;
-        if (SkyRoadsCopy.delta > 0.05)
-            console.log(SkyRoads.delta);
+        if (SkyRoads.delta == 0 || SkyRoads.delta > 1000)
+            SkyRoads.delta = 1 / 60;
         currentTime = newTime;
+    }
+
+    function animate() {
+        // note: three.js includes requestAnimationFrame shim
+        requestAnimationFrame( animate );
+        updateDelta();
 
         SkyRoads.time += SkyRoads.delta;
-        if (SkyRoads.time > 2 && !SkyRoads.vehicle.dead) {
+        if (SkyRoads.restart) {
+            Level.restart();
+            vehicle.move();
+        } else if (!SkyRoads.vehicle.dead) {
             keyboard.update();
             camera.update();
             vehicle.update();

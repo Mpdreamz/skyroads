@@ -2,6 +2,7 @@ var SkyRoads = (function() {
     
     var time = 0;
     var delta = 0;
+    var restart = false;
 
     var world = {
         gravity : 10000,
@@ -48,7 +49,8 @@ var SkyRoads = (function() {
         vehicle: vehicle,
         cell: cell,
         camera: camera,
-        keyboard: keyboard
+        keyboard: keyboard,
+        restart: restart
     };
 
 })();

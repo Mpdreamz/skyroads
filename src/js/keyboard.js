@@ -22,7 +22,7 @@ var Keyboard = (function() {
 		}
 
 		if (SkyRoads.vehicle.dead) {
-			Level.restart();
+			SkyRoads.restart = true;
 		}
 	};
 
