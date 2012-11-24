@@ -58,6 +58,7 @@ var Vehicle = (function (scene) {
             else {
                 SkyRoads.vehicle.velocity.z = 0;
             }
+            Scene.killVehicle();
         }
         // Or pushing up against the side of a block
         else if (hasLateralCollisions()) {
@@ -88,8 +89,9 @@ var Vehicle = (function (scene) {
             else if (tile.cell.type === "explosive" && SkyRoads.vehicle.position.y >= tile.cell.h && SkyRoads.vehicle.position.y <= (tile.cell.h + 20)) {
                 console.log("Death by touching explosive tile");
                 SkyRoads.vehicle.dead = true;
+                Scene.killVehicle();
             }
-               else if (tile && tile.cell && tile.cell.type === "end") {
+            else if (tile && tile.cell && tile.cell.type === "end") {
                 // We reached the end of the level without dying!
                 console.log('winning!');
                 SkyRoads.vehicle.winning = true;
@@ -104,6 +106,7 @@ var Vehicle = (function (scene) {
         if (SkyRoads.vehicle.position.y < -5000) {
             console.log("death by falling");
             SkyRoads.vehicle.dead = true;
+            Scene.killVehicle();
         }
     }
 

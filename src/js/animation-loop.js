@@ -1,7 +1,7 @@
 var Scene = (function () {
     var scene, renderer;
 
-    var vehicle, camera, keyboard, light;
+    var vehicle, camera, keyboard, light, explosion;
     
     var currentTime = new Date().getTime();
     var SkyRoadsCopy = utils.deepCopy(SkyRoads);
@@ -29,6 +29,8 @@ var Scene = (function () {
         var directionalLight = new THREE.DirectionalLight(0xffffff);
         directionalLight.position.set(1, 1, -1).normalize();
         scene.add(directionalLight);
+
+        explosion = new Explosion(scene);
 
         //renderer = new THREE.WebGLRenderer();
         renderer = new THREE.CanvasRenderer();
@@ -70,8 +72,9 @@ var Scene = (function () {
     function updateDelta() {
         var newTime = new Date().getTime();
         SkyRoads.delta = (newTime - currentTime) / 1000;
-        if (SkyRoads.delta === 0 || SkyRoads.delta > 1000)
+        if (SkyRoads.delta === 0 || SkyRoads.delta > 1000) {
             SkyRoads.delta = 1 / 60;
+        }
         currentTime = newTime;
     }
 
@@ -84,24 +87,31 @@ var Scene = (function () {
         if (SkyRoads.restart) {
             Level.restart();
             vehicle.move();
+            scene.add(vehicle.mesh);
+            explosion.stop();
         } else if (SkyRoads.time > 1 && !SkyRoads.vehicle.dead && !SkyRoads.vehicle.winning) {
             keyboard.update();
             camera.update();
             vehicle.update();
         } else if (SkyRoads.vehicle.dead) {
             $("#death-screen").show();
-        }
-        else if (SkyRoads.vehicle.winning) {
+            explosion.update();
+        } else if (SkyRoads.vehicle.winning) {
             $('#winning-screen').show();
         }
         renderer.render(scene, camera.mesh);
-    }
+    };
 
     function getActiveTile()
     {
         if (!vehicle)
             return null;
         return Level.getTileAt(vehicle.mesh.position.x, vehicle.mesh.position.z);
+    }
+
+    function killVehicle() {
+        scene.remove(vehicle.mesh);
+        explosion.start();
     }
 
     $(function() {
@@ -113,6 +123,7 @@ var Scene = (function () {
     return {
         getActiveTile : getActiveTile,
         updateScene: updateScene,
+        killVehicle: killVehicle,
         SkyRoadsCopy: SkyRoadsCopy
     };
 
