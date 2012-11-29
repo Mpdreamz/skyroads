@@ -87,7 +87,7 @@ var Level = (function() {
 	function getStartTile() {
 		return _.find(Level.getTiles(), function(tile) {
             if (tile.cell.type == "start") {
-                return tile; 
+                return tile;
             }
         });
 	}
@@ -95,12 +95,21 @@ var Level = (function() {
 	init();
 
 	function load(level) {
-		var levelData = $.getJSON("/levels/" + level + ".json?t=" + new Date().getTime())
-			.done(function (data) {
-				Level.loadFromJsonData(data);
-				Scene.updateScene();
-				$(document).trigger("level-loaded");
-			});
+		var data = $.jStorage.get("level-" + level);
+		if (data) {
+			var levelData = JSON.parse(data);
+			Level.loadFromJsonData(levelData);
+			Scene.updateScene();
+			$(document).trigger("level-loaded");
+		}
+		else {
+			$.getJSON("/levels/" + level + ".json?t=" + new Date().getTime())
+				.done(function (data) {
+					Level.loadFromJsonData(data);
+					Scene.updateScene();
+					$(document).trigger("level-loaded");
+				});
+		}
 	}
 
 

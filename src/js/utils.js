@@ -6,5 +6,5 @@ var utils = (function() {
 
 	return {
 		deepCopy: deepCopy
-	}
-}())
+	};
+}());

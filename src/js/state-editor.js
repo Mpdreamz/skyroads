@@ -1,8 +1,16 @@
 var StateEditor = (function()
 {
-    var gui;
+    var gui, playMode;
+
+    function setMode(mode) {
+        playMode = mode;
+        init();
+    }
 
 	function init() {
+        if (playMode == "play")
+            return; 
+
         if (gui !== undefined) {
             $(gui.domElement).remove();
         }
@@ -43,6 +51,7 @@ var StateEditor = (function()
     init();
 
     return {
+        setMode : setMode,
         init: init,
         gui: gui
     };

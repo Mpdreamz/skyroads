@@ -13,14 +13,18 @@
 		<script type="text/javascript" src="libs/underscore-min.js"></script>
 		<script type="text/javascript" src="libs/dat.gui.min.js"></script>
 		<script type="text/javascript" src="libs/three.js"></script>
-		<script type="text/javascript" src="libs/three.js"></script>
 		<script type="text/javascript" src="libs/jquery.nicescroll.js"></script>
+		<script type="text/javascript" src="libs/jStorage.js"></script>
 
 		<script type="text/javascript" src="js/prototypes/number.js"></script>
+		
 		<script type="text/javascript" src="js/utils.js"></script>
+		
+
 		<script type="text/javascript" src="js/skyroads.js"></script>
+		<script type="text/javascript" src="js/editor.js"></script>
 		<script type="text/javascript" src="js/state-editor.js"></script>
-		<script type="text/javascript" src="js/animation-loop.js"></script>
+		<script type="text/javascript" src="js/scene.js"></script>
 		<script type="text/javascript" src="js/camera.js"></script>
 		<script type="text/javascript" src="js/vehicle.js"></script>
 		<script type="text/javascript" src="js/tile.js"></script>
@@ -29,7 +33,7 @@
 		<script type="text/javascript" src="js/events.js"></script>
 		<script type="text/javascript" src="js/explosion.js"></script>
 		
-		<script type="text/javascript" src="js/editor.js"></script>
+		
 
 
 		<div id="fullPage">
@@ -74,9 +78,9 @@
 				<p>
 					</br>
 				</p>
-				<button id="save">Save!</button></br />
-				<textarea id="level-output" title="Click and press CTRL+C to copy..." onclick="this.style.borderColor = 'orange'; 
-  this.select();" style="min-width:50%;" height="1"></textarea>
+				<label for="level-name">Level name:</label>
+				<input id="level-name" type="text" />
+				<button id="save">Save!</button>
 			</div>
 		</div>
 

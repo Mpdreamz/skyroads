@@ -32,11 +32,15 @@ var editor = (function() {
 	}
 
 	function save() {
+		var levelName = $("#level-name").val();
+		if (!levelName)
+			return;
+
 		var cells = _.map(Level.getTiles(), function (tile) {
 			return tile.cell;
 		});
-
-		$("#level-output").text(JSON.stringify(cells));
+		var data = JSON.stringify(cells);
+		$.jStorage.set("level-" + levelName, data);
 	}
 
 	function onClickCell () {
