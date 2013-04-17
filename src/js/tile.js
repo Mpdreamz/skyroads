@@ -1,78 +1,78 @@
 // tileProps: x, z, h, type
 var Tile = (function (tileProps) {
-    var mesh, cell;
+	var mesh, cell;
 
 
-    function setColor() {
-         switch(cell.type) {
-            case "booster":
-                mesh.material.color.setHex(0x00ff00);
-                break;
-            case "explosive":
-                mesh.material.color.setHex(0xff0000);
-                break;
-            case "start":
-                mesh.material.color.setHex(0xFF7400);
-                break;
-            case "end":
-                mesh.material.color.setHex(0xCD0074);
-                break;
-            default:
-                mesh.material.color.setHex(0x0000ff);
-                break;
-        }
-    }
+	function setColor() {
+		switch(cell.type) {
+			case "booster":
+				mesh.material.color.setHex(0x00ff00);
+				break;
+			case "explosive":
+				mesh.material.color.setHex(0xff0000);
+				break;
+			case "start":
+				mesh.material.color.setHex(0xFF7400);
+				break;
+			case "end":
+				mesh.material.color.setHex(0xCD0074);
+				break;
+			default:
+				mesh.material.color.setHex(0x0000ff);
+				break;
+		}
+	}
 
-    function _createMaterial() {
-        switch(cell.type) {
-            case "booster":
-                return new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
-            case "explosive":
-                return new THREE.MeshLambertMaterial( { color: 0xff0000 } );
-            case "start":
-                return new THREE.MeshLambertMaterial( { color: 0xFF7400 } );
-            case "end":
-                return new THREE.MeshLambertMaterial( { color: 0xCD0074 } );
-            default:
-                return new THREE.MeshLambertMaterial( { color: 0x0000ff } );
-        }
+	function _createMaterial() {
+		switch(cell.type) {
+			case "booster":
+				return new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
+			case "explosive":
+				return new THREE.MeshLambertMaterial( { color: 0xff0000 } );
+			case "start":
+				return new THREE.MeshLambertMaterial( { color: 0xFF7400 } );
+			case "end":
+				return new THREE.MeshLambertMaterial( { color: 0xCD0074 } );
+			default:
+				return new THREE.MeshLambertMaterial( { color: 0x0000ff } );
+		}
 
-    }
+	}
 
 
-    function init(tileProps) {
-        
-        cell = tileProps;
-        cell.type = tileProps.type || 'basic';
-        cell.h = tileProps.h || 20;
+	function init(tileProps) {
 
-        var g = new THREE.CubeGeometry( 1, 1, 1 );
-        var m = _createMaterial();
+		cell = tileProps;
+		cell.type = tileProps.type || 'basic';
+		cell.h = tileProps.h || 20;
 
-        mesh = new THREE.Mesh( g, m );
-        
-        mesh._isTile = true;
+		var g = new THREE.CubeGeometry( 1, 1, 1 );
+		var m = _createMaterial();
 
-        update();
-    }
+		mesh = new THREE.Mesh( g, m );
 
-    function update() {
-        var cellWidth = SkyRoads.cell.size.x;
-        mesh.position.x = cell.x * cellWidth - Math.floor(SkyRoads.cell.maxGrid.x / 2) * cellWidth;
-        mesh.position.y = 0 + (cell.h / 2);
-        mesh.position.z = - cell.z * cellWidth;
+		mesh._isTile = true;
 
-        mesh.scale.x = SkyRoads.cell.size.x;
-        mesh.scale.y = cell.h || SkyRoads.cell.size.y;
-        mesh.scale.z = SkyRoads.cell.size.x;
-    }
+		update();
+	}
 
-    init(tileProps);
+	function update() {
+		var cellWidth = SkyRoads.cell.size.x;
+		mesh.position.x = cell.x * cellWidth - Math.floor(SkyRoads.cell.maxGrid.x / 2) * cellWidth;
+		mesh.position.y = 0 + (cell.h / 2);
+		mesh.position.z = - cell.z * cellWidth;
 
-    return {
-        mesh: mesh,
-        update: update,
-        cell: cell,
-        setColor : setColor
-    };
+		mesh.scale.x = SkyRoads.cell.size.x;
+		mesh.scale.y = cell.h || SkyRoads.cell.size.y;
+		mesh.scale.z = SkyRoads.cell.size.x;
+	}
+
+	init(tileProps);
+
+	return {
+		mesh: mesh,
+			update: update,
+			cell: cell,
+			setColor : setColor
+	};
 });
