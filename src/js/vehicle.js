@@ -5,21 +5,13 @@ var Vehicle = (function (scene) {
         var jsonLoader = new THREE.JSONLoader();
         jsonLoader.load( "/js/models/spaceship.js", function( geometry ) { createScene( geometry ) } );
 
-        // load binary model
-
-        // var binLoader = new THREE.BinaryLoader();
-        // binLoader.load( "Model_bin.js", function( geometry ) { createScene( geometry) } );
-
-        // var g = new THREE.CubeGeometry( 1, 1, 1 );
-        
-        // mesh =  new THREE.Mesh( g, m );
         dead = false;
     }
 
 
     function createScene( geometry ) {
-         //var m = new THREE.MeshLambertMaterial( { color: 0x999fff } );
-         mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
+         var m = new THREE.MeshLambertMaterial( { color: 0x999fff } );
+         mesh = new THREE.Mesh( geometry, m );
 
          spawn();
          update();
@@ -70,11 +62,18 @@ var Vehicle = (function (scene) {
             var tileHeight = getMinHeight();
             SkyRoads.vehicle.velocity.y -= SkyRoads.world.gravity * SkyRoads.delta;
             if (isCollidingWithFloor()) {
-                SkyRoads.vehicle.position.y = tileHeight;
-                SkyRoads.vehicle.velocity.y = 0;
+                SkyRoads.vehicle.position.y = Math.max(tileHeight, SkyRoads.vehicle.position.y / 2);
+                // SkyRoads.vehicle.position.y = tileHeight;
+                // SkyRoads.vehicle.velocity.y = 0;
+		if (!SkyRoads.vehicle.velocity.bounceY)
+		    SkyRoads.vehicle.velocity.bounceY = SkyRoads.vehicle.maximumVelocity.y;
 
+		var bounce = Math.max(0, SkyRoads.vehicle.velocity.bounceY / 2);
+                SkyRoads.vehicle.velocity.y = bounce;
+		SkyRoads.vehicle.velocity.bounceY = bounce;
                 // jumping
                 if (SkyRoads.keyboard.spacebar) {
+		    SkyRoads.vehicle.velocity.bounceY = SkyRoads.vehicle.maximumVelocity.y;
                     SkyRoads.vehicle.velocity.y = SkyRoads.vehicle.maximumVelocity.y;
                 }
             }
