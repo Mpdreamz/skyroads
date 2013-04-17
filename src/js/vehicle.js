@@ -61,7 +61,14 @@ var Vehicle = (function (scene) {
             // falling
             var tileHeight = getMinHeight();
             SkyRoads.vehicle.velocity.y -= SkyRoads.world.gravity * SkyRoads.delta;
-            if (isCollidingWithFloor()) {
+            if (SkyRoads.keyboard.spacebar
+		&& (isCollidingWithFloor() 
+	    	|| SkyRoads.vehicle.velocity.bounceY <= SkyRoads.vehicle.maximumVelocity.y / 2) 
+		) {
+		    SkyRoads.vehicle.velocity.bounceY = SkyRoads.vehicle.maximumVelocity.y;
+                    SkyRoads.vehicle.velocity.y = SkyRoads.vehicle.maximumVelocity.y;
+            }	
+	    if (isCollidingWithFloor()) {
                 SkyRoads.vehicle.position.y = Math.max(tileHeight, SkyRoads.vehicle.position.y / 2);
                 // SkyRoads.vehicle.position.y = tileHeight;
                 // SkyRoads.vehicle.velocity.y = 0;
@@ -72,10 +79,6 @@ var Vehicle = (function (scene) {
                 SkyRoads.vehicle.velocity.y = bounce;
 		SkyRoads.vehicle.velocity.bounceY = bounce;
                 // jumping
-                if (SkyRoads.keyboard.spacebar) {
-		    SkyRoads.vehicle.velocity.bounceY = SkyRoads.vehicle.maximumVelocity.y;
-                    SkyRoads.vehicle.velocity.y = SkyRoads.vehicle.maximumVelocity.y;
-                }
             }
 
             // Handle special tile properties
