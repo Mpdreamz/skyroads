@@ -12,7 +12,7 @@ var SkyRoads = (function() {
     };
 
     var cell = {
-        size : { x: 200, y: 10 },
+        size : { x: 200, y: 50 },
         maxGrid: { x: 9, y: 50, z: 800 }
     };
 
@@ -28,7 +28,7 @@ var SkyRoads = (function() {
         acceleration : 750,
         deceleration : 2500,
         maximumVelocity : { x: 1000, y: 2500, z: 4000 },
-        size : { x: 15, y: 15, z: 20 },
+        size : { x: 7.5, y: 7.5, z: 10 },
         rotation: { x : 0, y: 3.141527, z: 0 },
         position : { x:0, y:36, z:0 },
         canJump : true,
