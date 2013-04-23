@@ -8,6 +8,22 @@ var Tile = (function (tileProps) {
 		return colors[cell.color];
 	}
 
+	function _createGeometry() {
+		switch(cell.type) {
+			case "tunnel":
+				var pts = [
+	            new THREE.Vector3( 0.50,0, 0.50),//top left
+	            new THREE.Vector3( 0.40,0, 0.50),//top right
+	            new THREE.Vector3( 0.40,0,-0.50),//bottom right
+	            new THREE.Vector3( 0.50,0,-0.50),//bottom left
+	            new THREE.Vector3( 0.50,0, 0.50)//back to top left - close square path
+           		];
+				return new THREE.LatheGeometry( pts, 12, Math.PI );
+			default:
+				return new THREE.CubeGeometry( 1, 1, 1 ); 
+		}
+	}
+
 	function _createMaterial() {
 		switch(cell.type) {
 			case "booster":
@@ -17,6 +33,8 @@ var Tile = (function (tileProps) {
 			case "start":
 				return new THREE.MeshLambertMaterial( { color: 0xFF7400 } );
 			case "end":
+				return new THREE.MeshLambertMaterial( { color: 0xCD0074 } );
+			case "tunnel":
 				return new THREE.MeshLambertMaterial( { color: 0xCD0074 } );
 			default:
 				var color = getColor();
@@ -31,7 +49,7 @@ var Tile = (function (tileProps) {
 		cell.color = tileProps.color || 1;
 		cell.h = tileProps.h || 20;
 
-		var g = new THREE.CubeGeometry( 1, 1, 1 );
+		var g = _createGeometry();
 		var m = _createMaterial();
 
 		mesh = new THREE.Mesh( g, m );
