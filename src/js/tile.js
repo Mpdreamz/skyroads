@@ -2,11 +2,10 @@
 var Tile = (function (tileProps) {
 	var mesh, cell;
 
-	function getRandomColor() {
+	function getColor() {
 		// http://colorschemedesigner.com/#3w41Tw0w0w0w0
 		var colors = [0x0A64A4, 0x1A1EB2, 0xFFBE00, 0xFF9000, 0xFFFFFF];
-		var index = Math.floor(Math.random() * colors.length);
-		return colors[index];
+		return colors[cell.color];
 	}
 
 	function _createMaterial() {
@@ -20,7 +19,7 @@ var Tile = (function (tileProps) {
 			case "end":
 				return new THREE.MeshLambertMaterial( { color: 0xCD0074 } );
 			default:
-				var color = getRandomColor();
+				var color = getColor();
 				return new THREE.MeshLambertMaterial( { color: color } );
 		}
 	}
@@ -29,6 +28,7 @@ var Tile = (function (tileProps) {
 
 		cell = tileProps;
 		cell.type = tileProps.type || 'basic';
+		cell.color = tileProps.color || 1;
 		cell.h = tileProps.h || 20;
 
 		var g = new THREE.CubeGeometry( 1, 1, 1 );

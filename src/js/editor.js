@@ -27,8 +27,9 @@ var editor = (function() {
 	function getPen() {
 		var penSize = parseInt($("#pen-size button.selected").data("value"), 10);
 		var penType = $("#pen-type button.selected").data("value");
+		var penColor = parseInt($("#pen-color button.selected").data("value"), 10);
 		var blockType = $("#block-type button.selected").data("value");
-		return { size : penSize, type: penType, block : blockType};
+		return { size : penSize, type: penType, color: penColor, block : blockType};
 	}
 
 	function save() {
@@ -59,11 +60,11 @@ var editor = (function() {
 			switch (operation)
 			{
 				case "add":
-					Level.addTile({ x: lx, z: lz, type : pen.block});
+					Level.addTile({ x: lx, z: lz, type : pen.block, color: pen.color});
 					break;
 				case "raise":
 					if (!Level.positionOccupied(lx, lz))
-						Level.addTile({ x: lx, z: lz, type : pen.block });
+						Level.addTile({ x: lx, z: lz, type : pen.block, color: pen.color });
 
 					Level.increaseTileHeight(lx, lz);
 					break;
