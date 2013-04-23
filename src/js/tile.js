@@ -2,25 +2,11 @@
 var Tile = (function (tileProps) {
 	var mesh, cell;
 
-
-	function setColor() {
-		switch(cell.type) {
-			case "booster":
-				mesh.material.color.setHex(0x00ff00);
-				break;
-			case "explosive":
-				mesh.material.color.setHex(0xff0000);
-				break;
-			case "start":
-				mesh.material.color.setHex(0xFF7400);
-				break;
-			case "end":
-				mesh.material.color.setHex(0xCD0074);
-				break;
-			default:
-				mesh.material.color.setHex(0x0000ff);
-				break;
-		}
+	function getRandomColor() {
+		// http://colorschemedesigner.com/#3w41Tw0w0w0w0
+		var colors = [0x0A64A4, 0x1A1EB2, 0xFFBE00, 0xFF9000, 0xFFFFFF];
+		var index = Math.floor(Math.random() * colors.length);
+		return colors[index];
 	}
 
 	function _createMaterial() {
@@ -34,11 +20,10 @@ var Tile = (function (tileProps) {
 			case "end":
 				return new THREE.MeshLambertMaterial( { color: 0xCD0074 } );
 			default:
-				return new THREE.MeshLambertMaterial( { color: 0x0000ff } );
+				var color = getRandomColor();
+				return new THREE.MeshLambertMaterial( { color: color } );
 		}
-
 	}
-
 
 	function init(tileProps) {
 
@@ -71,8 +56,7 @@ var Tile = (function (tileProps) {
 
 	return {
 		mesh: mesh,
-			update: update,
-			cell: cell,
-			setColor : setColor
+		update: update,
+		cell: cell
 	};
 });
