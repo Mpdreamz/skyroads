@@ -18,7 +18,10 @@ var Tile = (function (tileProps) {
 	            new THREE.Vector3( 0.50,0,-0.50),//bottom left
 	            new THREE.Vector3( 0.50,0, 0.50)//back to top left - close square path
            		];
-				return new THREE.LatheGeometry( pts, 12, Math.PI );
+           		var tunnel = new THREE.LatheGeometry( pts, 12, Math.PI );
+				var tile = new THREE.CubeGeometry( 1, 0.2, 1 ); 
+           		var merged = THREE.GeometryUtils.merge(tunnel, tile);
+           		return tunnel;
 			default:
 				return new THREE.CubeGeometry( 1, 1, 1 ); 
 		}
@@ -48,6 +51,8 @@ var Tile = (function (tileProps) {
 		cell.type = tileProps.type || 'basic';
 		cell.color = tileProps.color || 1;
 		cell.h = tileProps.h || 20;
+		if (cell.type == "tunnel")
+			cell.h = 200;
 
 		var g = _createGeometry();
 		var m = _createMaterial();
@@ -62,9 +67,11 @@ var Tile = (function (tileProps) {
 	function update() {
 		var cellWidth = SkyRoads.cell.size.x;
 		mesh.position.x = cell.x * cellWidth - Math.floor(SkyRoads.cell.maxGrid.x / 2) * cellWidth;
-		mesh.position.y = 0 + (cell.h / 2);
+		if (cell.type != "tunnel")
+			mesh.position.y = 0 + (cell.h / 2);
+		else
+			mesh.position.y = 0;
 		mesh.position.z = - cell.z * cellWidth;
-
 		mesh.scale.x = SkyRoads.cell.size.x;
 		mesh.scale.y = cell.h || SkyRoads.cell.size.y;
 		mesh.scale.z = SkyRoads.cell.size.x;
