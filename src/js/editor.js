@@ -38,7 +38,7 @@ var editor = (function() {
 			return;
 
 		var data = Level.getLevelData();
-		prompt(data);
+		console.log(data);
 	}
 
 	function onClickCell () {
