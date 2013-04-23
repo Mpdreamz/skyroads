@@ -1,58 +1,57 @@
-var StateEditor = (function()
-{
-    var gui, playMode;
+var StateEditor = (function() {
+	var gui, playMode;
 
-    function setMode(mode) {
-        playMode = mode;
-        init();
-    }
+	function setMode(mode) {
+		playMode = mode;
+		init();
+	}
 
 	function init() {
-        if (playMode == "play")
-            return; 
+		// if (playMode == "play") 
+			// return;
 
-        if (gui !== undefined) {
-            $(gui.domElement).remove();
-        }
+		if (gui !== undefined) {
+			$(gui.domElement).remove();
+		}
 
-        gui = new dat.GUI();
-        object2Folder(gui, SkyRoads);
+		gui = new dat.GUI();
+		object2Folder(gui, SkyRoads);
 	}
 
 	function object2Folder(gui, obj, parentKey)
-    {
-        $.each(obj, function(key, value) {
-            if (typeof(value) == "function")
-                return;
+	{
+	$.each(obj, function(key, value) {
+		if (typeof(value) == "function")
+		return;
 
-            if (typeof(value) == "object")
-            {
-                var g = gui.addFolder(key);
-                object2Folder(g, value, key);
-            }
-            else {
-                if (parentKey == "rotation")
-                {
-                    gui.add(obj, key, -180, 180).listen();
-                }
-                else if (parentKey == "size")
-                {
-                    gui.add(obj, key, 0, 1000).listen();
-                }
-                else {
-                    gui.add(obj, key, -1000, 1000).listen();
-                }
-                //gui.close()
-            }
-            
-        });
-    }
+	if (typeof(value) == "object")
+	{
+		var g = gui.addFolder(key);
+		object2Folder(g, value, key);
+	}
+	else {
+		if (parentKey == "rotation")
+	{
+		gui.add(obj, key, -180, 180).listen();
+	}
+		else if (parentKey == "size")
+	{
+		gui.add(obj, key, 0, 1000).listen();
+	}
+		else {
+			gui.add(obj, key, -1000, 1000).listen();
+		}
+		//gui.close()
+	}
 
-    init();
+	});
+}
 
-    return {
-        setMode : setMode,
-        init: init,
-        gui: gui
-    };
+init();
+
+return {
+	setMode : setMode,
+					init: init,
+					gui: gui
+};
 })();

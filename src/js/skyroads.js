@@ -8,12 +8,13 @@ var SkyRoads = (function() {
         gravity : 10000,
         bounciness : 0.75,
         boostAcceleration: 2000,
-        killDepth : 500
+        killDepth : 500,
+				editMode : false
     };
 
     var cell = {
-        size : { x: 200, y: 50 },
-        maxGrid: { x: 9, y: 50, z: 800 }
+        size : { x: 200, y: 100 },
+        maxGrid: { x: 9, y: 50, z: 1600 }
     };
 
     var camera = {
@@ -27,7 +28,7 @@ var SkyRoads = (function() {
         velocity :  { x: 0, y: 0, z: 0 },
         acceleration : 750,
         deceleration : 2500,
-        maximumVelocity : { x: 1000, y: 2500, z: 4000 },
+        maximumVelocity : { x: 750, y: 2500, z: 4000 },
         size : { x: 7.5, y: 7.5, z: 10 },
         rotation: { x : 0, y: 3.141527, z: 0 },
         position : { x:0, y:36, z:0 },

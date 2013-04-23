@@ -36,11 +36,8 @@ var editor = (function() {
 		if (!levelName)
 			return;
 
-		var cells = _.map(Level.getTiles(), function (tile) {
-			return tile.cell;
-		});
-		var data = JSON.stringify(cells);
-		$.jStorage.set("level-" + levelName, data);
+		var data = Level.getLevelData();
+		prompt(data);
 	}
 
 	function onClickCell () {

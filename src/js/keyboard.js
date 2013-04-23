@@ -2,6 +2,7 @@ var Keyboard = (function() {
 
 	var onKeyDown = function (e) {
 		var keyCode = e.which;
+
 		switch(keyCode) {
 			case 87: // w
 			case 38:
@@ -22,6 +23,8 @@ var Keyboard = (function() {
 			case 32:
 				SkyRoads.keyboard.spacebar = true;
 				break;
+			case 69: //e
+				SkyRoads.world.editMode = !SkyRoads.world.editMode;
 		}
 
 		if (SkyRoads.vehicle.dead || SkyRoads.vehicle.winning) {
@@ -31,7 +34,6 @@ var Keyboard = (function() {
 
 	var onKeyUp = function (e) {
 		var keyCode = e.which;
-
 		switch(keyCode) {
 			case 27:
 				document.location = "#";

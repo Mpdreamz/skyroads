@@ -1,5 +1,6 @@
 var Level = (function() {
 	var tiles = [];
+	var gravity = 10000;
 
 	function init() {
 		addTile({ x: Math.floor(SkyRoads.cell.maxGrid.x / 2),	z: 0, h: 20, type: "start" });
@@ -40,6 +41,20 @@ var Level = (function() {
 	function getTiles() {
 		return tiles;
 	}
+	
+	function getLevelData() {
+		var cells = _.map(Level.getTiles(), function (tile) {
+			return tile.cell;
+		});
+		var level = {
+			gravity : gravity,
+			tiles : cells
+		}
+
+		var data = JSON.stringify(level);
+		return data;
+	}
+
 	function increaseTileHeight(columnX, columnZ)
 	{
 		var tile = _.find(tiles, function(t) {
@@ -53,10 +68,12 @@ var Level = (function() {
 	}
 	function loadFromJsonData(data) {
 		tiles = [];
-		_.each(data, function (cell) {
+		gravity = data.gravity;
+		_.each(data.tiles, function (cell) {
 			addTile(cell);
 		});
-		
+
+		SkyRoads.world.gravity = data.gravity || gravity;	
 		SkyRoads.restart = true;
 	}
 
@@ -80,6 +97,7 @@ var Level = (function() {
 	function restart() {
 		SkyRoads = utils.deepCopy(Scene.SkyRoadsCopy);
 		StateEditor.init();
+		SkyRoads.world.gravity = gravity;
 		$("#death-screen").hide();
 		$("#winning-screen").hide();
 	}
@@ -95,7 +113,8 @@ var Level = (function() {
 	init();
 
 	function load(level) {
-		var data = $.jStorage.get("level-" + level);
+		//var data = $.jStorage.get("level-" + level);
+		var data = null;
 		if (data) {
 			var levelData = JSON.parse(data);
 			Level.loadFromJsonData(levelData);
@@ -124,6 +143,8 @@ var Level = (function() {
 		loadFromJsonData: loadFromJsonData,
 		restart: restart,
 		load : load,
-		getStartTile : getStartTile
+		getStartTile : getStartTile,
+		getLevelData : getLevelData
+
 	};
 }());
